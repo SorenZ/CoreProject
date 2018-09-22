@@ -6,10 +6,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mobin.CoreProject.Core\Mobin.CoreProject.Core.csproj" />
+    <ProjectReference Include="..\Mobin.CoreProject.Data\Mobin.CoreProject.Data.csproj" />
+    <ProjectReference Include="..\Mobin.CoreProject.Service\Mobin.CoreProject.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <Folder Include="Mapping\" />
   </ItemGroup>
 
 </Project>

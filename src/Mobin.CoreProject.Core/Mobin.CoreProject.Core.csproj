@@ -4,4 +4,15 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Business\" />
+    <Folder Include="DataContracts\" />
+    <Folder Include="ServiceContracts\" />
+    <Folder Include="SSOT\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>
