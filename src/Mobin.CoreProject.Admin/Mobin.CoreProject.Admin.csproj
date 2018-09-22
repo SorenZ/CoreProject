@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Regate" Version="0.1.0" />
   </ItemGroup>
 
   <ItemGroup>
