@@ -1,8 +1,10 @@
-﻿namespace Mobin.CoreProject.Core.Entities
+﻿using Alamut.Data.Entity;
+
+namespace Mobin.CoreProject.Core.Entities
 {
-    public class Post
+    public class Post : IEntity
     {
-        public int PostId { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
 

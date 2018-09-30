@@ -37,6 +37,7 @@ namespace Mobin.CoreProject.Admin
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.ConfigDatabase(Configuration);
+            services.AddAlamut();
            
         }
 
