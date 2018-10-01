@@ -46,7 +46,7 @@
                 <tr>
                     <td>@item.Title</td>
                     <td class="text-center fa-2x" style="white-space: nowrap;">
-                        <a href="#" data-toggle="tooltip" title="حذف">
+                        <a asp-action="Delete" asp-route-id="@item.Id" data-role="delete" data-toggle="tooltip" title="حذف">
                             <i class="si si-close text-danger"></i>
                         </a>
                         <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="ویرایش">

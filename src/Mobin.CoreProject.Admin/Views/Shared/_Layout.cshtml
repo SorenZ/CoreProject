@@ -25,6 +25,14 @@
             font-family: IRANSans;
         }
     </style>
+    
+    <script>
+        $(function() {
+            $('[data-role="delete"]').on('click', function(e) {
+                return confirm('آیا از حذف مطمئن هستید؟');
+            });
+        })
+    </script>
 </head>
 <body dir="rtl">
 
