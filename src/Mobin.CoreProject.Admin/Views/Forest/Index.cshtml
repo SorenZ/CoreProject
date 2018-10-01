@@ -1,5 +1,155 @@
 ﻿@{
-    ViewData["Title"] = "Mobin.CoreProject";
+    ViewData["Title"] = "درخت";
 }
 
-<h1>Forest</h1>
+<div class="bg-body-light">
+    <div class="content content-full">
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">درخت</h1>
+            <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">درخت</li>
+                    <li class="breadcrumb-item active" aria-current="page">لیست</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    
+    <div class="text-right mb-3">
+        <a class="btn btn-hero-success" asp-controller="Forest" asp-action="Create">
+            <i class="fa fa-fw fa-plus"></i>
+            ثبت درخت جدید
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-vcenter">
+            <thead>
+                <tr>
+                    <th class="text-center" style="width: 100px;">
+                        <i class="far fa-user"></i>
+                    </th>
+                    <th>Name</th>
+                    <th style="width: 30%;">Email</th>
+                    <th style="width: 15%;">Access</th>
+                    <th class="text-center" style="width: 100px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar7.jpg" alt="">
+                    </td>
+                    <td class="font-w600">
+                        <a href="be_pages_generic_profile.html">Helen Jacobs</a>
+                    </td>
+                    <td>client1<em class="text-muted">example.com</em></td>
+                    <td>
+                        <span class="badge badge-danger">Disabled</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-primary js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Edit">
+                                <i class="fa fa-pencil-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-primary js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Delete">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar3.jpg" alt="">
+                    </td>
+                    <td class="font-w600">
+                        <a href="be_pages_generic_profile.html">Carol White</a>
+                    </td>
+                    <td>client2<em class="text-muted">example.com</em></td>
+                    <td>
+                        <span class="badge badge-success">VIP</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-primary js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Edit">
+                                <i class="fa fa-pencil-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-primary js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Delete">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar7.jpg" alt="">
+                    </td>
+                    <td class="font-w600">
+                        <a href="be_pages_generic_profile.html">Judy Ford</a>
+                    </td>
+                    <td>client3<em class="text-muted">example.com</em></td>
+                    <td>
+                        <span class="badge badge-success">VIP</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-primary js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Edit">
+                                <i class="fa fa-pencil-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-primary js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Delete">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar2.jpg" alt="">
+                    </td>
+                    <td class="font-w600">
+                        <a href="be_pages_generic_profile.html">Susan Day</a>
+                    </td>
+                    <td>client4<em class="text-muted">example.com</em></td>
+                    <td>
+                        <span class="badge badge-success">VIP</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-primary js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Edit">
+                                <i class="fa fa-pencil-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-primary js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Delete">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar1.jpg" alt="">
+                    </td>
+                    <td class="font-w600">
+                        <a href="be_pages_generic_profile.html">Lori Moore</a>
+                    </td>
+                    <td>client5<em class="text-muted">example.com</em></td>
+                    <td>
+                        <span class="badge badge-danger">Disabled</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-primary js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Edit">
+                                <i class="fa fa-pencil-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-primary js-tooltip-enabled" data-toggle="tooltip" title="" data-original-title="Delete">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

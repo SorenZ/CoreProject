@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Alamut.Data.Linq;
+using Alamut.Data.Paging;
+using Microsoft.AspNetCore.Mvc;
+using Mobin.CoreProject.Core.SearchCriteria.Forest;
 using Mobin.CoreProject.Core.ServiceContracts;
 using Mobin.CoreProject.Core.ViewModels.Forest;
 
@@ -13,9 +17,11 @@ namespace Mobin.CoreProject.Admin.Controllers
             _forestService = forestService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(ForestGetDataSC criteria, int page = 1)
         {
-            return View();
+            var model = _forestService.GetData(criteria, page);
+
+            return View(model);
         }
 
         #region Create
