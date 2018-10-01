@@ -10,7 +10,6 @@
     <Folder Include="Business\" />
     <Folder Include="DataContracts\" />
     <Folder Include="SSOT\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>

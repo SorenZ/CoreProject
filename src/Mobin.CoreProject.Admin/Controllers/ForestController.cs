@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Core.Entities;
 using Mobin.CoreProject.Core.ServiceContracts;
+using Mobin.CoreProject.Core.ViewModels;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
@@ -46,8 +47,5 @@ namespace Mobin.CoreProject.Admin.Controllers
         #endregion
     }
 
-    public class ForestCreateViewModel
-    {
-        public string Title { get; set; }
-    }
+    
 }

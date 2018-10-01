@@ -9,9 +9,11 @@ using Alamut.Data.Sql;
 using Alamut.Data.Sql.EF;
 using Alamut.Data.Sql.EF.Repositories;
 using Alamut.Service;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Mobin.CoreProject.Config.Mapping;
 using Mobin.CoreProject.Core.ServiceContracts;
 using Mobin.CoreProject.Data;
 using Mobin.CoreProject.Service.AppServices;
@@ -33,6 +35,8 @@ namespace Mobin.CoreProject.Config
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IService<>), typeof(Service<>));
             services.AddScoped(typeof(ICrudService<>), typeof(CrudService<>));
+
+            Mapper.Initialize(option => option.AddProfiles(typeof(Bootstrapper).Assembly));
         }
 
         public static void AddRepositories(this IServiceCollection services)
