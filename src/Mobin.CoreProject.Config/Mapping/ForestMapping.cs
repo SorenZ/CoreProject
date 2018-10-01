@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
+using Mobin.CoreProject.Core.DTOs.Forest;
 using Mobin.CoreProject.Core.Entities;
-using Mobin.CoreProject.Core.ViewModels;
 using Mobin.CoreProject.Core.ViewModels.Forest;
 
 namespace Mobin.CoreProject.Config.Mapping
@@ -12,7 +9,9 @@ namespace Mobin.CoreProject.Config.Mapping
     {
         public ForestMapping()
         {
-            CreateMap<ForestCreateViewModel, Forest>();
+            CreateMap<ForestCreateVM, Forest>();
+
+            CreateMap<Forest, ForestSummaryDTO>();
         }
     }
 }

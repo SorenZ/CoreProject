@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Mobin.CoreProject.Core.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Core.ServiceContracts;
-using Mobin.CoreProject.Core.ViewModels;
 using Mobin.CoreProject.Core.ViewModels.Forest;
 
 namespace Mobin.CoreProject.Admin.Controllers
@@ -32,7 +28,7 @@ namespace Mobin.CoreProject.Admin.Controllers
 
         public IActionResult Create(string title)
         {
-            var vm = new ForestCreateViewModel { Title = title };
+            var vm = new ForestCreateVM { Title = title };
             var result = _forestService.Create(vm);
             return Json(result);
 
@@ -40,7 +36,7 @@ namespace Mobin.CoreProject.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ForestCreateViewModel vm)
+        public IActionResult Create(ForestCreateVM vm)
         {
             var result = _forestService.Create(vm);
             return Json(result);
