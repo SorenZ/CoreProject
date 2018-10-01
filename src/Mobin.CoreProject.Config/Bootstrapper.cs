@@ -64,8 +64,10 @@ namespace Mobin.CoreProject.Config
             //var assemblies = GetAssemblies();
 
             services.Scan(scan => scan
-                //.FromAssemblies(assemblies)
                 .FromAssemblyOf<BlogService>()
+                //.FromAssemblies(assemblies)
+                //.FromAssemblyDependencies()
+                //.FromApplicationDependencies()
                 .AddClasses(classes => classes.AssignableTo(typeof(ICrudService<>)))
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
