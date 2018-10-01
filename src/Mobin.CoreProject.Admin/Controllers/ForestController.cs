@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Core.Entities;
 using Mobin.CoreProject.Core.ServiceContracts;
 using Mobin.CoreProject.Core.ViewModels;
+using Mobin.CoreProject.Core.ViewModels.Forest;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
@@ -31,7 +32,8 @@ namespace Mobin.CoreProject.Admin.Controllers
 
         public IActionResult Create(string title)
         {
-            var result = _forestService.Create(new ForestCreateViewModel { Title = title });
+            var vm = new ForestCreateViewModel { Title = title };
+            var result = _forestService.Create(vm);
             return Json(result);
 
         }
@@ -47,5 +49,5 @@ namespace Mobin.CoreProject.Admin.Controllers
         #endregion
     }
 
-    
+
 }

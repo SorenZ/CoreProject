@@ -4,6 +4,7 @@ using System.Text;
 using AutoMapper;
 using Mobin.CoreProject.Core.Entities;
 using Mobin.CoreProject.Core.ViewModels;
+using Mobin.CoreProject.Core.ViewModels.Forest;
 
 namespace Mobin.CoreProject.Config.Mapping
 {
@@ -11,7 +12,7 @@ namespace Mobin.CoreProject.Config.Mapping
     {
         public ForestMapping()
         {
-            CreateMap<Forest, ForestCreateViewModel>().ReverseMap();
+            CreateMap<ForestCreateViewModel, Forest>();
         }
     }
 }
