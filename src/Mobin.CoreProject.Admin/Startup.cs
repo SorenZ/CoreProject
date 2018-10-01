@@ -34,7 +34,13 @@ namespace Mobin.CoreProject.Admin
 
             services
                 .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddSessionStateTempDataProvider();
+
+            services.AddSession(opt =>
+            {
+                opt.Cookie.IsEssential = true;
+            });
 
             services.ConfigDatabase(Configuration);
             services.AddAlamut();
@@ -57,8 +63,10 @@ namespace Mobin.CoreProject.Admin
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseSession();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            
 
             app.UseMvc(routes =>
             {
