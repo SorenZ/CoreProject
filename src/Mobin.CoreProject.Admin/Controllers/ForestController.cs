@@ -64,6 +64,16 @@ namespace Mobin.CoreProject.Admin.Controllers
             return RedirectToAction(nameof(Edit), new { id });
         }
         #endregion
+
+
+        #region Delete
+        public IActionResult Delete(int id)
+        {
+            var result = _forestService.Delete(id);
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(Index));
+        }
+        #endregion
     }
 
 
