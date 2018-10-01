@@ -63,10 +63,11 @@ namespace Mobin.CoreProject.Admin
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseSession();
+            
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            
+            app.UseSession();
+
 
             app.UseMvc(routes =>
             {
