@@ -19,5 +19,33 @@ namespace Mobin.CoreProject.Admin.Controllers
         {
             return View();
         }
+
+        #region Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        public IActionResult Create(string title)
+        {
+            var result = _forestService.Create(new ForestCreateViewModel { Title = title });
+            return Json(result);
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ForestCreateViewModel vm)
+        {
+            var result = _forestService.Create(vm);
+            return Json(result);
+
+        }
+        #endregion
+    }
+
+    public class ForestCreateViewModel
+    {
+        public string Title { get; set; }
     }
 }

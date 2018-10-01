@@ -13,6 +13,7 @@ namespace Mobin.CoreProject.Service.AppServices
     {
         public ForestService(IRepository<Forest> repository) : base(repository)
         {
+            
         }
     }
 }
