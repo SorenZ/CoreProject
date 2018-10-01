@@ -7,15 +7,16 @@ using Alamut.Data.Service;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Admin.Models;
 using Mobin.CoreProject.Core.Entities;
+using Mobin.CoreProject.Core.ServiceContracts;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IService<Blog> _blogService;
+        private readonly IBlogService _blogService;
         private readonly ICrudService<Post> _postService;
 
-        public HomeController(IService<Blog> blogService, ICrudService<Post> postService)
+        public HomeController(IBlogService blogService, ICrudService<Post> postService)
         {
             _blogService = blogService;
             _postService = postService;
