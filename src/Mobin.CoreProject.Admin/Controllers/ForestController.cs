@@ -25,20 +25,11 @@ namespace Mobin.CoreProject.Admin.Controllers
         }
 
         #region Create
-        /*
         public IActionResult Create()
         {
             return View();
         }
-        */
 
-        public IActionResult Create(string title)
-        {
-            var vm = new ForestCreateVM { Title = title };
-            var result = _forestService.Create(vm);
-            return Json(result);
-
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
