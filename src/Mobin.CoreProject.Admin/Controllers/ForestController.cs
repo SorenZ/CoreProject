@@ -1,7 +1,10 @@
 ﻿using System.Linq;
 using Alamut.Data.Linq;
 using Alamut.Data.Paging;
+using Alamut.Data.Structure;
 using Microsoft.AspNetCore.Mvc;
+using Mobin.CoreProject.Admin.Extensions;
+using Mobin.CoreProject.Core.DTOs.Forest;
 using Mobin.CoreProject.Core.SearchCriteria.Forest;
 using Mobin.CoreProject.Core.ServiceContracts;
 using Mobin.CoreProject.Core.ViewModels.Forest;
@@ -24,6 +27,7 @@ namespace Mobin.CoreProject.Admin.Controllers
             return View(model);
         }
 
+
         #region Create
         public IActionResult Create()
         {
@@ -36,8 +40,28 @@ namespace Mobin.CoreProject.Admin.Controllers
         public IActionResult Create(ForestCreateVM vm)
         {
             var result = _forestService.Create(vm);
-            return Json(result);
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(Edit), new { id = result.Data });
+        }
+        #endregion
 
+
+
+        #region Edit
+        public IActionResult Edit(int id)
+        {
+            var model = _forestService.Get<ForestEditDTO>(id);
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, ForestCreateVM vm)
+        {
+            var result = _forestService.Create(vm);
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(Edit), new { id = result.Data });
         }
         #endregion
     }
