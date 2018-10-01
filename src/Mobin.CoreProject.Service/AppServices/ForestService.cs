@@ -18,17 +18,13 @@ namespace Mobin.CoreProject.Service.AppServices
 {
     public class ForestService : CrudService<Forest>, IForestService
     {
-        private readonly IRepository<Forest> _repository;
-
-
         public ForestService(IRepository<Forest> repository) : base(repository)
         {
-            _repository = repository;
         }
 
         public IPaginated<ForestSummaryDTO> GetData(ForestGetDataSC criteria, int page = 1)
         {
-            var model = _repository
+            var model = this.Repository
                 .Queryable
 
                 .WhereIf(! string.IsNullOrWhiteSpace(criteria.Title),
