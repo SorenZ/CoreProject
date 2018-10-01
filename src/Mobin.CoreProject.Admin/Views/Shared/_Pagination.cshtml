@@ -1,0 +1,90 @@
+﻿@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Hosting.Internal
+@using Microsoft.AspNetCore.Http.Extensions
+@model Alamut.Data.Paging.IPaginated
+
+@{ var count = 3; }
+
+@{
+    var querystringDictionary = Context.Request.Query.Keys.ToDictionary(k => k, v => Context.Request.Query[v]);
+    var qs = "";
+}
+
+@if (Model.TotalRowsCount != 0)
+{
+    <div class="content">
+        <div class="block">
+            <div class="block-content">
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        @{
+                            querystringDictionary["page"] = "1";
+                            qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                        }
+                        <li class="page-item"><a class="page-link" href="?@qs"><i class="fa fa-angle-double-right"></i></a></li>
+
+                        @{
+                            querystringDictionary["page"] = Model.PreviousPage.ToString();
+                            qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                        }
+                        <li class="page-item"><a class="page-link" href="?@qs"><i class="fa fa-angle-right"></i></a></li>
+
+
+                        @for (var i = Model.CurrentPage - count; i <= Model.CurrentPage - 1; i++)
+                        {
+                            if (i >= 1)
+                            {
+                                {
+                                    querystringDictionary["page"] = i.ToString();
+                                    qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                                }
+
+                                <li><a class="page-link" href="?@qs">@i</a></li>
+                            }
+                        }
+
+
+                        @{
+                            querystringDictionary["page"] = Model.CurrentPage.ToString();
+                            qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                        }
+                        <li class="page-item active"><a class="page-link" href="?@qs">صفحه @Model.CurrentPage از @Model.PageCount</a></li>
+
+
+                        @for (var i = Model.CurrentPage + 1; i <= Model.CurrentPage + count; i++)
+                        {
+                            if (i <= Model.PageCount)
+                            {
+                                {
+                                    querystringDictionary["page"] = i.ToString();
+                                    qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                                }
+
+                                <li class="page-item"><a class="page-link" href="?@qs">@i</a></li>
+                            }
+                        }
+
+
+                        @{
+                            querystringDictionary["page"] = Model.NextPage.ToString();
+                            qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                        }
+                        <li class="page-item"><a class="page-link" href="?@qs"><i class="fa fa-angle-left"></i></a></li>
+
+                        @{
+                            querystringDictionary["page"] = Model.PageCount.ToString();
+                            qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                        }
+                        <li class="page-item"><a class="page-link" href="?@qs"><i class="fa fa-angle-double-left"></i></a></li>
+                    </ul>
+
+                </nav>
+                
+
+            </div>
+        </div>
+    </div>
+    
+
+}
+

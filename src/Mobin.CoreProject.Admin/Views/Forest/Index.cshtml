@@ -33,27 +33,29 @@
     <div class="table-responsive">
         <table class="table table-bordered table-striped table-vcenter">
             <thead>
-                <tr>
-                    <th>عنوان</th>
-                    <th class="text-center" style="width: 100px;">عملیات</th>
-                </tr>
+            <tr>
+                <th>عنوان</th>
+                <th class="text-center" style="width: 100px;">عملیات</th>
+            </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Data)
-                {
-                    <tr>
-                        <td>@item.Title</td>
-                        <td class="text-center fa-2x" style="white-space: nowrap;">
-                            <a href="#" data-toggle="tooltip" title="ویرایش">
-                                <i class="si si-close text-danger"></i>
-                            </a>
-                            <a href="#" data-toggle="tooltip" title="حذف">
-                                <i class="si si-note text-primary"></i>
-                            </a>
-                        </td>
-                    </tr>
-                }
+            @foreach (var item in Model.Data)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td class="text-center fa-2x" style="white-space: nowrap;">
+                        <a href="#" data-toggle="tooltip" title="ویرایش">
+                            <i class="si si-close text-danger"></i>
+                        </a>
+                        <a href="#" data-toggle="tooltip" title="حذف">
+                            <i class="si si-note text-primary"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>
 </div>
+
+@await Html.PartialAsync("_Pagination", Model)
