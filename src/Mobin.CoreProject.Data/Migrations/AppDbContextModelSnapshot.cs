@@ -18,44 +18,17 @@ namespace Mobin.CoreProject.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Mobin.CoreProject.Core.Entities.Blog", b =>
+            modelBuilder.Entity("Mobin.CoreProject.Core.Entities.Forest", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Url");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Blogs");
-                });
-
-            modelBuilder.Entity("Mobin.CoreProject.Core.Entities.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BlogId");
-
-                    b.Property<string>("Content");
 
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlogId");
-
-                    b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("Mobin.CoreProject.Core.Entities.Post", b =>
-                {
-                    b.HasOne("Mobin.CoreProject.Core.Entities.Blog", "Blog")
-                        .WithMany("Posts")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.ToTable("Forest");
                 });
 #pragma warning restore 612, 618
         }
