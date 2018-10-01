@@ -13,7 +13,9 @@
             <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">درخت</h1>
             <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">درخت</li>
+                    <li class="breadcrumb-item">
+                        <a asp-action="Index">درخت</a>
+                    </li>
                     <li class="breadcrumb-item active" aria-current="page">لیست</li>
                 </ol>
             </nav>
@@ -24,7 +26,7 @@
 <div class="content">
     
     <div class="text-right mb-3">
-        <a class="btn btn-hero-success" asp-controller="Forest" asp-action="Create">
+        <a class="btn btn-hero-success" asp-action="Create">
             <i class="fa fa-fw fa-plus"></i>
             ثبت درخت جدید
         </a>
@@ -44,10 +46,10 @@
                 <tr>
                     <td>@item.Title</td>
                     <td class="text-center fa-2x" style="white-space: nowrap;">
-                        <a href="#" data-toggle="tooltip" title="ویرایش">
+                        <a href="#" data-toggle="tooltip" title="حذف">
                             <i class="si si-close text-danger"></i>
                         </a>
-                        <a href="#" data-toggle="tooltip" title="حذف">
+                        <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="ویرایش">
                             <i class="si si-note text-primary"></i>
                         </a>
                     </td>
