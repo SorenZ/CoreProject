@@ -10,6 +10,7 @@ namespace Mobin.CoreProject.Config.Mapping
         public ForestMapping()
         {
             CreateMap<ForestCreateVM, Forest>();
+            CreateMap<ForestEditVM, Forest>();
 
             CreateMap<Forest, ForestSummaryDTO>();
         }

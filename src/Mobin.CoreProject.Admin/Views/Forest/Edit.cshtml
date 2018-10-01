@@ -22,7 +22,7 @@
 
 <div class="content">
 
-    <form asp-action="Create">
+    <form asp-action="Edit" asp-route-id="@Model.Id">
         <div class="block block-rounded block-bordered">
             <div class="block-header block-header-default">
                 <h3 class="block-title">@ViewData["Title"]</h3>

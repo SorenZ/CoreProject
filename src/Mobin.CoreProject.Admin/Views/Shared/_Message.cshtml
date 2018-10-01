@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Html
+@using Newtonsoft.Json
+
+<script>
+    function showBeautyMessage(res) {
+        res = res || {};
+
+        if (res.Message === undefined || res.Succeed === undefined) {
+            return false;
+        }
+
+        console.log(res.Message)
+
+        swal({
+            title: (res.Succeed ? 'موفق' : 'خطا'),
+            text: res.Message || (res.Succeed ? 'عملیات با موفقیت انجام شد' : "عملیات با خطا مواجه شد"),
+            type: res.Succeed ? "success" : "error",
+            confirmButtonText: "تایید",
+            html: false
+        });
+    }
+</script>
+
+
+@{
+    <script>
+        (function () {
+            var result = @Html.Raw(JsonConvert.SerializeObject(TempData));
+
+            var fixedResult = {
+                Succeed: result['ServiceResult.Succeed'],
+                Message: result['ServiceResult.Message']
+            };
+
+            showBeautyMessage(fixedResult);
+        }());
+    </script>
+}
