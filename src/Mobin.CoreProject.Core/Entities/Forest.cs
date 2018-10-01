@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Alamut.Data.Entity;
 
 namespace Mobin.CoreProject.Core.Entities
 {
-    public class Blog : IEntity
+    public class Forest : IEntity
     {
+        [Key]
         public int Id { get; set; }
-        public string Url { get; set; }
 
-        public List<Post> Posts { get; set; }
+        public string Title { get; set; }
     }
 }

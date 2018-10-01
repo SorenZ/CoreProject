@@ -9,9 +9,9 @@ using Mobin.CoreProject.Core.ServiceContracts;
 
 namespace Mobin.CoreProject.Service.AppServices
 {
-    public class BlogService : CrudService<Blog>, IBlogService
+    public class ForestService : CrudService<Forest>, IForestService
     {
-        public BlogService(IRepository<Blog> repository) : base(repository)
+        public ForestService(IRepository<Forest> repository) : base(repository)
         {
         }
     }

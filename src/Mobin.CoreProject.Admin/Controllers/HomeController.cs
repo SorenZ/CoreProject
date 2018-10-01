@@ -13,13 +13,11 @@ namespace Mobin.CoreProject.Admin.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IBlogService _blogService;
-        private readonly ICrudService<Post> _postService;
+        private readonly IForestService _forestService;
 
-        public HomeController(IBlogService blogService, ICrudService<Post> postService)
+        public HomeController(IForestService forestService)
         {
-            _blogService = blogService;
-            _postService = postService;
+            _forestService = forestService;
         }
 
         public IActionResult Index()
@@ -52,16 +50,9 @@ namespace Mobin.CoreProject.Admin.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public List<Blog> Blogs()
+        public List<Forest> Forests()
         {
-            return _blogService
-                .ReadOnlyRepository
-                .GetAll();
-        }
-
-        public List<Post> Posts()
-        {
-            return _postService
+            return _forestService
                 .ReadOnlyRepository
                 .GetAll();
         }
