@@ -17,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Forest\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Forest\Create.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
