@@ -21,10 +21,12 @@ namespace Mobin.CoreProject.Admin.Controllers
         }
 
         #region Create
+        /*
         public IActionResult Create()
         {
             return View();
         }
+        */
 
         public IActionResult Create(string title)
         {
