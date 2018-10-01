@@ -59,9 +59,9 @@ namespace Mobin.CoreProject.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, ForestCreateVM vm)
         {
-            var result = _forestService.Create(vm);
+            var result = _forestService.Update(id, vm);
             TempData.AddResult(result);
-            return RedirectToAction(nameof(Edit), new { id = result.Data });
+            return RedirectToAction(nameof(Edit), new { id });
         }
         #endregion
     }
