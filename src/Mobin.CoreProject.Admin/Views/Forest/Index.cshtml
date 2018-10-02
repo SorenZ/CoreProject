@@ -2,6 +2,7 @@
 @using Alamut.Data.Paging
 @using Alamut.Helpers.Linq
 @using DNTPersianUtils.Core
+@using Mobin.CoreProject.Admin.Helper
 @using Mobin.CoreProject.Admin.Toolkit
 
 @model IPaginated<ForestSummaryDTO>
@@ -42,7 +43,7 @@
 
     @if (Model.Data.IsAny())
     {
-        var i = 0;
+        var i = 1;
 
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-vcenter table-hover">
@@ -58,7 +59,7 @@
                     {
                         <tr>
                             <td class="text-center">
-                                @await Html.PartialAsync("_Counter", new Tuple<IPaginated, int>(Model, ++i))
+                                @GridHelper.Counter(Model, i++)
                             </td>
                             <td>@item.Title</td>
                             <td class="text-center fa-2x" style="white-space: nowrap;">

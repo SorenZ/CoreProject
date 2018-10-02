@@ -38,9 +38,6 @@
     <Content Update="Views\Shared\_Nodata.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Shared\_Counter.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
   </ItemGroup>
 
 </Project>
