@@ -15,9 +15,9 @@
 {
     <div class="content">
         <div class="block">
-            <div class="block-content">
-                <nav>
-                    <ul class="pagination justify-content-center">
+            <div class="block-content text-center">
+                <nav style="display: inline-block;">
+                    <ul class="pagination">
                         @{
                             querystringDictionary["page"] = "1";
                             qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
@@ -77,8 +77,13 @@
                             qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
                         }
                         <li class="page-item"><a class="page-link" href="?@qs"><i class="fa fa-angle-double-left"></i></a></li>
-                        
-                        <li class="page-item disabled">
+                    </ul>
+
+                </nav>
+                
+                <nav style="display: inline-block; pointer-events: none;">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
                             <span class="page-link">
                                 نمایش رکوردهای
                                 @((((Model.CurrentPage - 1) * Model.PageSize) + 1).ToPersianNumbers())
@@ -89,7 +94,6 @@
                             </span>
                         </li>
                     </ul>
-
                 </nav>
                 
 
