@@ -106,6 +106,8 @@
         <!-- Main Container -->
         <main id="main-container">
 
+            @await Html.PartialAsync("_BreadCrumb")
+
             @RenderBody()
 
         </main>

@@ -1,5 +1,6 @@
 ﻿@using Mobin.CoreProject.Core.DTOs.Forest
 @using Alamut.Data.Paging
+@using Mobin.CoreProject.Admin.Toolkit
 
 @model IPaginated<ForestSummaryDTO>
 
@@ -7,24 +8,28 @@
     ViewData["Title"] = "درخت";
 }
 
-<div class="bg-body-light">
-    <div class="content content-full">
-        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">درخت</h1>
-            <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a asp-action="Index">درخت</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">لیست</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-</div>
+
+@{
+    ViewBag.BreadCrumb = new BreadCrumb
+    {
+        Links = new List<BreadCrumbLink>
+        {
+            new BreadCrumbLink
+            {
+                Title = "درخت",
+                Link = Url.Action("Index"),
+            },
+
+            new BreadCrumbLink
+            {
+                Title = "لیست",
+            },
+        }
+    };
+}
 
 <div class="content">
-    
+
     <div class="text-right mb-3">
         <a class="btn btn-hero-success" asp-action="Create">
             <i class="fa fa-fw fa-plus"></i>
@@ -35,26 +40,26 @@
     <div class="table-responsive">
         <table class="table table-bordered table-striped table-vcenter">
             <thead>
-            <tr>
-                <th>عنوان</th>
-                <th class="text-center" style="width: 100px;">عملیات</th>
-            </tr>
+                <tr>
+                    <th>عنوان</th>
+                    <th class="text-center" style="width: 100px;">عملیات</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var item in Model.Data)
-            {
-                <tr>
-                    <td>@item.Title</td>
-                    <td class="text-center fa-2x" style="white-space: nowrap;">
-                        <a asp-action="Delete" asp-route-id="@item.Id" data-role="delete" data-toggle="tooltip" title="حذف">
-                            <i class="si si-close text-danger"></i>
-                        </a>
-                        <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="ویرایش">
-                            <i class="si si-note text-primary"></i>
-                        </a>
-                    </td>
-                </tr>
-            }
+                @foreach (var item in Model.Data)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+                        <td class="text-center fa-2x" style="white-space: nowrap;">
+                            <a asp-action="Delete" asp-route-id="@item.Id" data-role="delete" data-toggle="tooltip" title="حذف">
+                                <i class="si si-close text-danger"></i>
+                            </a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="ویرایش">
+                                <i class="si si-note text-primary"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
