@@ -1,0 +1,8 @@
+﻿@using DNTPersianUtils.Core
+@model Tuple<Alamut.Data.Paging.IPaginated, int>
+
+
+@{
+    var counter = (Model.Item1.CurrentPage - 1) * Model.Item1.PageSize + Model.Item2;
+}
+@counter.ToPersianNumbers()
