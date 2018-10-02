@@ -8,6 +8,6 @@ namespace Mobin.CoreProject.Core.ServiceContracts
 {
     public interface IForestService : ICrudService<Forest>
     {
-        IPaginated<ForestSummaryDTO> GetData(ForestGetDataSC criteria, int page);
+        IPaginated<ForestSummaryDTO> GetData(ForestGetDataSC criteria, int page, int size);
     }
 }

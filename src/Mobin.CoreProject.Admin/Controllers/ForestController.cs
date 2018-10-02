@@ -20,9 +20,9 @@ namespace Mobin.CoreProject.Admin.Controllers
             _forestService = forestService;
         }
 
-        public IActionResult Index(ForestGetDataSC criteria, int page = 1)
+        public IActionResult Index(ForestGetDataSC criteria, int page = 1, int size = 10)
         {
-            var model = _forestService.GetData(criteria, page);
+            var model = _forestService.GetData(criteria, page, size);
 
             return View(model);
         }

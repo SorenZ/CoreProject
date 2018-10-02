@@ -22,7 +22,7 @@ namespace Mobin.CoreProject.Service.AppServices
         {
         }
 
-        public IPaginated<ForestSummaryDTO> GetData(ForestGetDataSC criteria, int page = 1)
+        public IPaginated<ForestSummaryDTO> GetData(ForestGetDataSC criteria, int page = 1, int size = 10)
         {
             var model = this.Repository
                 .Queryable
@@ -32,7 +32,7 @@ namespace Mobin.CoreProject.Service.AppServices
 
                 .ProjectTo<ForestSummaryDTO>()
 
-                .ToPaginated(new PaginatedCriteria(page, 3));
+                .ToPaginated(new PaginatedCriteria(page, size));
 
             return model;
         }
