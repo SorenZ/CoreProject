@@ -8,6 +8,11 @@
 
 @{
     var querystringDictionary = Context.Request.Query.Keys.ToDictionary(k => k, v => Context.Request.Query[v]);
+    if (! querystringDictionary.ContainsKey("size"))
+    {
+        querystringDictionary["size"] = "10";
+    }
+
     var qs = "";
 }
 
@@ -16,6 +21,23 @@
     <div class="content">
         <div class="block">
             <div class="block-content text-center">
+                <nav style="display: inline-block;">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item @(querystringDictionary["size"] == "10" ? " active " : "")">
+                            <a class="page-link" href="?size=10">۱۰</a>
+                        </li>
+                        <li class="page-item @(querystringDictionary["size"] == "20" ? " active " : "")">
+                            <a class="page-link" href="?size=20">۲۰</a>
+                        </li>
+                        <li class="page-item @(querystringDictionary["size"] == "50" ? " active " : "")">
+                            <a class="page-link" href="?size=50">۵۰</a>
+                        </li>
+                        <li class="page-item @(querystringDictionary["size"] == "100" ? " active " : "")">
+                            <a class="page-link" href="?size=100">۱۰۰</a>
+                        </li>
+                    </ul>
+                </nav>
+
                 <nav style="display: inline-block;">
                     <ul class="pagination">
                         @{
@@ -80,7 +102,7 @@
                     </ul>
 
                 </nav>
-                
+
                 <nav style="display: inline-block; pointer-events: none;">
                     <ul class="pagination justify-content-center">
                         <li class="page-item">
@@ -95,7 +117,7 @@
                         </li>
                     </ul>
                 </nav>
-                
+
 
             </div>
         </div>
