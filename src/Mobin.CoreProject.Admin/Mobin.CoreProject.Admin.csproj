@@ -32,6 +32,9 @@
     <Content Update="Views\Shared\_Footer.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Shared\_QSearch.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Shared\_Header.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

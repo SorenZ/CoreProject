@@ -1,0 +1,30 @@
+﻿@model Alamut.Data.Paging.IPaginated
+
+<form class="mb-2" action="" method="get">
+    @{
+        var qsDictionary = Context.Request.Query.Keys.ToDictionary(k => k, v => Context.Request.Query[v]);
+        if (!qsDictionary.ContainsKey("size"))
+        {
+            qsDictionary["size"] = "10";
+        }
+    }
+
+    <input type="hidden" name="page" value="1" />
+    <input type="hidden" name="size" value="@qsDictionary["size"]" />
+
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="جستجو" name="Q" value="@ViewBag.Q" />
+        <div class="input-group-append">
+            @if (!string.IsNullOrEmpty(ViewBag.Q))
+            {
+                <a href="?size=@Model.PageSize" class="btn btn-danger">
+                    <i class="fa fa-times fa-fw"></i>
+                </a>
+            }
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search fa-fw"></i>
+            </button>
+        </div>
+    </div>
+</form>
