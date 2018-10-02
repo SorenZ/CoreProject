@@ -70,7 +70,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         public IActionResult Delete(int id, bool isAjax = false)
         {
             // var result = _forestService.Delete(id);
-            var result = ServiceResult.Okay();
+            var result = ServiceResult.Error();
 
             if (isAjax) return Json(result);
 

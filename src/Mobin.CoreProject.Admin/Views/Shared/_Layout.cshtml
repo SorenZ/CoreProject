@@ -54,6 +54,8 @@
     <script>
         $(function () {
             $('[data-role="delete"]').on('click', function (e) {
+                $('.tooltip').remove();
+
                 var shouldContinue = confirm('آیا از حذف مطمئن هستید؟');
 
                 if (!shouldContinue) {
@@ -69,7 +71,6 @@
                             'pointer-events': 'none',
                             'opacity': 0.3
                         });
-                        $('.tooltip').remove();
                         $elem.tooltip('disable');
                         showBeautyMessage(response);
                     })
