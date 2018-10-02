@@ -1,6 +1,4 @@
-﻿@model Alamut.Data.Paging.IPaginated
-
-<form class="mb-3" action="" method="get">
+﻿<form class="mb-3" action="" method="get">
     @{
         var qsDictionary = Context.Request.Query.Keys.ToDictionary(k => k, v => Context.Request.Query[v]);
         if (!qsDictionary.ContainsKey("size"))
@@ -17,7 +15,7 @@
         <div class="input-group-append">
             @if (!string.IsNullOrEmpty(ViewBag.Q))
             {
-                <a href="?size=@Model.PageSize" class="btn btn-info" data-toggle="tooltip" title="لغو جستجو">
+                <a href="?size=@qsDictionary["size"]" class="btn btn-info" data-toggle="tooltip" title="لغو جستجو">
                     <i class="fa fa-times fa-fw"></i>
                 </a>
             }
