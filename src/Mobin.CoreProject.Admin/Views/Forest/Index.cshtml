@@ -1,5 +1,6 @@
 ﻿@using Mobin.CoreProject.Core.DTOs.Forest
 @using Alamut.Data.Paging
+@using Alamut.Helpers.Linq
 @using Mobin.CoreProject.Admin.Toolkit
 
 @model IPaginated<ForestSummaryDTO>
@@ -36,16 +37,19 @@
             ثبت درخت جدید
         </a>
     </div>
-
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped table-vcenter">
-            <thead>
+    
+    
+    @if (Model.Data.IsAny())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-vcenter">
+                <thead>
                 <tr>
                     <th>عنوان</th>
                     <th class="text-center" style="width: 100px;">عملیات</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @foreach (var item in Model.Data)
                 {
                     <tr>
@@ -60,9 +64,16 @@
                         </td>
                     </tr>
                 }
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        @await Html.PartialAsync("_Nodata")
+    }
+
+
 </div>
 
 @await Html.PartialAsync("_Pagination", Model)
