@@ -63,3 +63,18 @@ $(function() {
         }, 0);
     });
 });
+
+
+$(function () {
+    $("body").on("input", ":input", function (e) {
+        setTimeout(function () {
+            var newString = $(e.target).val()
+                    .replace(/ي/g, 'ی')
+                    .replace(/ك/g, 'ک')
+                    .replace(/<script/g, '')
+                ;
+
+            $(e.target).val(newString);
+        }, 0);
+    });
+});
