@@ -8,11 +8,6 @@
 
 @{
     var querystringDictionary = Context.Request.Query.Keys.ToDictionary(k => k, v => Context.Request.Query[v]);
-    if (! querystringDictionary.ContainsKey("size"))
-    {
-        querystringDictionary["size"] = "10";
-    }
-
     var qs = "";
 }
 
@@ -105,17 +100,33 @@
 
                 <nav style="display: inline-block;">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item @(querystringDictionary["size"] == "10" ? " active " : "")">
-                            <a class="page-link" href="?size=10">۱۰</a>
+                        <li class="page-item @(Model.PageSize == 10 ? " active " : "")">
+                            @{
+                                querystringDictionary["size"] = "10";
+                                qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                            }
+                            <a class="page-link" href="?@qs">۱۰</a>
                         </li>
-                        <li class="page-item @(querystringDictionary["size"] == "20" ? " active " : "")">
-                            <a class="page-link" href="?size=20">۲۰</a>
+                        <li class="page-item @(Model.PageSize == 20 ? " active " : "")">
+                            @{
+                                querystringDictionary["size"] = "20";
+                                qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                            }
+                            <a class="page-link" href="?@qs">۲۰</a>
                         </li>
-                        <li class="page-item @(querystringDictionary["size"] == "50" ? " active " : "")">
-                            <a class="page-link" href="?size=50">۵۰</a>
+                        <li class="page-item @(Model.PageSize == 50 ? " active " : "")">
+                            @{
+                                querystringDictionary["size"] = "50";
+                                qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                            }
+                            <a class="page-link" href="?@qs">۵۰</a>
                         </li>
-                        <li class="page-item @(querystringDictionary["size"] == "100" ? " active " : "")">
-                            <a class="page-link" href="?size=100">۱۰۰</a>
+                        <li class="page-item @(Model.PageSize == 100 ? " active " : "")">
+                            @{
+                                querystringDictionary["size"] = "100";
+                                qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                            }
+                            <a class="page-link" href="?@qs">۱۰۰</a>
                         </li>
                     </ul>
                 </nav>
