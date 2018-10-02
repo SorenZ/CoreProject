@@ -17,12 +17,12 @@
         <div class="input-group-append">
             @if (!string.IsNullOrEmpty(ViewBag.Q))
             {
-                <a href="?size=@Model.PageSize" class="btn btn-danger">
+                <a href="?size=@Model.PageSize" class="btn btn-info" data-toggle="tooltip" title="لغو جستجو">
                     <i class="fa fa-times fa-fw"></i>
                 </a>
             }
 
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="جستجو">
                 <i class="fa fa-search fa-fw"></i>
             </button>
         </div>
