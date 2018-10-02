@@ -54,19 +54,25 @@
     <script>
         $(function () {
             $('[data-role="delete"]').on('click', function (e) {
-                /*
                 var shouldContinue = confirm('آیا از حذف مطمئن هستید؟');
 
                 if (!shouldContinue) {
                     return false;
                 }
-                */
 
-                var url = $(this).attr('href');
-                $.get(url, { isAjax: true }, function (response) {
-                    console.log(response);
-                    // showBeautyMessage(response);
-                })
+                var $elem = $(this);
+                var $row = $elem.closest('tr');
+                var url = $elem.attr('href');
+                $.get(url, { isAjax: true })
+                    .then(function (response) {
+                        $row.css({
+                            'pointer-events': 'none',
+                            'opacity': 0.3
+                        });
+                        $('.tooltip').remove();
+                        $elem.tooltip('disable');
+                        showBeautyMessage(response);
+                    })
                     .fail(function (response) {
                         showBeautyMessage(response);
                     });
