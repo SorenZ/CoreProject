@@ -49,7 +49,7 @@
                             querystringDictionary["page"] = Model.CurrentPage.ToString();
                             qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
                         }
-                        <li class="page-item active"><a class="page-link" href="?@qs">صفحه @Model.CurrentPage.ToPersianNumbers() از @Model.PageCount.ToPersianNumbers()</a></li>
+                        <li class="page-item active"><a class="page-link" href="?@qs" style="white-space: nowrap;">صفحه @Model.CurrentPage.ToPersianNumbers() از @Model.PageCount.ToPersianNumbers()</a></li>
 
 
                         @for (var i = Model.CurrentPage + 1; i <= Model.CurrentPage + count; i++)
