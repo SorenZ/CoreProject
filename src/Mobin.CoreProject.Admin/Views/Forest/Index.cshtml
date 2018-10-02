@@ -14,18 +14,18 @@
     ViewBag.BreadCrumb = new BreadCrumb
     {
         Links = new List<BreadCrumbLink>
-        {
-            new BreadCrumbLink
-            {
-                Title = "درخت",
-                Link = Url.Action("Index"),
-            },
+{
+    new BreadCrumbLink
+    {
+        Title = "درخت",
+        Link = Url.Action("Index"),
+    },
 
-            new BreadCrumbLink
-            {
-                Title = "لیست",
-            },
-        }
+    new BreadCrumbLink
+    {
+        Title = "لیست",
+    },
+}
     };
 }
 
@@ -37,33 +37,34 @@
             ثبت درخت جدید
         </a>
     </div>
-    
-    
+
+
     @if (Model.Data.IsAny())
     {
+
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-vcenter table-hover">
                 <thead class="thead-light">
-                <tr>
-                    <th>عنوان</th>
-                    <th class="text-center" style="width: 100px;">عملیات</th>
-                </tr>
+                    <tr>
+                        <th>عنوان</th>
+                        <th class="text-center" style="width: 100px;">عملیات</th>
+                    </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in Model.Data)
-                {
-                    <tr>
-                        <td>@item.Title</td>
-                        <td class="text-center fa-2x" style="white-space: nowrap;">
-                            <a asp-action="Delete" asp-route-id="@item.Id" data-role="delete" data-toggle="tooltip" title="حذف">
-                                <i class="si si-close text-danger"></i>
-                            </a>
-                            <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="ویرایش">
-                                <i class="si si-note text-primary"></i>
-                            </a>
-                        </td>
-                    </tr>
-                }
+                    @foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td class="text-center fa-2x" style="white-space: nowrap;">
+                                <a asp-action="Delete" asp-route-id="@item.Id" data-role="delete" data-toggle="tooltip" title="حذف">
+                                    <i class="si si-close text-danger"></i>
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="ویرایش">
+                                    <i class="si si-note text-primary"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

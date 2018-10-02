@@ -32,7 +32,7 @@ namespace Mobin.CoreProject.Service.AppServices
 
                 .ProjectTo<ForestSummaryDTO>()
 
-                .ToPaginated(new PaginatedCriteria(page));
+                .ToPaginated(new PaginatedCriteria(page, 3));
 
             return model;
         }
