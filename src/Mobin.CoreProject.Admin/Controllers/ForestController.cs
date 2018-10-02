@@ -69,8 +69,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         #region Delete
         public IActionResult Delete(int id, bool isAjax = false)
         {
-            // var result = _forestService.Delete(id);
-            var result = ServiceResult.Error();
+            var result = _forestService.Delete(id);
 
             if (isAjax) return Json(result);
 
