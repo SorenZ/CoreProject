@@ -43,3 +43,8 @@ body.swal2-height-auto {
     border-radius: 0.15rem;
     padding: 0.05rem .75rem 0.1rem;
 }
+
+.pagination .page-link {
+    font-weight: normal;
+    
+}
