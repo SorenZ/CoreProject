@@ -1,6 +1,6 @@
 ﻿@model Alamut.Data.Paging.IPaginated
 
-<form class="mb-2" action="" method="get">
+<form class="mb-3" action="" method="get">
     @{
         var qsDictionary = Context.Request.Query.Keys.ToDictionary(k => k, v => Context.Request.Query[v]);
         if (!qsDictionary.ContainsKey("size"))

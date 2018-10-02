@@ -39,8 +39,8 @@
             ثبت درخت جدید
         </a>
     </div>
-    
-    
+
+
     @await Html.PartialAsync("_QSearch", Model)
 
     @if (Model.Data.IsAny())
@@ -77,6 +77,8 @@
                 </tbody>
             </table>
         </div>
+
+        @await Html.PartialAsync("_Pagination", Model)
     }
     else
     {
@@ -86,4 +88,3 @@
 
 </div>
 
-@await Html.PartialAsync("_Pagination", Model)
