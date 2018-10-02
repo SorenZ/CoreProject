@@ -67,11 +67,14 @@
                 var url = $elem.attr('href');
                 $.get(url, { isAjax: true })
                     .then(function (response) {
-                        $row.css({
-                            'pointer-events': 'none',
-                            'opacity': 0.3
-                        });
-                        $elem.tooltip('disable');
+                        if (response.Succeed) {
+                            $row.css({
+                                'pointer-events': 'none',
+                                'opacity': 0.3
+                            });
+                            $elem.tooltip('disable');
+                        }
+
                         showBeautyMessage(response);
                     })
                     .fail(function (response) {
