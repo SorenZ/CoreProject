@@ -1,15 +1,38 @@
-﻿<div class="bg-body-light">
-    <div class="content content-full">
-        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">درخت</h1>
-            <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="#">درخت</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">لیست</li>
-                </ol>
-            </nav>
+﻿@using Mobin.CoreProject.Admin.Toolkit
+
+@{ BreadCrumb breadCrumb = ViewBag.BreadCrumb; }
+
+
+@if (breadCrumb != null)
+{
+    <div class="bg-body-light">
+        <div class="content content-full">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">@ViewData["Title"]</h1>
+
+                @if (breadCrumb.Links != null)
+                {
+                    <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            @foreach (var item in breadCrumb.Links)
+                            {
+                                <li class="breadcrumb-item @(string.IsNullOrWhiteSpace(item.Link) ? " active " : "")">
+                                    @if (string.IsNullOrWhiteSpace(item.Link))
+                                    {
+                                        <span>@item.Title</span>
+                                    }
+                                    else
+                                    {
+                                        <a href="@item.Link">@item.Title</a>
+                                    }
+                                </li>
+                            }
+                        </ol>
+                    </nav>
+                }
+                
+
+            </div>
         </div>
     </div>
-</div>
+}
