@@ -27,6 +27,31 @@
     </style>
     
     <script>
+        function showBeautyMessage(res) {
+            res = res || {};
+
+            if (res.Message === undefined || res.Succeed === undefined) {
+                return false;
+            }
+
+            var message = res.Succeed
+                ? 'عملیات با موفقیت انجام شد'
+                : 'عملیات با خطا مواجه شد';
+
+            if (!res.Succeed && res.Message)
+                message = res.Message
+
+            swal({
+                title: (res.Succeed ? 'موفق' : 'خطا'),
+                text: message,
+                type: res.Succeed ? "success" : "error",
+                confirmButtonText: "تایید",
+                html: false
+            });
+        }
+    </script>
+
+    <script>
         $(function() {
             $('[data-role="delete"]').on('click', function(e) {
                 return confirm('آیا از حذف مطمئن هستید؟');
