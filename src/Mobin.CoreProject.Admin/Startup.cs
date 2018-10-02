@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mobin.CoreProject.Config;
+using Newtonsoft.Json.Serialization;
 
 namespace Mobin.CoreProject.Admin
 {
@@ -34,6 +35,7 @@ namespace Mobin.CoreProject.Admin
 
             services
                 .AddMvc()
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddSessionStateTempDataProvider();
 

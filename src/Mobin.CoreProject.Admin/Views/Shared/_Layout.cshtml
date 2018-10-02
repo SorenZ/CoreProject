@@ -25,7 +25,7 @@
             font-family: IRANSans;
         }
     </style>
-    
+
     <script>
         function showBeautyMessage(res) {
             res = res || {};
@@ -52,9 +52,26 @@
     </script>
 
     <script>
-        $(function() {
-            $('[data-role="delete"]').on('click', function(e) {
-                return confirm('آیا از حذف مطمئن هستید؟');
+        $(function () {
+            $('[data-role="delete"]').on('click', function (e) {
+                /*
+                var shouldContinue = confirm('آیا از حذف مطمئن هستید؟');
+
+                if (!shouldContinue) {
+                    return false;
+                }
+                */
+
+                var url = $(this).attr('href');
+                $.get(url, { isAjax: true }, function (response) {
+                    console.log(response);
+                    // showBeautyMessage(response);
+                })
+                    .fail(function (response) {
+                        showBeautyMessage(response);
+                    });
+
+                return false;
             });
         })
     </script>
@@ -110,9 +127,9 @@
             height: 38px;
         }
 
-        .select2-container .select2-selection--single .select2-selection__rendered {
-            padding-left: 15px;
-        }
+            .select2-container .select2-selection--single .select2-selection__rendered {
+                padding-left: 15px;
+            }
 
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             line-height: 34px;
@@ -126,9 +143,9 @@
             padding: 1px 15px 3px;
         }
 
-        .select2-results__option:empty {
-            display: none;
-        }
+            .select2-results__option:empty {
+                display: none;
+            }
 
         .select2-container {
             width: 100% !important;
