@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading;
 using Alamut.Data.Linq;
 using Alamut.Data.Paging;
 using Alamut.Data.Structure;
@@ -58,9 +59,12 @@ namespace Mobin.CoreProject.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, ForestEditVM vm)
+        public IActionResult Edit(int id, ForestEditVM vm, bool isAjax = false)
         {
             var result = _forestService.Update(id, vm);
+
+            if (isAjax) return Json(result);
+
             TempData.AddResult(result);
             return RedirectToAction(nameof(Edit), new { id });
         }

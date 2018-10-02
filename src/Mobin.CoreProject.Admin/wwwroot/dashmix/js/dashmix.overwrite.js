@@ -78,3 +78,34 @@ $(function () {
         }, 0);
     });
 });
+
+$(function() {
+    $('body').on('submit', 'form[data-ajax]', function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var data = $this.serialize() + '&isAjax=true';
+        var action = $this.attr('action');
+        var req = $.post(action, data);
+        var $button = $this.find(':submit');
+        $button.prop('disabled', true);
+        $button.append('<i class="fa fa-spinner fa-spin"/>');
+
+        
+        req.then(function (res) {
+            if (typeof res != typeof {}) {
+                $this.removeAttr('data-ajax');
+                $this.submit();
+            } else {
+                if (!res.Succeed) {
+                    $this.removeAttr('data-ajax');
+                    $this.submit();
+                } else {
+                    showBeautyMessage(res);
+                    $button.prop('disabled', false);
+                    $button.find('.fa.fa-spin.fa-spinner').remove();
+                }
+            }
+        });
+        
+    });
+});
