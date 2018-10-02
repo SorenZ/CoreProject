@@ -4,6 +4,6 @@ namespace Mobin.CoreProject.Core.SearchCriteria.Forest
 {
     public class ForestGetDataSC : PaginatedCriteria
     {
-        public string Title { get; set; }
+        public string Q { get; set; }
     }
 }

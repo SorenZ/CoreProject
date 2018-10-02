@@ -23,6 +23,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         public IActionResult Index(ForestGetDataSC criteria, int page = 1, int size = 10)
         {
             var model = _forestService.GetData(criteria, page, size);
+            ViewBag.Q = criteria.Q;
 
             return View(model);
         }

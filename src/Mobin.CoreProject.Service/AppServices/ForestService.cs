@@ -27,8 +27,8 @@ namespace Mobin.CoreProject.Service.AppServices
             var model = this.Repository
                 .Queryable
 
-                .WhereIf(! string.IsNullOrWhiteSpace(criteria.Title),
-                    q => q.Title.Contains(criteria.Title))
+                .WhereIf(! string.IsNullOrWhiteSpace(criteria.Q),
+                    q => q.Title.Contains(criteria.Q))
 
                 .ProjectTo<ForestSummaryDTO>()
 

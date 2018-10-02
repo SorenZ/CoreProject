@@ -16,18 +16,18 @@
     ViewBag.BreadCrumb = new BreadCrumb
     {
         Links = new List<BreadCrumbLink>
-{
-    new BreadCrumbLink
-    {
-        Title = "درخت",
-        Link = Url.Action("Index"),
-    },
+        {
+            new BreadCrumbLink
+            {
+                Title = "درخت",
+                Link = Url.Action("Index"),
+            },
 
-    new BreadCrumbLink
-    {
-        Title = "لیست",
-    },
-}
+            new BreadCrumbLink
+            {
+                Title = "لیست",
+            },
+        }
     };
 }
 
@@ -41,6 +41,28 @@
     </div>
 
 
+    <form class="mb-2" action="" method="get">
+        @{
+            var qsDictionary = Context.Request.Query.Keys.ToDictionary(k => k, v => Context.Request.Query[v]);
+            if (!qsDictionary.ContainsKey("size"))
+            {
+                qsDictionary["size"] = "10";
+            }
+        }
+
+        <input type="hidden" name="page" value="1"/>
+        <input type="hidden" name="size" value="@qsDictionary["size"]"/>
+
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="جستجو" name="Q" value="@ViewBag.Q" />
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+
     @if (Model.Data.IsAny())
     {
         var i = 1;
@@ -48,11 +70,11 @@
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-vcenter table-hover">
                 <thead class="thead-light">
-                <tr>
-                    <th width="70" class="text-center">#</th>
-                    <th>عنوان</th>
-                    <th class="text-center" style="width: 1px;">عملیات</th>
-                </tr>
+                    <tr>
+                        <th width="70" class="text-center">#</th>
+                        <th>عنوان</th>
+                        <th class="text-center" style="width: 1px;">عملیات</th>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.Data)
