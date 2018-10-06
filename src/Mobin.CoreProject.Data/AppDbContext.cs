@@ -21,7 +21,7 @@ namespace Mobin.CoreProject.Data
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlServer("Server=172.16.12.162; Database=CoreProject;User Id=CoreProjectUser;Password=123456;");
+            optionsBuilder.UseSqlServer("Server=172.16.12.162; Database=CoreProject;Trusted_Connection=True; MultipleActiveResultSets=true");
 
             return new AppDbContext(optionsBuilder.Options);
         }
