@@ -7,7 +7,5 @@ namespace Mobin.CoreProject.Core.ViewModels.Forest
     {
         public string Title { get; set; }
         public string Description { get; set; }
-
-        public virtual ICollection<LeafEditVM> Leafs { get; set; }
     }
 }

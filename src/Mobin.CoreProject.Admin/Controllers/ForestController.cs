@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Alamut.Data.Linq;
 using Alamut.Data.Paging;
@@ -9,6 +10,7 @@ using Mobin.CoreProject.Core.DTOs.Forest;
 using Mobin.CoreProject.Core.SearchCriteria.Forest;
 using Mobin.CoreProject.Core.ServiceContracts;
 using Mobin.CoreProject.Core.ViewModels.Forest;
+using Mobin.CoreProject.Core.ViewModels.Leaf;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
@@ -59,8 +61,12 @@ namespace Mobin.CoreProject.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, ForestEditVM vm, bool isAjax = false)
+        public IActionResult Edit(int id
+            , ForestEditVM vm
+            , ICollection<LeafEditVM> leafs
+            , bool isAjax = false)
         {
+            return Json(leafs);
 
             var result = _forestService.Update(id, vm);
 

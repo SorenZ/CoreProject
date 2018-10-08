@@ -1,4 +1,6 @@
-﻿@using Mobin.CoreProject.Admin.Toolkit
+﻿@using Alamut.Helpers.Linq
+@using Mobin.CoreProject.Admin.Toolkit
+@using Newtonsoft.Json
 @model Mobin.CoreProject.Core.DTOs.Forest.ForestEditDTO
 
 @{
@@ -48,18 +50,17 @@
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">برگ‌ها</label>
                     <div class="col-sm-9">
-                        <div>
-                            <input type="text" name="Leafs[0].Title" value="برگ شماره ۱" />
+                        <div id="app">
+                            <div v-for="(item, index) in items">
+                                <input type="text" v-bind:name="'Leafs['+index+'].Id'" v-model="item.Id" />
+                                <input type="text" v-bind:name="'Leafs['+index+'].Title'" v-model="item.Title" />
+
+                                <button type="button" v-on:click="removeItem(index)">x</button>
+                            </div>
+
+                            <button type="button" v-on:click="addItem">+</button>
                         </div>
-                        <div>
-                            <input type="text" name="Leafs[1].Title" value="برگ شماره ۲" />
-                        </div>
-                        <div>
-                            <input type="text" name="Leafs[2].Title" value="برگ شماره ۳" />
-                        </div>
-                        <div>
-                            <input type="text" name="Leafs[3].Title" value="برگ شماره ۴" />
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -73,3 +74,23 @@
 
 </div>
 
+<script>
+    var data = @Html.Raw(JsonConvert.SerializeObject(Model.Leafs));
+    console.log(data);
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            items: data
+        },
+        methods: {
+            addItem: function () {
+                this.items.push({ Id: 0, Title: '' });
+            },
+
+            removeItem: function (index) {
+                this.items.splice(index, 1);
+            }
+        }
+    });
+</script>
