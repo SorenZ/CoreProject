@@ -14,5 +14,7 @@ namespace Mobin.CoreProject.Core.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }
+
+        public virtual ICollection<Leaf> Leafs { get; set; }
     }
 }
