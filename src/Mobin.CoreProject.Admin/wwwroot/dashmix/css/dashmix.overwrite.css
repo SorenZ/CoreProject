@@ -46,5 +46,8 @@ body.swal2-height-auto {
 
 .pagination .page-link {
     font-weight: normal;
-    
+}
+
+[dir="rtl"] .mds-bootstrap-persian-datetime-picker-popover {
+    right: auto !important;
 }
