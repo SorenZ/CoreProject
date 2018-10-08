@@ -61,6 +61,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, ForestEditVM vm, bool isAjax = false)
         {
+
             var result = _forestService.Update(id, vm);
 
             if (isAjax) return Json(result);
