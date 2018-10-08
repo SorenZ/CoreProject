@@ -7,6 +7,7 @@ using Alamut.Data.Structure;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Admin.Extensions;
 using Mobin.CoreProject.Core.DTOs.Forest;
+using Mobin.CoreProject.Core.Entities;
 using Mobin.CoreProject.Core.SearchCriteria.Forest;
 using Mobin.CoreProject.Core.ServiceContracts;
 using Mobin.CoreProject.Core.ViewModels.Forest;
@@ -18,7 +19,8 @@ namespace Mobin.CoreProject.Admin.Controllers
     {
         private readonly IForestService _forestService;
 
-        public ForestController(IForestService forestService)
+        public ForestController(IForestService forestService
+            , ILeafService leafService)
         {
             _forestService = forestService;
         }
@@ -63,12 +65,11 @@ namespace Mobin.CoreProject.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id
             , ForestEditVM vm
-            , ICollection<LeafEditVM> leafs
+            , ICollection<Leaf> leafs
             , bool isAjax = false)
         {
-            return Json(leafs);
-
             var result = _forestService.Update(id, vm);
+            _forestService.UpdateLeafs(id, leafs);
 
             if (isAjax) return Json(result);
 
