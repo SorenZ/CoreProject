@@ -11,20 +11,23 @@
     ViewBag.BreadCrumb = new BreadCrumb
     {
         Links = new List<BreadCrumbLink>
-        {
-            new BreadCrumbLink
-            {
-                Title = "درخت",
-                Link = Url.Action("Index"),
-            },
+    {
+    new BreadCrumbLink
+    {
+    Title = "درخت",
+    Link = Url.Action("Index"),
+    },
 
-            new BreadCrumbLink
-            {
-                Title = ViewData["Title"].ToString(),
-            },
-        }
+    new BreadCrumbLink
+    {
+    Title = ViewData["Title"].ToString(),
+    },
+    }
     };
 }
+
+<script src="~/dashmix/js/plugins/vue-draggable/Sortable.min.js"></script>
+<script src="~/dashmix/js/plugins/vue-draggable/vuedraggable.min.js"></script>
 
 @Html.Raw(RegateText.Init())
 @Html.Raw(RegateTextarea.Init())
@@ -51,16 +54,27 @@
                     <label class="col-sm-3 col-form-label">برگ‌ها</label>
                     <div class="col-sm-9">
                         <div id="app">
-                            <div v-for="(item, index) in items">
-                                <input type="hidden" v-bind:name="'Leafs['+index+'].Id'" v-model="item.Id" />
-                                <input type="text" v-bind:name="'Leafs['+index+'].Title'" v-model="item.Title" />
-
-                                <button type="button" v-on:click="removeItem(index)">x</button>
+                            <draggable :list="items" v-model="items" :options="{handle:'.list-item--move'}">
+                                <div class="mb-2" v-for="(item, index) in items">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend handle list-item--move">
+                                            <span class="input-group-text"><i class="fa fa-fw fa-bars" style="opacity: 0.3;"></i></span>
+                                        </div>
+                                        <input type="hidden" v-bind:name="'Leafs['+index+'].Id'" v-model="item.Id" />
+                                        <input type="text" class="form-control" v-bind:name="'Leafs['+index+'].Title'" v-model="item.Title" />
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-danger" v-on:click="removeItem(index)"><i class="fa fa-fw fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </draggable>
+                            <div class="text-right">
+                               
+                                    <button type="button" class="btn btn-success" v-on:click="addItem"><i class="fa fa-fw fa-plus"></i></button>
+                              
                             </div>
-
-                            <button type="button" v-on:click="addItem">+</button>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -73,6 +87,9 @@
     </form>
 
 </div>
+
+
+
 
 <script>
     var data = @Html.Raw(JsonConvert.SerializeObject(Model.Leafs));
