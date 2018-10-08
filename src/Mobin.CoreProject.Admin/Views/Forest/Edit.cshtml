@@ -30,7 +30,7 @@
 
 <div class="content">
 
-    <form asp-action="Edit" asp-route-id="@Model.Id" data-ajax>
+    <form asp-action="Edit" asp-route-id="@Model.Id">
         <div class="block block-rounded block-bordered">
             <div class="block-content">
                 <div class="form-group row">
@@ -43,6 +43,23 @@
                     <label class="col-sm-3 col-form-label">توضیحات</label>
                     <div class="col-sm-9">
                         @Html.Raw(RegateTextarea.Build("Description", Model.Description))
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">برگ‌ها</label>
+                    <div class="col-sm-9">
+                        <div>
+                            <input type="text" name="Leafs[0].Title" value="برگ شماره ۱" />
+                        </div>
+                        <div>
+                            <input type="text" name="Leafs[1].Title" value="برگ شماره ۲" />
+                        </div>
+                        <div>
+                            <input type="text" name="Leafs[2].Title" value="برگ شماره ۳" />
+                        </div>
+                        <div>
+                            <input type="text" name="Leafs[3].Title" value="برگ شماره ۴" />
+                        </div>
                     </div>
                 </div>
             </div>
