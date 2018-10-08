@@ -52,7 +52,7 @@
                     <div class="col-sm-9">
                         <div id="app">
                             <div v-for="(item, index) in items">
-                                <input type="text" v-bind:name="'Leafs['+index+'].Id'" v-model="item.Id" />
+                                <input type="hidden" v-bind:name="'Leafs['+index+'].Id'" v-model="item.Id" />
                                 <input type="text" v-bind:name="'Leafs['+index+'].Title'" v-model="item.Title" />
 
                                 <button type="button" v-on:click="removeItem(index)">x</button>
@@ -80,9 +80,11 @@
 
     var app = new Vue({
         el: '#app',
+
         data: {
             items: data
         },
+
         methods: {
             addItem: function () {
                 this.items.push({ Id: 0, Title: '' });
