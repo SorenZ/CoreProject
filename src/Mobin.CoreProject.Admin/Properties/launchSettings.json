@@ -3,7 +3,7 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:5408",
+      "applicationUrl": "http://localhost:5407",
       "sslPort": 0
     }
   },
@@ -14,12 +14,12 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5408"
+      "applicationUrl": "http://localhost:5407"
     },
     "Mobin.CoreProject.Admin": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5408",
+      "applicationUrl": "http://localhost:5407",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
