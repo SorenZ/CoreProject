@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mobin.CoreProject.Config;
@@ -27,6 +28,7 @@ namespace Mobin.CoreProject.Admin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(IISDefaults.AuthenticationScheme);
             services.AddSingleton<HtmlEncoder>(
                 HtmlEncoder.Create(allowedRanges: new[]
                 {

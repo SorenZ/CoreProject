@@ -4,6 +4,7 @@ using System.Threading;
 using Alamut.Data.Linq;
 using Alamut.Data.Paging;
 using Alamut.Data.Structure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Admin.Extensions;
 using Mobin.CoreProject.Core.DTOs.Forest;
@@ -15,6 +16,7 @@ using Mobin.CoreProject.Core.ViewModels.Leaf;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
+    [Authorize]
     public class ForestController : Controller
     {
         private readonly IForestService _forestService;
