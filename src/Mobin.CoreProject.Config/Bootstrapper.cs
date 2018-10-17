@@ -10,6 +10,7 @@ using Alamut.Data.Sql.EF;
 using Alamut.Data.Sql.EF.Repositories;
 using Alamut.Service;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ using Mobin.CoreProject.Config.Mapping;
 using Mobin.CoreProject.Core.ServiceContracts;
 using Mobin.CoreProject.Data;
 using Mobin.CoreProject.Service.AppServices;
+using Mobin.CoreProject.Service.SecurityServices;
 
 namespace Mobin.CoreProject.Config
 {
@@ -38,6 +40,11 @@ namespace Mobin.CoreProject.Config
 
             Mapper.Initialize(option => option.AddProfiles(typeof(Bootstrapper).Assembly));
         }
+
+        public static void RegisterCustomClaims(this IServiceCollection services) =>
+            services.AddScoped<IClaimsTransformation, AppClaimsTransformer>();
+
+        
 
         public static void AddRepositories(this IServiceCollection services)
         {

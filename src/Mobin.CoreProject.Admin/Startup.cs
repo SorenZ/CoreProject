@@ -50,17 +50,20 @@ namespace Mobin.CoreProject.Admin
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddSessionStateTempDataProvider();
 
+            services.AddMemoryCache();
             services.AddSession(opt =>
             {
                 opt.Cookie.IsEssential = true;
             });
 
+            
+
             services.ConfigDatabase(Configuration);
             services.AddAlamut();
             services.AddRepositories();
             services.AddAppServices();
+            services.RegisterCustomClaims();
 
-            
 
         }
 

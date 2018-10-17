@@ -18,7 +18,8 @@ namespace Mobin.CoreProject.Data
         {
             modelBuilder.Entity<UserRole>(b =>
             {
-                b.HasKey(c => new {c.UserName, c.RoleId});
+                b.Ignore(c => c.Id);
+                b.HasKey(c => new {c.UserName, c.RoleName});
                 b.Property(p => p.UserName).HasMaxLength(50);
                 b.Property(p => p.RoleName).HasMaxLength(50);
             });
