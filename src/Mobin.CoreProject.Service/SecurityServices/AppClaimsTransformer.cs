@@ -26,7 +26,7 @@ namespace Mobin.CoreProject.Service.SecurityServices
         public List<Claim> GetUserRoles(string userName) =>
             _cache.GetOrCreate($"UserRoles_{userName}", entry =>
             {
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(ClaimDuration);
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(ClaimDuration);
 
                 return _useRepository.Queryable
                     .Where(q => q.UserName == userName &&
