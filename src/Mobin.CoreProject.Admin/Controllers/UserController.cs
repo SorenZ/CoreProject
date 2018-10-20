@@ -6,7 +6,6 @@ using Mobin.CoreProject.Core.ViewModels.User;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
-    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserService _userService;

@@ -6,7 +6,6 @@ using Mobin.CoreProject.Core.SSOT;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()

@@ -16,7 +16,6 @@ using Mobin.CoreProject.Core.ViewModels.Leaf;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
-    [Authorize]
     public class ForestController : Controller
     {
         private readonly IForestService _forestService;
