@@ -9,17 +9,17 @@ namespace Mobin.CoreProject.Admin.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        private readonly IUserService _forestService;
+        private readonly IUserService _userService;
 
-        public UserController(IUserService forestService
+        public UserController(IUserService userService
             , ILeafService leafService)
         {
-            _forestService = forestService;
+            _userService = userService;
         }
 
         public IActionResult Index(int page = 1, int size = 10)
         {
-            var model = _forestService.GetData(page, size);
+            var model = _userService.GetData(page, size);
 
             return View(model);
         }
@@ -36,7 +36,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(UserCreateVM vm)
         {
-            var result = _forestService.Create(vm);
+            var result = _userService.Create(vm);
             TempData.AddResult(result);
             return RedirectToAction(nameof(Index));
         }
@@ -49,7 +49,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         #region Delete
         public IActionResult Delete(int id, bool isAjax = false)
         {
-            var result = _forestService.Delete(id);
+            var result = _userService.Delete(id);
 
             if (isAjax) return Json(result);
 

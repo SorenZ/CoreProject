@@ -24,6 +24,13 @@ namespace Mobin.CoreProject.Data
                 b.Property(p => p.UserName).HasMaxLength(50);
                 b.Property(p => p.RoleName).HasMaxLength(50);
             });
+
+            modelBuilder.Entity<User>(b =>
+            {
+                b.Ignore(c => c.Id);
+                b.HasKey(c => c.UserName);
+                b.Property(p => p.UserName).HasMaxLength(50);
+            });
                 
 
             base.OnModelCreating(modelBuilder);

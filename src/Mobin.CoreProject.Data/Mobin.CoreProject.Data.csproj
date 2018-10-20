@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20181020091701_UserIEntityMigration.cs" />
+    <Compile Remove="Migrations\20181020091806_UserIEntityMigration.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Mobin.CoreProject.Core\Mobin.CoreProject.Core.csproj" />
   </ItemGroup>
 
