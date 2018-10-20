@@ -12,6 +12,7 @@ namespace Mobin.CoreProject.Data
 
         public DbSet<Forest> Forest { get; set; }
         public DbSet<Leaf> Leaf { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
