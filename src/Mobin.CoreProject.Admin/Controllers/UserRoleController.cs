@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Admin.Extensions;
 using Mobin.CoreProject.Core.ServiceContracts;
+using Mobin.CoreProject.Core.SSOT;
 using Mobin.CoreProject.Core.ViewModels.UserRole;
 
 namespace Mobin.CoreProject.Admin.Controllers
@@ -33,8 +34,10 @@ namespace Mobin.CoreProject.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(UserRoleCreateVM vm)
+        public IActionResult Create(UserRoleCreateVM vm, AuthorityCode roleName)
         {
+            vm.RoleName = roleName.ToString();
+
             var result = _userRoleService.Create(vm);
             TempData.AddResult(result);
             return RedirectToAction(nameof(Index));

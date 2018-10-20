@@ -1,4 +1,5 @@
 ﻿@using Mobin.CoreProject.Admin.Toolkit
+@using Mobin.CoreProject.Core.SSOT
 @{
     ViewData["Title"] = "ثبت دسترسی جدید";
 }
@@ -33,7 +34,14 @@
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">کاربر</label>
                     <div class="col-sm-9">
-                        @Html.Raw(RegateForeignKey.Build(Url.Action("User", "Api"), "UserName", isRequired: true))
+                        @Html.Raw(RegateForeignKey.Build(Url.Action("GetAll", "User"), "UserName", isRequired: true))
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">دسترسی</label>
+                    <div class="col-sm-9">
+                        @Html.Raw(RegateDropdown.Build<AuthorityCode>("RoleName", isRequired: true))
                     </div>
                 </div>
             </div>

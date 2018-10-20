@@ -1,4 +1,6 @@
-﻿namespace Mobin.CoreProject.Core.ViewModels.UserRole
+﻿using Mobin.CoreProject.Core.SSOT;
+
+namespace Mobin.CoreProject.Core.ViewModels.UserRole
 {
     public class UserRoleCreateVM
     {
