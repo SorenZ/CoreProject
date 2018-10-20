@@ -22,8 +22,5 @@ namespace Mobin.CoreProject.Admin.Controllers
         public IActionResult UserManagementFullAccess() => 
             Content(AuthorityCode.UserManagementFullAccess.ToString());
 
-        [HasRole(AuthorityCode.UserManagementRequestReason)]
-        public IActionResult UserManagementRequestReason() => 
-            Content(AuthorityCode.UserManagementRequestReason.ToString());
     }
 }
