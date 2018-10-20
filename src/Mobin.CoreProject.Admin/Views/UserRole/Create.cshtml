@@ -22,7 +22,8 @@
     };
 }
 
-@Html.Raw(RegateText.Init())
+@Html.Raw(RegateDropdown.Init())
+@Html.Raw(RegateForeignKey.Init())
 
 <div class="content">
 
@@ -30,9 +31,9 @@
         <div class="block block-rounded block-bordered">
             <div class="block-content">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">عنوان</label>
+                    <label class="col-sm-3 col-form-label">کاربر</label>
                     <div class="col-sm-9">
-                        
+                        @Html.Raw(RegateForeignKey.Build(Url.Action("User", "Api"), "UserName", isRequired: true))
                     </div>
                 </div>
             </div>

@@ -57,6 +57,13 @@ namespace Mobin.CoreProject.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
         #endregion
+
+        [AllowAnonymous]
+        public IActionResult GetAll()
+        {
+            var model = _userService.GetAll();
+            return Json(model);
+        }
     }
 
 

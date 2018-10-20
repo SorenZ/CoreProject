@@ -39,5 +39,18 @@ namespace Mobin.CoreProject.Service.AppServices
 
             return result;
         }
+
+        public List<IdTitle> GetAll()
+        {
+            var model = this.Repository
+                .Queryable
+                .Select(q => new IdTitle
+                {
+                    Id = q.UserName,
+                    Title = q.UserName,
+                });
+
+            return model.ToList();
+        }
     }
 }

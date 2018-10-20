@@ -1,4 +1,5 @@
-﻿using Alamut.Data.Paging;
+﻿using System.Collections.Generic;
+using Alamut.Data.Paging;
 using Alamut.Data.Service;
 using Alamut.Data.Structure;
 using Mobin.CoreProject.Core.DTOs.User;
@@ -10,5 +11,6 @@ namespace Mobin.CoreProject.Core.ServiceContracts
     {
         IPaginated<UserSummaryDTO> GetData(int page, int size);
         ServiceResult Delete(string userName);
+        List<IdTitle> GetAll();
     }
 }
