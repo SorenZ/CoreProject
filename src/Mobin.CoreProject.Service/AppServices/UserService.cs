@@ -31,5 +31,13 @@ namespace Mobin.CoreProject.Service.AppServices
 
             return model;
         }
+
+        public ServiceResult Delete(string userName)
+        {
+            var result = this.Repository
+                .DeleteMany(q => q.UserName == userName);
+
+            return result;
+        }
     }
 }

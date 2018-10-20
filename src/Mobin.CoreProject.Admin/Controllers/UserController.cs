@@ -47,9 +47,9 @@ namespace Mobin.CoreProject.Admin.Controllers
         
 
         #region Delete
-        public IActionResult Delete(int id, bool isAjax = false)
+        public IActionResult Delete(string userName, bool isAjax = false)
         {
-            var result = _userService.Delete(id);
+            var result = _userService.Delete(userName);
 
             if (isAjax) return Json(result);
 
