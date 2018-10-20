@@ -1,6 +1,9 @@
-﻿using Alamut.Data.Linq;
+﻿using System.Linq;
+using System.Reflection;
+using Alamut.Data.Linq;
 using Alamut.Data.Paging;
 using Alamut.Data.Repository;
+using Alamut.Data.Structure;
 using Alamut.Service;
 using AutoMapper.QueryableExtensions;
 using Mobin.CoreProject.Core.Entities;
@@ -23,6 +26,14 @@ namespace Mobin.CoreProject.Service.AppServices
                 .ToPaginated(new PaginatedCriteria(page, size));
 
             return model;
+        }
+
+        public ServiceResult Delete(string userName, string roleName)
+        {
+            var result = this.Repository
+                .DeleteMany(q => q.UserName == userName && q.RoleName == roleName);
+
+            return result;
         }
     }
 }
