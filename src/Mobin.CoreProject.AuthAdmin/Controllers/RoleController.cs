@@ -29,22 +29,7 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
         #endregion
 
 
-        #region DeleteRole
-        public IActionResult DeleteRole()
-        {
-            var data = new { id = 1 };
-            return RedirectToAction(nameof(DeleteRolePost), data);
-        }
-
-        public IActionResult DeleteRolePost(int id)
-        {
-            // TODO: delete role
-            // [ ] assigned to the users (AspNetUserRoles)
-            // [ ] delete role claims (AspNetRoleClaims)
-            // [ ] the role itself (AspNetRoles)
-            return Json(id);
-        }
-        #endregion
+        
 
 
         #region UpdateRoleTitle
@@ -86,6 +71,23 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
         }
         #endregion
 
+
+        #region DeleteRole
+        public IActionResult DeleteRole()
+        {
+            var data = new { id = 1 };
+            return RedirectToAction(nameof(DeleteRolePost), data);
+        }
+
+        public IActionResult DeleteRolePost(int id)
+        {
+            // TODO: delete role
+            // [ ] assigned to the users (AspNetUserRoles)
+            // [ ] delete role claims (AspNetRoleClaims)
+            // [ ] the role itself (AspNetRoles)
+            return Json(id);
+        }
+        #endregion
 
         #region UpdateUserRoles
         public IActionResult UpdateUserRoles()
