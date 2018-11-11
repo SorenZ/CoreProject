@@ -43,7 +43,7 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
             // [ ] delete role claims (AspNetRoleClaims)
             // [ ] the role itself (AspNetRoles)
             return Json(id);
-        } 
+        }
         #endregion
 
 
@@ -57,8 +57,33 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
         public IActionResult UpdateRoleTitlePost(int id, string title)
         {
             // TODO: update role title
-            return Json(new {id, title});
-        } 
+            return Json(new { id, title });
+        }
+        #endregion
+
+
+        #region UpdateRoleClaims
+        public IActionResult UpdateRoleClaims()
+        {
+            var data = new
+            {
+                id = 1,
+                claims = new List<string>
+                {
+                    "Forest.Create",
+                    "Forest.Delete",
+                    "Forest.Manage",
+                }
+            };
+
+            return RedirectToAction(nameof(UpdateRoleClaimsPost), data);
+        }
+
+        public IActionResult UpdateRoleClaimsPost(int id, List<string> claims)
+        {
+            // TODO: update role claims
+            return Json(new { id, claims });
+        }
         #endregion
 
     }
