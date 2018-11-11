@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mobin.CoreProject.AuthAdmin.Areas.Identity.Data
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public class AppDbContext : IdentityDbContext<AppUser,AppRole,int>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)

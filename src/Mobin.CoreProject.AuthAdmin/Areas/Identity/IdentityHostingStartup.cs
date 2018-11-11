@@ -20,9 +20,9 @@ namespace Mobin.CoreProject.AuthAdmin.Areas.Identity
                         context.Configuration.GetConnectionString("AppDbContextConnection")));
 
                 services
-                    .AddIdentity<IdentityUser, IdentityRole>()
+                    .AddIdentity<AppUser, AppRole>()
                     .AddDefaultTokenProviders()
-                    //.AddDefaultIdentity<IdentityUser>()
+                    //.AddDefaultIdentity<AppUser>()
                     //.AddRoleManager<RoleManager<IdentityRole>>()
                     //.AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<AppDbContext>();
@@ -63,5 +63,25 @@ namespace Mobin.CoreProject.AuthAdmin.Areas.Identity
 
             });
         }
+    }
+
+    public class AppUser : IdentityUser<int>
+    {
+        
+    }
+
+    public class AppRole : IdentityRole<int>
+    {
+        public AppRole()
+        {
+            
+        }
+
+        public AppRole(string roleName)
+            : this()
+        {
+            base.Name = roleName;
+        }
+
     }
 }

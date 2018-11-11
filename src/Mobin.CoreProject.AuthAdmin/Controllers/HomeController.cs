@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Mobin.CoreProject.AuthAdmin.Areas.Identity;
 using Mobin.CoreProject.AuthAdmin.Models;
 
 namespace Mobin.CoreProject.AuthAdmin.Controllers
@@ -14,11 +15,11 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
 
-        public HomeController(UserManager<IdentityUser> userManager, 
-            RoleManager<IdentityRole> roleManager)
+        public HomeController(UserManager<AppUser> userManager, 
+            RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -61,7 +62,7 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
             var adminRole = await _roleManager.FindByNameAsync("Admin");
             if (adminRole == null)
             {
-                adminRole = new IdentityRole("Admin");
+                adminRole = new AppRole("Admin");
                 await _roleManager.CreateAsync(adminRole);
 
                 await _roleManager.AddClaimAsync(adminRole, new Claim("Permission", "projects.view"));
@@ -78,7 +79,7 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
 
             if (accountManagerRole == null)
             {
-                accountManagerRole = new IdentityRole("Account Manager");
+                accountManagerRole = new AppRole("Account Manager");
                 await _roleManager.CreateAsync(accountManagerRole);
 
                 await _roleManager.AddClaimAsync(accountManagerRole, new Claim("Permission", "account.manage"));
