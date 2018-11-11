@@ -86,5 +86,27 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
         }
         #endregion
 
+
+        #region UpdateUserRoles
+        public IActionResult UpdateUserRoles()
+        {
+            var data = new
+            {
+                userId = 1, // userid
+                roleIds = new List<int> { 1, 2, 3 },
+            };
+
+            return RedirectToAction(nameof(UpdateUserRolesPost), data);
+        }
+
+        public IActionResult UpdateUserRolesPost(int userId, List<int> roleIds)
+        {
+            // TODO: update user roles
+            // [ ] delete all user roles
+            // [ ] assign these roles to the user
+            return Json(new { userId, roleIds });
+        }
+        #endregion
+
     }
 }
