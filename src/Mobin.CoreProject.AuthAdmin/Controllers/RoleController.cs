@@ -56,10 +56,15 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
             return RedirectToAction(nameof(UpdateRoleTitlePost), data);
         }
 
-        public IActionResult UpdateRoleTitlePost(int id, string title)
+        public async Task<IActionResult> UpdateRoleTitlePost(int id, string title)
         {
-            // TODO: update role title
-            return Json(new { id, title });
+            //  update role title
+            var role = await _roleManager.FindByIdAsync(id.ToString());
+            role.Name = title;
+
+            var result = await _roleManager.UpdateAsync(role);
+
+            return Json(result);
         }
         #endregion
 
