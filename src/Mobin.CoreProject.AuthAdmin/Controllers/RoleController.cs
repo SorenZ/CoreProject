@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Mobin.CoreProject.AuthAdmin.Areas.Identity;
 using Mobin.CoreProject.AuthAdmin.Models;
 
 namespace Mobin.CoreProject.AuthAdmin.Controllers
@@ -14,6 +15,14 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
     [Authorize]
     public class RoleController : Controller
     {
+
+        private readonly RoleManager<AppRole> _roleManager;
+
+        public RoleController(RoleManager<AppRole> roleManager)
+        {
+            _roleManager = roleManager;
+        }
+
         #region CreateRole
         public IActionResult CreateRole()
         {
@@ -21,10 +30,18 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
             return RedirectToAction(nameof(CreateRolePost), data);
         }
 
-        public IActionResult CreateRolePost(string title)
+        public async Task<IActionResult> CreateRolePost(string title)
         {
-            // TODO : Create a role
-            return Json(title);
+            // Create a role
+            var newRole = await _roleManager.FindByNameAsync(title);
+            if (newRole == null)
+            {
+                newRole = new AppRole(title);
+                var result = await _roleManager.CreateAsync(newRole);
+                return Json(result);
+            }
+
+            return Json($"The role {title} already exist.");
         }
         #endregion
 
