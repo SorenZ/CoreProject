@@ -17,7 +17,7 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
         #region CreateRole
         public IActionResult CreateRole()
         {
-            var data = new { title = "مدیر واحد تضمین کیفیت" };
+            var data = new { title = "مدیر واحد کنترل کیفیت" };
             return RedirectToAction(nameof(CreateRolePost), data);
         }
 
@@ -29,6 +29,7 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
         #endregion
 
 
+        #region DeleteRole
         public IActionResult DeleteRole()
         {
             var data = new { id = 1 };
@@ -42,7 +43,23 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
             // [ ] delete role claims (AspNetRoleClaims)
             // [ ] the role itself (AspNetRoles)
             return Json(id);
+        } 
+        #endregion
+
+
+        #region UpdateRoleTitle
+        public IActionResult UpdateRoleTitle()
+        {
+            var data = new { id = 1, title = "مدیر واحد تضمین کیفیت" };
+            return RedirectToAction(nameof(UpdateRoleTitlePost), data);
         }
+
+        public IActionResult UpdateRoleTitlePost(int id, string title)
+        {
+            // TODO: update role title
+            return Json(new {id, title});
+        } 
+        #endregion
 
     }
 }
