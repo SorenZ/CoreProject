@@ -86,9 +86,26 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
             return RedirectToAction(nameof(UpdateRoleClaimsPost), data);
         }
 
-        public IActionResult UpdateRoleClaimsPost(int id, List<string> claims)
+        public async Task<IActionResult> UpdateRoleClaimsPost(int id, List<string> claims)
         {
-            // TODO: update role claims
+            // update role claims
+            var role = await _roleManager.FindByIdAsync(id.ToString());
+
+            if (role == null)
+                {return Content($"there is no role with Id : {id}");}
+
+            var currentClaims = await _roleManager.GetClaimsAsync(role);
+
+            foreach (var claim in claims)
+            {
+                if (currentClaims.Any(q => q.Value == claim)) // simplified 
+                    { continue;}
+
+                await _roleManager.AddClaimAsync(role, new Claim("Permission", claim));
+            }
+            
+
+
             return Json(new { id, claims });
         }
         #endregion
