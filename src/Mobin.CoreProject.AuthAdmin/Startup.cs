@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.Extensions.Configuration;
@@ -60,5 +61,7 @@ namespace Mobin.CoreProject.AuthAdmin
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+        
     }
 }

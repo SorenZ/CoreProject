@@ -17,10 +17,11 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
     {
 
         private readonly RoleManager<AppRole> _roleManager;
-
-        public RoleController(RoleManager<AppRole> roleManager)
+        private readonly UserManager<AppUser> _userManager;
+        public RoleController(RoleManager<AppRole> roleManager, UserManager<AppUser> userManager)
         {
             _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         #region CreateRole
@@ -118,13 +119,16 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
             return RedirectToAction(nameof(DeleteRolePost), data);
         }
 
-        public IActionResult DeleteRolePost(int id)
+        public async Task<IActionResult> DeleteRolePost(int id)
         {
-            // TODO: delete role
+            //  delete role
             // [ ] assigned to the users (AspNetUserRoles)
             // [ ] delete role claims (AspNetRoleClaims)
             // [ ] the role itself (AspNetRoles)
-            return Json(id);
+            var role = _roleManager.Roles.FirstOrDefault(q => q.Id == id);
+            var result = await _roleManager.DeleteAsync(role);
+
+            return Json(result);
         }
         #endregion
 
@@ -140,12 +144,24 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
             return RedirectToAction(nameof(UpdateUserRolesPost), data);
         }
 
-        public IActionResult UpdateUserRolesPost(int userId, List<int> roleIds)
+        public async Task<IActionResult> UpdateUserRolesPost(int userId, List<int> roleIds)
         {
-            // TODO: update user roles
-            // [ ] delete all user roles
-            // [ ] assign these roles to the user
-            return Json(new { userId, roleIds });
+            // update user roles
+            var user = await _userManager.GetUserAsync(this.User);
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var roles = _roleManager.Roles
+                .Where(q => roleIds.Contains(q.Id))
+                .Select(s => s.Name);
+
+            var result = await _userManager.RemoveFromRolesAsync(user, userRoles);
+
+            if (!result.Succeeded)
+                {return Json(result);}
+
+            result = await _userManager.AddToRolesAsync(user, roles);
+
+            return Json(result);
+
         }
         #endregion
 

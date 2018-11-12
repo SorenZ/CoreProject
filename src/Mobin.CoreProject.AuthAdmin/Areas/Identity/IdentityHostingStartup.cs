@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -61,6 +63,9 @@ namespace Mobin.CoreProject.AuthAdmin.Areas.Identity
                     options.SlidingExpiration = true;
                 });
 
+                services.AddSingleton<IEmailSender, EmailSender>();
+
+
             });
         }
     }
@@ -83,5 +88,13 @@ namespace Mobin.CoreProject.AuthAdmin.Areas.Identity
             base.Name = roleName;
         }
 
+    }
+
+    public class EmailSender : IEmailSender
+    {
+        public Task SendEmailAsync(string email, string subject, string message)
+        {
+            return Task.CompletedTask;
+        }
     }
 }
