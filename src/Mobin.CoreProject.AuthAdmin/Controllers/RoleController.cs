@@ -147,7 +147,7 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
         public async Task<IActionResult> UpdateUserRolesPost(int userId, List<int> roleIds)
         {
             // update user roles
-            var user = await _userManager.GetUserAsync(this.User);
+            var user = await _userManager.FindByIdAsync(userId.ToString());
             var userRoles = await _userManager.GetRolesAsync(user);
             var roles = _roleManager.Roles
                 .Where(q => roleIds.Contains(q.Id))
