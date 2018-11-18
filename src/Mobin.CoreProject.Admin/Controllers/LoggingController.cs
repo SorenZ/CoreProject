@@ -2,7 +2,7 @@
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
-    public class LogController : Controller
+    public class LoggingController : Controller
     {
         public IActionResult Index()
         {
