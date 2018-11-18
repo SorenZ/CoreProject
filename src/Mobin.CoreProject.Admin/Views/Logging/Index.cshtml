@@ -1,1 +1,268 @@
-﻿
+﻿@using Mobin.CoreProject.Core.DTOs.Forest
+@using Alamut.Data.Paging
+@using Alamut.Helpers.Linq
+@using Mobin.CoreProject.Admin.Helper
+@using Mobin.CoreProject.Admin.Toolkit
+
+@model IPaginated<ForestSummaryDTO>
+
+@{
+    ViewData["Title"] = "log";
+}
+
+@{
+    ViewBag.BreadCrumb = new BreadCrumb
+    {
+        Links = new List<BreadCrumbLink>
+{
+new BreadCrumbLink
+{
+Title = "log",
+Link = Url.Action("Index"),
+},
+
+new BreadCrumbLink
+{
+Title = "لیست",
+},
+}
+    };
+}
+
+
+
+
+<div class="content">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-vcenter table-hover table-text-left ltr">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        Time
+                    </th>
+
+                    <th>
+                        Level
+                    </th>
+                    <th>
+                        Path
+                    </th>
+                    <th>
+                        Message
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>
+                        ۹۷/۰۸/۲۷ ۱۰:۴۳:۴۶
+                    </td>
+                    <td>
+                        Information
+                    </td>
+                    <td data-prop="{&quot;SourceContext&quot;:&quot;ECare.Application.EventHandlers.User.UserAuthenticatedHandler&quot;,&quot;ActionId&quot;:&quot;b02aec4d-ee9d-406f-96ec-80b54187eb9f&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.AccountController.RedirectoLogin (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL66:00000E95&quot;,&quot;RequestPath&quot;:&quot;/Account/RedirectoLogin&quot;}"></td>
+                    <td class="td-ellipsis">
+                        <span class="ellipsis" data-text="User 9125543193 has logged in."> User 9125543193 has logged in.</span>
+
+                    </td>
+                    <td>
+
+                        <a class="btn btn-hero-secondary" data-properties="{&quot;SourceContext&quot;:&quot;ECare.Application.EventHandlers.User.UserAuthenticatedHandler&quot;,&quot;ActionId&quot;:&quot;b02aec4d-ee9d-406f-96ec-80b54187eb9f&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.AccountController.RedirectoLogin (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL66:00000E95&quot;,&quot;RequestPath&quot;:&quot;/Account/RedirectoLogin&quot;}">Properties</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ۹۷/۰۸/۲۷ ۱۰:۴۳:۴۶
+                    </td>
+                    <td>
+                        Information
+                    </td>
+                    <td data-prop="{&quot;SourceContext&quot;:&quot;ECare.Application.EventHandlers.User.UserAuthenticatedHandler&quot;,&quot;ActionId&quot;:&quot;b02aec4d-ee9d-406f-96ec-80b54187eb9f&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.AccountController.RedirectoLogin (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL66:00000E95&quot;,&quot;RequestPath&quot;:&quot;/Account/RedirectoLogin&quot;}"></td>
+                    <td class="td-ellipsis">
+                        <span class="ellipsis" data-text="User 9125543193 has logged in."> User 9125543193 has logged in.</span>
+
+                    </td>
+                    <td>
+
+                        <a class="btn btn-hero-secondary" data-properties="{&quot;SourceContext&quot;:&quot;ECare.Application.EventHandlers.User.UserAuthenticatedHandler&quot;,&quot;ActionId&quot;:&quot;b02aec4d-ee9d-406f-96ec-80b54187eb9f&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.AccountController.RedirectoLogin (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL66:00000E95&quot;,&quot;RequestPath&quot;:&quot;/Account/RedirectoLogin&quot;}">Properties</a>
+                    </td>
+                </tr>
+                <tr class="table-warning">
+                    <td>
+                        ۹۷/۰۸/۲۷ ۱۰:۴۳:۲۷
+                    </td>
+                    <td>
+                        Warning
+                    </td>
+                    <td data-prop="{&quot;SourceContext&quot;:&quot;Mobin.IPGProxy.IPGClient&quot;,&quot;ActionId&quot;:&quot;370cfe17-1069-4688-ad77-2093a85d3147&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.FactorController.PaymentCallBack (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL64:00000E70&quot;,&quot;RequestPath&quot;:&quot;/Factor/PaymentCallBack&quot;}"></td>
+                    <td class="td-ellipsis">
+                        <span class="ellipsis" data-text="IPGClient.Verify(1982786) => response.Content : &quot;true&quot;"> IPGClient.Verify(1982786) =&gt; response.Content : "true"</span>
+
+                    </td>
+                    <td>
+
+                        <a class="btn btn-hero-secondary" data-properties="{&quot;SourceContext&quot;:&quot;Mobin.IPGProxy.IPGClient&quot;,&quot;ActionId&quot;:&quot;370cfe17-1069-4688-ad77-2093a85d3147&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.FactorController.PaymentCallBack (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL64:00000E70&quot;,&quot;RequestPath&quot;:&quot;/Factor/PaymentCallBack&quot;}">Properties</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ۹۷/۰۸/۲۷ ۱۰:۴۳:۲۶
+                    </td>
+                    <td>
+                        Information
+                    </td>
+                    <td data-prop="{&quot;SourceContext&quot;:&quot;Mobin.IPGProxy.IPGClient&quot;,&quot;ActionId&quot;:&quot;370cfe17-1069-4688-ad77-2093a85d3147&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.FactorController.PaymentCallBack (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL64:00000E70&quot;,&quot;RequestPath&quot;:&quot;/Factor/PaymentCallBack&quot;}"></td>
+                    <td class="td-ellipsis">
+                        <span class="ellipsis" data-text="IPGClient.Audit(1982786,120523146) => response.Content : {&quot;Succeed&quot;:true,&quot;Message&quot;:&quot;Payment was successfull&quot;}"> IPGClient.Audit(1982786,120523146) =&gt; response.Content : {"Succeed":true,"Message":"Payment was successfull"}</span>
+
+                    </td>
+                    <td>
+
+                        <a class="btn btn-hero-secondary" data-properties="{&quot;SourceContext&quot;:&quot;Mobin.IPGProxy.IPGClient&quot;,&quot;ActionId&quot;:&quot;370cfe17-1069-4688-ad77-2093a85d3147&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.FactorController.PaymentCallBack (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL64:00000E70&quot;,&quot;RequestPath&quot;:&quot;/Factor/PaymentCallBack&quot;}">Properties</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ۹۷/۰۸/۲۷ ۱۰:۴۳:۲۶
+                    </td>
+                    <td>
+                        Information
+                    </td>
+                    <td data-prop="{&quot;SourceContext&quot;:&quot;ECare.Application.Services.FactorService&quot;,&quot;ActionId&quot;:&quot;370cfe17-1069-4688-ad77-2093a85d3147&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.FactorController.PaymentCallBack (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL64:00000E70&quot;,&quot;RequestPath&quot;:&quot;/Factor/PaymentCallBack&quot;}"></td>
+                    <td class="td-ellipsis">
+                        <span class="ellipsis" data-text="FactorService.PaymentCallBack(sid:91801, tid:1982786,price:272500) vendorResponse : ?UID=1982786&amp;Price=272500&amp;IPGName=Tejarat&amp;RefrenceNumber=120523146&amp;Status=True"> FactorService.PaymentCallBack(sid:91801, tid:1982786,price:272500) vendorResponse : ?UID=1982786&amp;Price=272500&amp;IPGName=Tejarat&amp;RefrenceNumber=120523146&amp;Status=True</span>
+
+                    </td>
+                    <td>
+
+                        <a class="btn btn-hero-secondary" data-properties="{&quot;SourceContext&quot;:&quot;ECare.Application.Services.FactorService&quot;,&quot;ActionId&quot;:&quot;370cfe17-1069-4688-ad77-2093a85d3147&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.FactorController.PaymentCallBack (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL64:00000E70&quot;,&quot;RequestPath&quot;:&quot;/Factor/PaymentCallBack&quot;}">Properties</a>
+                    </td>
+                </tr>
+                <tr class="table-danger">
+                    <td>
+                        ۹۷/۰۸/۲۷ ۱۰:۴۳:۱۸
+                    </td>
+                    <td>
+                        Error
+                    </td>
+                    <td data-prop="{&quot;SourceContext&quot;:&quot;Mobin.eCare.Web.Controllers.FactorController&quot;,&quot;ActionId&quot;:&quot;370cfe17-1069-4688-ad77-2093a85d3147&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.FactorController.PaymentCallBack (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL67:00000E70&quot;,&quot;RequestPath&quot;:&quot;/Factor/PaymentCallBack&quot;}"></td>
+                    <td class="td-ellipsis">
+                        <span class="ellipsis" data-text="Action:'PaymentCallBack' Get ErrorCode:'645' For( TransactionId:'1982801' ServiceId:'212962'  Msisdn:'989551094436@lte.mobinnet.net' )=>Message:'transaction with id:1982801 refrenceNumber: was not audit => Message:'Wrong transaction number''"> Action:'PaymentCallBack' Get ErrorCode:'645' For( TransactionId:'1982801' ServiceId:'212962'  Msisdn:'989551094436@lte.mobinnet.net' )=&gt;Message:'transaction with id:1982801 refrenceNumber: was not audit =&gt; Message:'Wrong transaction number''</span>
+
+                    </td>
+                    <td>
+
+                        <a class="btn btn-hero-secondary" data-properties="{&quot;SourceContext&quot;:&quot;Mobin.eCare.Web.Controllers.FactorController&quot;,&quot;ActionId&quot;:&quot;370cfe17-1069-4688-ad77-2093a85d3147&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.FactorController.PaymentCallBack (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL67:00000E70&quot;,&quot;RequestPath&quot;:&quot;/Factor/PaymentCallBack&quot;}">Properties</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ۹۷/۰۸/۲۷ ۱۰:۴۳:۴۶
+                    </td>
+                    <td>
+                        Information
+                    </td>
+                    <td data-prop="{&quot;SourceContext&quot;:&quot;ECare.Application.EventHandlers.User.UserAuthenticatedHandler&quot;,&quot;ActionId&quot;:&quot;b02aec4d-ee9d-406f-96ec-80b54187eb9f&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.AccountController.RedirectoLogin (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL66:00000E95&quot;,&quot;RequestPath&quot;:&quot;/Account/RedirectoLogin&quot;}"></td>
+                    <td class="td-ellipsis">
+                        <span class="ellipsis" data-text="User 9125543193 has logged in."> User 9125543193 has logged in.</span>
+
+                    </td>
+                    <td>
+
+                        <a class="btn btn-hero-secondary" data-properties="{&quot;SourceContext&quot;:&quot;ECare.Application.EventHandlers.User.UserAuthenticatedHandler&quot;,&quot;ActionId&quot;:&quot;b02aec4d-ee9d-406f-96ec-80b54187eb9f&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.AccountController.RedirectoLogin (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL66:00000E95&quot;,&quot;RequestPath&quot;:&quot;/Account/RedirectoLogin&quot;}">Properties</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ۹۷/۰۸/۲۷ ۱۰:۴۳:۴۶
+                    </td>
+                    <td>
+                        Information
+                    </td>
+                    <td data-prop="{&quot;SourceContext&quot;:&quot;ECare.Application.EventHandlers.User.UserAuthenticatedHandler&quot;,&quot;ActionId&quot;:&quot;b02aec4d-ee9d-406f-96ec-80b54187eb9f&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.AccountController.RedirectoLogin (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL66:00000E95&quot;,&quot;RequestPath&quot;:&quot;/Account/RedirectoLogin&quot;}"></td>
+                    <td class="td-ellipsis">
+                        <span class="ellipsis" data-text="User 9125543193 has logged in."> User 9125543193 has logged in.</span>
+
+                    </td>
+                    <td>
+
+                        <a class="btn btn-hero-secondary" data-properties="{&quot;SourceContext&quot;:&quot;ECare.Application.EventHandlers.User.UserAuthenticatedHandler&quot;,&quot;ActionId&quot;:&quot;b02aec4d-ee9d-406f-96ec-80b54187eb9f&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.AccountController.RedirectoLogin (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL66:00000E95&quot;,&quot;RequestPath&quot;:&quot;/Account/RedirectoLogin&quot;}">Properties</a>
+                    </td>
+                </tr>
+                <tr class="table-fatal">
+                    <td>
+                        ۹۷/۰۸/۲۷ ۱۰:۴۳:۴۶
+                    </td>
+                    <td>
+                        Information
+                    </td>
+                    <td data-prop="{&quot;SourceContext&quot;:&quot;ECare.Application.EventHandlers.User.UserAuthenticatedHandler&quot;,&quot;ActionId&quot;:&quot;b02aec4d-ee9d-406f-96ec-80b54187eb9f&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.AccountController.RedirectoLogin (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL66:00000E95&quot;,&quot;RequestPath&quot;:&quot;/Account/RedirectoLogin&quot;}"></td>
+                    <td class="td-ellipsis">
+                        <span class="ellipsis" data-text="User 9125543193 has logged in."> User 9125543193 has logged in.</span>
+
+                    </td>
+                    <td>
+
+                        <a class="btn btn-hero-secondary" data-properties="{&quot;SourceContext&quot;:&quot;ECare.Application.EventHandlers.User.UserAuthenticatedHandler&quot;,&quot;ActionId&quot;:&quot;b02aec4d-ee9d-406f-96ec-80b54187eb9f&quot;,&quot;ActionName&quot;:&quot;Mobin.eCare.Web.Controllers.AccountController.RedirectoLogin (Mobin.eCare.Web)&quot;,&quot;RequestId&quot;:&quot;0HLID3F1VJL66:00000E95&quot;,&quot;RequestPath&quot;:&quot;/Account/RedirectoLogin&quot;}">Properties</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    @*@await Html.PartialAsync("_Pagination", Model)*@
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" role="dialog" aria-labelledby="exampleModalLongLabel">
+    <div class="modal-dialog modal-lg modal-blueberry" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-right ltr">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+        $(document).ready(function () {
+
+        $("[data-prop]").each(function () {
+            var path = $(this).data("prop");
+            $(this).html(path['RequestPath']);
+        });
+
+        $("[data-exeption]").click(function () {
+            var exeption = $(this).data("exeption");
+            $('#exampleModalLong').modal('show');
+            $(".modal-body").text("");
+            $(".modal-body").text(exeption);
+        });
+
+        $("[data-properties]").click(function () {
+            var obj = $(this).data("properties");
+            $('#exampleModalLong').modal('show');
+            $(".modal-body").text("");
+            $(".modal-body").html("" +
+                "<div class='mb-1'><span class='mr-1 text-bold'>SourceContext: </span><span>" + obj['SourceContext'] + "</span></div>" +
+                "<div class='mb-1'><span class='mr-1 text-bold'>ActionId: </span><span>" + obj['ActionId'] + "</span></div>" +
+                "<div class='mb-1'><span class='mr-1 text-bold'>ActionName: </span><span>" + obj['ActionName'] + "</span></div>" +
+                "<div class='mb-1'><span class='mr-1 text-bold'>RequestId: </span><span>" + obj['RequestId'] + "</span></div>" +
+                "<div class='mb-1'><span class='mr-1 text-bold'>RequestPath: </span><span>" + obj['RequestPath'] + "</span></div>");
+        });
+    });
+</script>

@@ -2,6 +2,14 @@
     font-family: IRANSans;
 }
 
+.rtl{
+    direction:rtl;
+}
+
+.ltr{
+    direction:ltr;
+}
+
 .select2-container .select2-selection--single {
     height: 38px;
 }
@@ -51,3 +59,46 @@ body.swal2-height-auto {
 [dir="rtl"] .mds-bootstrap-persian-datetime-picker-popover {
     right: auto !important;
 }
+
+.table-text-left td, .table-text-left th{
+    text-align:left;
+}
+
+.table tr.table-fatal {
+    background-color: #313131 !important;
+    color: #ff4d4d;
+}
+
+.table a.btn-hero-secondary{
+    color:#fff;
+}
+
+.td-ellipsis {
+    max-width: 80ch;
+}
+
+.ellipsis {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all .2s linear;
+    white-space: nowrap;
+    padding: .5rem 1rem;
+}
+
+    .ellipsis:focus, .ellipsis:hover {
+        color: transparent;
+    }
+
+        .ellipsis:focus:after, .ellipsis:hover:after {
+            content: attr(data-text);
+            overflow: visible;
+            text-overflow: inherit;
+            width: auto;
+            white-space: normal;
+            word-wrap: break-word;
+            display: block;
+            color: #444;
+            margin-top: -1.8rem;
+        }
