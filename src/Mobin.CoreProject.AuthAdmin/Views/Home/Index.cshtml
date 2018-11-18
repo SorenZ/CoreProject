@@ -2,6 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
+@*
 <ul dir="rtl">
     <li>
         <a asp-controller="Role" asp-action="CreateRole">ایجاد رول جدید</a>
@@ -26,9 +27,26 @@
 </ul>
 
 <hr />
+*@
 
 <ul dir="rtl">
     <li>
         <a asp-controller="Role" asp-action="HasPermission">چک کردن دسترسی کاربر - HasPermission</a>
+    </li>
+</ul>
+
+<hr />
+
+<ul dir="rtl">
+    <li>
+        <a asp-controller="User" asp-action="CreateUser">ایجاد کاربر جدید</a>
+    </li>
+</ul>
+
+<hr />
+
+<ul dir="rtl">
+    <li>
+        <a asp-controller="User" asp-action="DeleteUser">حذف کاربر</a>
     </li>
 </ul>
