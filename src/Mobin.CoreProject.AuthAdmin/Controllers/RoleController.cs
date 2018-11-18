@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.AuthAdmin.Areas.Identity;
+using Mobin.CoreProject.AuthAdmin.Helper;
 using Mobin.CoreProject.AuthAdmin.Models;
+using Mobin.CoreProject.Core.SSOT;
 
 namespace Mobin.CoreProject.AuthAdmin.Controllers
 {
@@ -165,5 +167,12 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
         }
         #endregion
 
+
+        // TODO: implement HasPermission method
+        [HasPermission(Permissions.ForestCreate)]
+        public IActionResult HasPermission()
+        {
+            return Json($"the user has permission {Permissions.ForestCreate}");
+        }
     }
 }
