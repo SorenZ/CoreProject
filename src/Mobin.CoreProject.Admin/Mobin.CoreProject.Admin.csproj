@@ -17,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Log\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\UserRole\Create.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
