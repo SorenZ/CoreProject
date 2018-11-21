@@ -32,6 +32,9 @@ namespace Mobin.CoreProject.Admin.Helper
             }
         }
 
+        public static bool HasPermission(this ClaimsPrincipal principal, Permissions permission) => 
+            principal.HasClaim(AlamutClaimTypes.Permission, permission.ToString());
+
         public static bool IsSystemSupervisor(this ClaimsPrincipal principal) => principal.IsInRole(SystemSupervisor);
 
     }

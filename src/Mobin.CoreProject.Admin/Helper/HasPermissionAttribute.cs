@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Security.Claims;
 using Alamut.Data.Structure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -7,18 +6,18 @@ using Mobin.CoreProject.Core.SSOT;
 
 namespace Mobin.CoreProject.Admin.Helper
 {
-    public class HasRoleAttribute : ActionFilterAttribute
+    public class HasPermissionAttribute : ActionFilterAttribute
     {
-        private readonly AuthorityCode _authorityCode;
+        private readonly Permissions _permission;
 
-        public HasRoleAttribute(AuthorityCode authorityCode)
+        public HasPermissionAttribute(Permissions permission)
         {
-            _authorityCode = authorityCode;
+            _permission = permission;
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            if (context.HttpContext.User.HasRole(_authorityCode))
+            if (context.HttpContext.User.HasPermission(_permission))
             {
                 base.OnActionExecuting(context);
             }
@@ -28,7 +27,5 @@ namespace Mobin.CoreProject.Admin.Helper
             }
         }
     }
-
-
     
 }

@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mobin.CoreProject.Config.Mapping;
+using Mobin.CoreProject.Core.Entities;
 using Mobin.CoreProject.Core.ServiceContracts;
 using Mobin.CoreProject.Data;
 using Mobin.CoreProject.Service.AppServices;
