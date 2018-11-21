@@ -7,6 +7,7 @@ using Alamut.Data.Repository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Caching.Memory;
 using Mobin.CoreProject.Core.Entities;
+using Mobin.CoreProject.Core.SSOT;
 
 namespace Mobin.CoreProject.Service.SecurityServices
 {
@@ -45,4 +46,6 @@ namespace Mobin.CoreProject.Service.SecurityServices
             return Task.FromResult(principal);
         }
     }
+
+    
 }

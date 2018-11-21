@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Alamut.Data.Entity;
 using Alamut.Data.Repository;
 using Alamut.Data.Service;
@@ -11,6 +12,8 @@ using Alamut.Data.Sql.EF.Repositories;
 using Alamut.Service;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -82,30 +85,60 @@ namespace Mobin.CoreProject.Config
                 .WithScopedLifetime());
         }
 
-
-        public static IEnumerable<Assembly> GetAssemblies()
+        public static void AddIdentity(this IServiceCollection services)
         {
-            var list = new List<string>();
-            var stack = new Stack<Assembly>();
+            services
+                .AddIdentity<AppUser, AppRole>()
+                .AddDefaultTokenProviders()
+                //.AddDefaultIdentity<AppUser>()
+                //.AddRoleManager<RoleManager<IdentityRole>>()
+                //.AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
 
-            stack.Push(Assembly.GetEntryAssembly());
 
-            do
+
+            services.Configure<IdentityOptions>(options =>
             {
-                var asm = stack.Pop();
+                // Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
 
-                yield return asm;
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
 
-                foreach (var reference in asm.GetReferencedAssemblies())
-                    if (!list.Contains(reference.FullName))
-                    {
-                        stack.Push(Assembly.Load(reference));
-                        list.Add(reference.FullName);
-                    }
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = false;
+            });
 
-            }
-            while (stack.Count > 0);
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
 
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+
+            services.AddSingleton<IEmailSender, EmailSender>();
+        }
+        
+    }
+
+    public class EmailSender : IEmailSender
+    {
+        public Task SendEmailAsync(string email, string subject, string message)
+        {
+            return Task.CompletedTask;
         }
     }
 }

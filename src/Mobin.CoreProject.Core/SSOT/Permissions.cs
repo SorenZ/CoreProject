@@ -5,6 +5,11 @@ using System.Text;
 
 namespace Mobin.CoreProject.Core.SSOT
 {
+    public class AlamutClaimTypes
+    {
+        public const string Permission = "permission";
+    }
+
     /// <summary>
     /// [provides permissions of system]
     /// </summary>

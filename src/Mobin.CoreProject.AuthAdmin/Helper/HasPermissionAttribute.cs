@@ -1,8 +1,8 @@
 ﻿using System.Net;
+using System.Security.Claims;
 using Alamut.Data.Structure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Mobin.CoreProject.AdminAdmin.Helper;
 using Mobin.CoreProject.Core.SSOT;
 
 namespace Mobin.CoreProject.AuthAdmin.Helper
@@ -27,5 +27,12 @@ namespace Mobin.CoreProject.AuthAdmin.Helper
                 context.Result = new JsonResult(ServiceResult.Error("you are not authorized", (int) HttpStatusCode.Forbidden));
             }
         }
+    }
+
+
+    public static class ClaimsPrincipalExtensions
+    {
+        public static bool HasPermission(this ClaimsPrincipal principal, Permissions permission) => 
+            principal.HasClaim(AlamutClaimTypes.Permission, permission.ToString());
     }
 }

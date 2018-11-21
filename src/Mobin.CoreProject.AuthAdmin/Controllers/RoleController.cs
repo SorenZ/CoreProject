@@ -77,12 +77,12 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
         {
             var data = new
             {
-                id = 1,
+                id = 6,
                 claims = new List<string>
                 {
-                    "Forest.Create",
-                    "Forest.Delete",
-                    "Forest.Manage",
+                    Permissions.ForestCreate.ToString(),
+                    Permissions.ForestDelete.ToString(),
+                    Permissions.ForestEdit.ToString()
                 }
             };
 
@@ -104,7 +104,7 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
                 if (currentClaims.Any(q => q.Value == claim)) // simplified 
                     { continue;}
 
-                await _roleManager.AddClaimAsync(role, new Claim("Permission", claim));
+                await _roleManager.AddClaimAsync(role, new Claim(AlamutClaimTypes.Permission, claim));
             }
             
 
@@ -140,7 +140,7 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
             var data = new
             {
                 userId = 1, // userid
-                roleIds = new List<int> { 1, 2, 3 },
+                roleIds = new List<int> {6}/*{ 1, 2, 3 }*/,
             };
 
             return RedirectToAction(nameof(UpdateUserRolesPost), data);
@@ -168,7 +168,7 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
         #endregion
 
 
-        // TODO: implement HasPermission method
+        // implement HasPermission method
         [HasPermission(Permissions.ForestCreate)]
         public IActionResult HasPermission()
         {
