@@ -14,7 +14,7 @@ namespace Mobin.CoreProject.Service.SecurityServices
 {
     public class AppClaimsTransformer : IClaimsTransformation
     {
-        private const int ClaimDuration = 60; // minutes
+        private const int ClaimDuration = 1; // minutes
         private readonly RoleManager<AppRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly IMemoryCache _cache;
@@ -33,8 +33,10 @@ namespace Mobin.CoreProject.Service.SecurityServices
             {
                 var claims = new List<Claim>();
 
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(ClaimDuration);
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(ClaimDuration);
                 var user = _userManager.FindByNameAsync(userName).Result;
+                if (user == null)
+                    { return claims; }
                 
                 var userRoles = _userManager.GetRolesAsync(user).Result;
                 var roles = _roleManager.Roles

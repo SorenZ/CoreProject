@@ -17,7 +17,10 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
     [Authorize]
     public class UserController : Controller
     {
+        private const string DomainName = "MOBINNET";
+        private const string DomainEMail = "mobinnet.net";
         private readonly UserManager<AppUser> _userManager;
+
         public UserController(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
@@ -26,27 +29,36 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
         #region CreateUser
         public IActionResult CreateUser()
         {
+            return RedirectToAction(nameof(CreateUserPost), new {userName = "m.dashtinejad"});
+
             // add other parameters if they are mandatory
-            var data = new { id = 12548 };
-            return RedirectToAction(nameof(CreateUserPost), data);
+            //var data = new { id = 12548 };
+            
+
+
         }
 
-        public async Task<IActionResult> CreateUserPost(int id)
+        public async Task<IActionResult> CreateUserPost(string userName)
         {
-            return Json(new { id });
+            var user = new AppUser {UserName = $"{DomainName}\\{userName}", Email = $"{userName}@{DomainEMail}"};
+            var result = await _userManager.CreateAsync(user);
+
+            return Json(result);
         }
         #endregion
 
-        #region CreateUser
+        #region Delete User
         public IActionResult DeleteUser()
         {
-            var data = new { id = 12548 };
-            return RedirectToAction(nameof(DeleteUserPost), data);
+            return RedirectToAction(nameof(DeleteUserPost), new {userName = "m.dashtinejad"});
         }
 
-        public async Task<IActionResult> DeleteUserPost(int id)
+        public async Task<IActionResult> DeleteUserPost(string userName)
         {
-            return Json(new { id });
+            var user = await _userManager.FindByNameAsync($"{DomainName}\\{userName}");
+            var result = await _userManager.DeleteAsync(user);
+
+            return Json(result);
         }
         #endregion
 
