@@ -18,5 +18,7 @@ namespace Mobin.CoreProject.Core.SSOT
         ForestCreate,
         ForestEdit,
         ForestDelete,
+
+        NoPermission,
     }
 }

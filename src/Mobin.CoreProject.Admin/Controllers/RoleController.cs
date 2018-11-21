@@ -171,5 +171,12 @@ namespace Mobin.CoreProject.Admin.Controllers
         {
             return Json($"the user has permission {Permissions.ForestCreate}");
         }
+
+
+        [HasPermission(Permissions.NoPermission)]
+        public IActionResult NoPermission()
+        {
+            return Json($"the user has permission {Permissions.NoPermission}");
+        }
     }
 }
