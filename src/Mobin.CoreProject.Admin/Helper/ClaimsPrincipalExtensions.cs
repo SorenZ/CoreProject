@@ -37,5 +37,13 @@ namespace Mobin.CoreProject.Admin.Helper
 
         public static bool IsSystemSupervisor(this ClaimsPrincipal principal) => principal.IsInRole(SystemSupervisor);
 
+        public static string GetUserId(this ClaimsPrincipal principal)
+        {
+            if (principal == null)
+                throw new ArgumentNullException(nameof(principal));
+
+            return principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        }
+
     }
 }

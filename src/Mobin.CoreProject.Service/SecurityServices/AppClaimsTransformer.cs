@@ -34,7 +34,9 @@ namespace Mobin.CoreProject.Service.SecurityServices
                 var claims = new List<Claim>();
 
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(ClaimDuration);
+
                 var user = _userManager.FindByNameAsync(userName).Result;
+
                 if (user == null)
                     { return claims; }
                 
@@ -47,6 +49,7 @@ namespace Mobin.CoreProject.Service.SecurityServices
                     { claims.AddRange(_roleManager.GetClaimsAsync(role).Result); }
 
                 claims.AddRange(_userManager.GetClaimsAsync(user).Result);
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())); // update UserId
 
                 return claims;
             });

@@ -178,5 +178,27 @@ namespace Mobin.CoreProject.Admin.Controllers
         {
             return Json($"the user has permission {Permissions.NoPermission}");
         }
+
+        public IActionResult GetClaims()
+        {
+            var keyPair = User.Claims.Select(s => new
+            {
+                s.Type,
+                s.Value
+            });
+
+            return Json(keyPair);
+        }
+
+        public IActionResult GetUserInfo()
+        {
+            return Json(new
+            {
+                Id = User.GetUserId(),
+                Name = User.Identity.Name
+            });
+        }
+        
+
     }
 }
