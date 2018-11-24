@@ -166,7 +166,7 @@ namespace Mobin.CoreProject.Admin.Controllers
 
 
         // implement HasPermission method
-        [HasPermission(Permissions.ForestCreate)]
+        [HasPermission(Permissions.ForestCreate, Permissions.ForestDelete, Permissions.ForestEdit)]
         public IActionResult HasPermission()
         {
             return Json($"the user has permission {Permissions.ForestCreate}");

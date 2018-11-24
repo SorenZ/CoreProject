@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Claims;
 using Mobin.CoreProject.Core.SSOT;
 
@@ -13,15 +14,19 @@ namespace Mobin.CoreProject.Admin.Helper
             //if (principal.IsInRole(SystemSupervisor)) return true;
             //if (principal.IsInRole(code.ToString())) return true;
             if (principal.HasClaim(ClaimTypes.Role, SystemSupervisor))
-                {return true;}
+            {
+                return true;
+            }
 
             if (principal.HasClaim(ClaimTypes.Role, code.ToString()))
-                {return true;}
+            {
+                return true;
+            }
 
             try
             {
-                var fullAccessCode = ((int)code / 1000) * 1000;
-                AuthorityCode fullAccessCodeEnum = (AuthorityCode)fullAccessCode;
+                var fullAccessCode = ((int) code / 1000) * 1000;
+                AuthorityCode fullAccessCodeEnum = (AuthorityCode) fullAccessCode;
                 return principal.HasClaim(ClaimTypes.Role, fullAccessCodeEnum.ToString());
                 //var hasFullAccessCode = principal.IsInRole(fullAccessCodeEnum.ToString());
                 //return hasFullAccessCode;
@@ -32,8 +37,16 @@ namespace Mobin.CoreProject.Admin.Helper
             }
         }
 
-        public static bool HasPermission(this ClaimsPrincipal principal, Permissions permission) => 
-            principal.HasClaim(AlamutClaimTypes.Permission, permission.ToString());
+        //public static bool HasPermission(this ClaimsPrincipal principal, Permissions permission) =>
+        //    principal.HasClaim(AlamutClaimTypes.Permission, permission.ToString());
+
+        public static bool HasPermissions(this ClaimsPrincipal principal, Permissions[] permissions)
+        {
+            var stringedPermissions = permissions.Select(s => s.ToString());
+
+            return principal.Claims.Any(q =>
+                q.Type == AlamutClaimTypes.Permission && stringedPermissions.Contains(q.Value));
+        }
 
         public static bool IsSystemSupervisor(this ClaimsPrincipal principal) => principal.IsInRole(SystemSupervisor);
 
@@ -44,6 +57,5 @@ namespace Mobin.CoreProject.Admin.Helper
 
             return principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }
-
     }
 }
