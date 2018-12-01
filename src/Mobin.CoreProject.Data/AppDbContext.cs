@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Mobin.CoreProject.Core.Entities;
+using Mobin.CoreProject.CrossCutting.Security.Models;
 
 namespace Mobin.CoreProject.Data
 {

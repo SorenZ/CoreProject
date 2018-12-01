@@ -1,69 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Alamut.Data.Repository;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Caching.Memory;
-using Mobin.CoreProject.Core.Entities;
-using Mobin.CoreProject.Core.SSOT;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Security.Claims;
+//using System.Threading.Tasks;
+//using Alamut.Data.Repository;
+//using Microsoft.AspNetCore.Authentication;
+//using Microsoft.AspNetCore.Identity;
+//using Microsoft.Extensions.Caching.Memory;
+//using Mobin.CoreProject.Core.Entities;
+//using Mobin.CoreProject.Core.SSOT;
+//using Mobin.CoreProject.CrossCutting.Security.Models;
 
-namespace Mobin.CoreProject.Service.SecurityServices
-{
-    public class AppClaimsTransformer : IClaimsTransformation
-    {
-        private const int ClaimDuration = 1; // minutes
-        private readonly RoleManager<AppRole> _roleManager;
-        private readonly UserManager<AppUser> _userManager;
-        private readonly IMemoryCache _cache;
+//namespace Mobin.CoreProject.Service.SecurityServices
+//{
+//    public class AppClaimsTransformer : IClaimsTransformation
+//    {
+//        private const int ClaimDuration = 1; // minutes
+//        private readonly RoleManager<AppRole> _roleManager;
+//        private readonly UserManager<AppUser> _userManager;
+//        private readonly IMemoryCache _cache;
 
-        public AppClaimsTransformer(IMemoryCache cache, 
-            RoleManager<AppRole> roleManager, 
-            UserManager<AppUser> userManager)
-        {
-            _cache = cache;
-            _roleManager = roleManager;
-            _userManager = userManager;
-        }
+//        public AppClaimsTransformer(IMemoryCache cache, 
+//            RoleManager<AppRole> roleManager, 
+//            UserManager<AppUser> userManager)
+//        {
+//            _cache = cache;
+//            _roleManager = roleManager;
+//            _userManager = userManager;
+//        }
 
-        public IList<Claim> GetUserClaims(string userName) =>
-            _cache.GetOrCreate($"UserClaims_{userName}", entry =>
-            {
-                var claims = new List<Claim>();
+//        public IList<Claim> GetUserClaims(string userName) =>
+//            _cache.GetOrCreate($"UserClaims_{userName}", entry =>
+//            {
+//                var claims = new List<Claim>();
 
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(ClaimDuration);
+//                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(ClaimDuration);
 
-                var user = _userManager.FindByNameAsync(userName).Result;
+//                var user = _userManager.FindByNameAsync(userName).Result;
 
-                if (user == null)
-                    { return claims; }
+//                if (user == null)
+//                    { return claims; }
                 
-                var userRoles = _userManager.GetRolesAsync(user).Result;
-                var roles = _roleManager.Roles
-                    .Where(q => userRoles.Contains(q.NormalizedName))
-                    .ToList();
+//                var userRoles = _userManager.GetRolesAsync(user).Result;
+//                var roles = _roleManager.Roles
+//                    .Where(q => userRoles.Contains(q.NormalizedName))
+//                    .ToList();
 
-                foreach (var role in roles)
-                    { claims.AddRange(_roleManager.GetClaimsAsync(role).Result); }
+//                foreach (var role in roles)
+//                    { claims.AddRange(_roleManager.GetClaimsAsync(role).Result); }
 
-                claims.AddRange(_userManager.GetClaimsAsync(user).Result);
-                claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())); // update UserId
+//                claims.AddRange(_userManager.GetClaimsAsync(user).Result);
+//                claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())); // update UserId
 
-                return claims;
-            });
+//                return claims;
+//            });
 
 
-        public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
-        {
-            var roleClaims = GetUserClaims(principal.Identity.Name);
+//        public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
+//        {
+//            var roleClaims = GetUserClaims(principal.Identity.Name);
 
-            (principal.Identity as ClaimsIdentity)?.AddClaims(roleClaims);
+//            (principal.Identity as ClaimsIdentity)?.AddClaims(roleClaims);
 
-            return Task.FromResult(principal);
-        }
-    }
+//            return Task.FromResult(principal);
+//        }
+//    }
 
     
-}
+//}

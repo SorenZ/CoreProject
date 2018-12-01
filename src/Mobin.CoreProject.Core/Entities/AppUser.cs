@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿//using Microsoft.AspNetCore.Identity;
 
-namespace Mobin.CoreProject.Core.Entities
-{
-    public class AppUser : IdentityUser<int>
-    {
+//namespace Mobin.CoreProject.Core.Entities
+//{
+//    public class AppUser : IdentityUser<int>
+//    {
         
-    }
-}
+//    }
+//}

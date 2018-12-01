@@ -20,9 +20,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Mobin.CoreProject.Config.Mapping;
 using Mobin.CoreProject.Core.Entities;
 using Mobin.CoreProject.Core.ServiceContracts;
+using Mobin.CoreProject.CrossCutting.Security;
+using Mobin.CoreProject.CrossCutting.Security.Models;
 using Mobin.CoreProject.Data;
 using Mobin.CoreProject.Service.AppServices;
-using Mobin.CoreProject.Service.SecurityServices;
 
 namespace Mobin.CoreProject.Config
 {
