@@ -4,7 +4,7 @@ using Alamut.Data.Structure;
 
 namespace Mobin.CoreProject.CrossCutting.Security.Services
 {
-    public interface IUserServices
+    public interface IUserService
     {
         Task<ServiceResult> CreateAsync(string username);
 

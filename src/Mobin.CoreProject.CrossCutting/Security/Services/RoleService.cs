@@ -10,16 +10,13 @@ using Mobin.CoreProject.CrossCutting.Security.SSOT;
 
 namespace Mobin.CoreProject.CrossCutting.Security.Services
 {
-    public class RoleServices : IRoleServices
+    public class RoleService : IRoleService
     {
         private readonly RoleManager<AppRole> _roleManager;
-        private readonly UserManager<AppUser> _userManager;
 
-        public RoleServices(RoleManager<AppRole> roleManager, 
-            UserManager<AppUser> userManager)
+        public RoleService(RoleManager<AppRole> roleManager)
         {
             _roleManager = roleManager;
-            _userManager = userManager;
         }
 
         public async Task<ServiceResult> CreateAsync(string name)
@@ -39,7 +36,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             var role = await _roleManager.FindByIdAsync(id.ToString());
 
             if (role == null)
-                { return ServiceResult.Error($"The is no role with name {name}"); }
+                { return ServiceResult.Error($"There is no role with name {name}"); }
 
             role.Name = name;
             var result = await _roleManager.UpdateAsync(role);
@@ -52,7 +49,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             var role = _roleManager.Roles.FirstOrDefault(q => q.Id == id);
 
             if (role == null)
-                { return ServiceResult.Error($"The is no role with id {id}"); }
+                { return ServiceResult.Error($"There is no role with id {id}"); }
 
             var result = await _roleManager.DeleteAsync(role);
 
@@ -64,7 +61,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             var role = await _roleManager.FindByIdAsync(roleId.ToString());
 
             if (role == null)
-                { return ServiceResult.Error($"The is no role with id {roleId}"); }
+                { return ServiceResult.Error($"There is no role with id {roleId}"); }
 
             var currentClaims = await _roleManager.GetClaimsAsync(role);
 

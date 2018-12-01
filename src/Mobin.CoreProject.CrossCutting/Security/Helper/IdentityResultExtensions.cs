@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Mobin.CoreProject.CrossCutting.Security.Helper
 {
-    public static class IdentityExtensions
+    public static class IdentityResultExtensions
     {
         public static ServiceResult AsServiceResult(this IdentityResult source)
         {

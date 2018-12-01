@@ -1,29 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Mobin.CoreProject.AuthAdmin.Areas.Identity;
-using Mobin.CoreProject.AuthAdmin.Helper;
-using Mobin.CoreProject.AuthAdmin.Models;
-using Mobin.CoreProject.Core.SSOT;
+using Mobin.CoreProject.CrossCutting.Security.Services;
 
 namespace Mobin.CoreProject.AuthAdmin.Controllers
 {
     [Authorize]
     public class UserController : Controller
     {
-        private const string DomainName = "MOBINNET";
-        private const string DomainEMail = "mobinnet.net";
-        private readonly UserManager<AppUser> _userManager;
+        private readonly IUserService _userService;
 
-        public UserController(UserManager<AppUser> userManager)
+        public UserController(IUserService userService)
         {
-            _userManager = userManager;
+            _userService = userService;
         }
 
         #region CreateUser
@@ -40,10 +30,46 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
 
         public async Task<IActionResult> CreateUserPost(string userName)
         {
-            var user = new AppUser {UserName = $"{DomainName}\\{userName}", Email = $"{userName}@{DomainEMail}"};
-            var result = await _userManager.CreateAsync(user);
+            //var user = new AppUser {UserName = $"{DomainName}\\{userName}", Email = $"{userName}@{DomainEMail}"};
+            //var result = await _userManager.CreateAsync(user);
+
+            var result = await _userService.CreateAsync(userName);
 
             return Json(result);
+        }
+        #endregion
+
+        #region UpdateUserRoles
+        public IActionResult UpdateUserRoles()
+        {
+            var data = new
+            {
+                userId = 1, // userid
+                roleIds = new List<int> {6}/*{ 1, 2, 3 }*/,
+            };
+
+            return RedirectToAction(nameof(UpdateUserRolesPost), data);
+        }
+
+        public async Task<IActionResult> UpdateUserRolesPost(int userId, List<int> roleIds)
+        {
+            // update user roles
+            //var user = await _userManager.FindByIdAsync(userId.ToString());
+            //var userRoles = await _userManager.GetRolesAsync(user);
+            //var roles = _roleManager.Roles
+            //    .Where(q => roleIds.Contains(q.Id))
+            //    .Select(s => s.Name);
+
+            //var result = await _userManager.RemoveFromRolesAsync(user, userRoles);
+
+            //if (!result.Succeeded)
+            //{return Json(result);}
+
+            //result = await _userManager.AddToRolesAsync(user, roles);
+            var result = await _userService.UpdateRoles(userId, roleIds);
+
+            return Json(result);
+
         }
         #endregion
 
@@ -55,8 +81,10 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
 
         public async Task<IActionResult> DeleteUserPost(string userName)
         {
-            var user = await _userManager.FindByNameAsync($"{DomainName}\\{userName}");
-            var result = await _userManager.DeleteAsync(user);
+            //var user = await _userManager.FindByNameAsync($"{DomainName}\\{userName}");
+            //var result = await _userManager.DeleteAsync(user);
+
+            var result = await _userService.DeleteAsync(userName);
 
             return Json(result);
         }

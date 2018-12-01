@@ -1,26 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Admin.Helper;
-using Mobin.CoreProject.Core.Entities;
 using Mobin.CoreProject.Core.SSOT;
+using Mobin.CoreProject.CrossCutting.Security.Services;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
     [Authorize]
     public class RoleController : Controller
     {
-
-        private readonly RoleManager<AppRole> _roleManager;
-        private readonly UserManager<AppUser> _userManager;
-        public RoleController(RoleManager<AppRole> roleManager, UserManager<AppUser> userManager)
+        private readonly IRoleService _roleServices;
+        
+        public RoleController(IRoleService roleServices)
         {
-            _roleManager = roleManager;
-            _userManager = userManager;
+            _roleServices = roleServices;
         }
 
         #region CreateRole
@@ -33,15 +29,17 @@ namespace Mobin.CoreProject.Admin.Controllers
         public async Task<IActionResult> CreateRolePost(string title)
         {
             // Create a role
-            var newRole = await _roleManager.FindByNameAsync(title);
-            if (newRole == null)
-            {
-                newRole = new AppRole(title);
-                var result = await _roleManager.CreateAsync(newRole);
-                return Json(result);
-            }
+            //var newRole = await _roleManager.FindByNameAsync(title);
+            //if (newRole == null)
+            //{
+            //    newRole = new AppRole(title);
+            //    var result = await _roleManager.CreateAsync(newRole);
+            //    return Json(result);
+            //}
 
-            return Json($"The role {title} already exist.");
+            var result = await _roleServices.CreateAsync(title);
+
+            return Json(result);
         }
         #endregion
 
@@ -58,11 +56,13 @@ namespace Mobin.CoreProject.Admin.Controllers
 
         public async Task<IActionResult> UpdateRoleTitlePost(int id, string title)
         {
-            //  update role title
-            var role = await _roleManager.FindByIdAsync(id.ToString());
-            role.Name = title;
+            ////  update role title
+            //var role = await _roleManager.FindByIdAsync(id.ToString());
+            //role.Name = title;
 
-            var result = await _roleManager.UpdateAsync(role);
+            //var result = await _roleManager.UpdateAsync(role);
+
+            var result = await _roleServices.UpdateAsync(id, title);
 
             return Json(result);
         }
@@ -89,24 +89,27 @@ namespace Mobin.CoreProject.Admin.Controllers
         public async Task<IActionResult> UpdateRoleClaimsPost(int id, List<string> claims)
         {
             // update role claims
-            var role = await _roleManager.FindByIdAsync(id.ToString());
+            //var role = await _roleManager.FindByIdAsync(id.ToString());
 
-            if (role == null)
-                {return Content($"there is no role with Id : {id}");}
+            //if (role == null)
+            //    {return Content($"there is no role with Id : {id}");}
 
-            var currentClaims = await _roleManager.GetClaimsAsync(role);
+            //var currentClaims = await _roleManager.GetClaimsAsync(role);
 
-            foreach (var claim in claims)
-            {
-                if (currentClaims.Any(q => q.Value == claim)) // simplified 
-                    { continue;}
+            //foreach (var claim in claims)
+            //{
+            //    if (currentClaims.Any(q => q.Value == claim)) // simplified 
+            //        { continue;}
 
-                await _roleManager.AddClaimAsync(role, new Claim(AlamutClaimTypes.Permission, claim));
-            }
+            //    await _roleManager.AddClaimAsync(role, new Claim(AlamutClaimTypes.Permission, claim));
+            //}
             
+            //return Json(new { id, claims });
 
+            var result = await _roleServices.UpdatePermissions(id, claims);
 
-            return Json(new { id, claims });
+            return Json(result);
+
         }
         #endregion
 
@@ -124,45 +127,16 @@ namespace Mobin.CoreProject.Admin.Controllers
             // [ ] assigned to the users (AspNetUserRoles)
             // [ ] delete role claims (AspNetRoleClaims)
             // [ ] the role itself (AspNetRoles)
-            var role = _roleManager.Roles.FirstOrDefault(q => q.Id == id);
-            var result = await _roleManager.DeleteAsync(role);
+            //var role = _roleManager.Roles.FirstOrDefault(q => q.Id == id);
+            //var result = await _roleManager.DeleteAsync(role);
+
+            var result = await _roleServices.DeleteAsync(id);
 
             return Json(result);
         }
         #endregion
 
-        #region UpdateUserRoles
-        public IActionResult UpdateUserRoles()
-        {
-            var data = new
-            {
-                userId = 1, // userid
-                roleIds = new List<int> {6}/*{ 1, 2, 3 }*/,
-            };
-
-            return RedirectToAction(nameof(UpdateUserRolesPost), data);
-        }
-
-        public async Task<IActionResult> UpdateUserRolesPost(int userId, List<int> roleIds)
-        {
-            // update user roles
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            var userRoles = await _userManager.GetRolesAsync(user);
-            var roles = _roleManager.Roles
-                .Where(q => roleIds.Contains(q.Id))
-                .Select(s => s.Name);
-
-            var result = await _userManager.RemoveFromRolesAsync(user, userRoles);
-
-            if (!result.Succeeded)
-                {return Json(result);}
-
-            result = await _userManager.AddToRolesAsync(user, roles);
-
-            return Json(result);
-
-        }
-        #endregion
+        
 
 
         // implement HasPermission method

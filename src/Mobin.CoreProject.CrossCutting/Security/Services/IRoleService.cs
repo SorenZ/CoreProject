@@ -5,7 +5,7 @@ using Alamut.Data.Structure;
 
 namespace Mobin.CoreProject.CrossCutting.Security.Services
 {
-    public interface IRoleServices
+    public interface IRoleService
     {
         Task<ServiceResult> CreateAsync(string name);
 

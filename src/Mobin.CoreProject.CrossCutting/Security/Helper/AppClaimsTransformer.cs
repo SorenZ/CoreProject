@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Memory;
 using Mobin.CoreProject.CrossCutting.Security.Models;
 
-namespace Mobin.CoreProject.CrossCutting.Security
+namespace Mobin.CoreProject.CrossCutting.Security.Helper
 {
     public class AppClaimsTransformer : IClaimsTransformation
     {
