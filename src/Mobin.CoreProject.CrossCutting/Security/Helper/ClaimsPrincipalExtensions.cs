@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using Mobin.CoreProject.CrossCutting.Security.SSOT;
 
@@ -6,12 +8,24 @@ namespace Mobin.CoreProject.CrossCutting.Security.Helper
 {
     public static class ClaimsPrincipalExtensions
     {
-        public static bool HasPermissions(this ClaimsPrincipal principal, string[] stringedPermissions) =>
+        /// <summary>
+        /// check if user has any claim with value of provided array and type of 'permission'
+        /// </summary>
+        /// <param name="principal"></param>
+        /// <param name="stringedPermissions"></param>
+        /// <returns></returns>
+        public static bool HasPermissions(this ClaimsPrincipal principal, IEnumerable<string> stringedPermissions) =>
             principal.Claims.Any(q =>
                 q.Type == AlamutClaimTypes.Permission
                 && stringedPermissions.Contains(q.Value));
 
-        public static string GetUserId(this ClaimsPrincipal principal) => 
-            principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        /// <summary>
+        /// provide current user Id
+        /// </summary>
+        /// <param name="principal"></param>
+        /// <returns></returns>
+        public static string GetUserId(this ClaimsPrincipal principal) =>
+            principal.FindFirstValue(ClaimTypes.NameIdentifier)
+                ?? throw new NullReferenceException("there is no claim with type 'ClaimTypes.NameIdentifier'");
     }
 }

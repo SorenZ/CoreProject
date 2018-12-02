@@ -13,11 +13,11 @@ namespace Mobin.CoreProject.Admin.Controllers
             return View();
         }
 
-        [HasRole(AuthorityCode.SystemSupervisor)]
+        //[HasRole(AuthorityCode.SystemSupervisor)]
         public IActionResult SystemSupervisor() => 
             Content(AuthorityCode.SystemSupervisor.ToString());
 
-        [HasRole(AuthorityCode.UserManagementFullAccess)]
+        //[HasRole(AuthorityCode.UserManagementFullAccess)]
         public IActionResult UserManagementFullAccess() => 
             Content(AuthorityCode.UserManagementFullAccess.ToString());
 

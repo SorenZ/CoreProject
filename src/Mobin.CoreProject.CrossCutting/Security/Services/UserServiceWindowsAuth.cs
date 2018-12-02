@@ -32,6 +32,18 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             return result.AsServiceResult();
         }
 
+        public async Task<ServiceResult> DeleteAsync(int userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            
+            if (user == null)
+                { return ServiceResult.Error($"There is no user with userId {userId}"); }
+
+            var result = await _userManager.DeleteAsync(user);
+
+            return result.AsServiceResult();
+        }
+
         public async Task<ServiceResult> DeleteAsync(string username)
         {
             var user = await _userManager.FindByNameAsync($"{DomainName}\\{username}");

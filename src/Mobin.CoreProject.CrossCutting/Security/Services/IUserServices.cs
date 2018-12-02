@@ -8,6 +8,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
     {
         Task<ServiceResult> CreateAsync(string username);
 
+        Task<ServiceResult> DeleteAsync(int userId);
         Task<ServiceResult> DeleteAsync(string username);
 
         Task<ServiceResult> UpdateRoles(int userId, List<int> roleIds);

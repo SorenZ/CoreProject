@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mobin.CoreProject.CrossCutting.Security.Helper;
 using Mobin.CoreProject.CrossCutting.Security.Models;
+using Mobin.CoreProject.CrossCutting.Security.Services;
 using Mobin.CoreProject.Data;
 using Mobin.CoreProject.Service.AppServices;
 
@@ -80,7 +81,7 @@ namespace Mobin.CoreProject.Config
                 .WithScopedLifetime());
         }
 
-        public static void AddIdentity(this IServiceCollection services)
+        public static void AddIdentity(this IServiceCollection services, bool isWindowsAuthentication = true)
         {
             services
                 .AddIdentity<AppUser, AppRole>()
@@ -125,6 +126,17 @@ namespace Mobin.CoreProject.Config
             });
 
             services.AddSingleton<IEmailSender, EmailSender>();
+
+            services.AddScoped<IRoleService, RoleService>();
+
+            if (isWindowsAuthentication)
+            {
+                services.AddScoped<IUserService, UserServiceWindowsAuth>();
+            }
+            else
+            {
+                
+            }
         }
         
     }
