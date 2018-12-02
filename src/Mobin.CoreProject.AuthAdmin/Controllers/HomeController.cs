@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.AuthAdmin.Areas.Identity;
 using Mobin.CoreProject.AuthAdmin.Models;
+using Mobin.CoreProject.CrossCutting.Security.Models;
 
 namespace Mobin.CoreProject.AuthAdmin.Controllers
 {

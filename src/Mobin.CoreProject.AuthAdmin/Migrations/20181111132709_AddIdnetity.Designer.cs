@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Mobin.CoreProject.AuthAdmin.Areas.Identity.Data;
+using Mobin.CoreProject.Data;
 
 namespace Mobin.CoreProject.AuthAdmin.Migrations
 {

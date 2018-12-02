@@ -12,11 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Areas\Identity\Data\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mobin.CoreProject.Config\Mobin.CoreProject.Config.csproj" />
     <ProjectReference Include="..\Mobin.CoreProject.Core\Mobin.CoreProject.Core.csproj" />
+    <ProjectReference Include="..\Mobin.CoreProject.CrossCutting\Mobin.CoreProject.CrossCutting.csproj" />
   </ItemGroup>
 
 </Project>

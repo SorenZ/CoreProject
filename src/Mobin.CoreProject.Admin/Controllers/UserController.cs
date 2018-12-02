@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.CrossCutting.Security.Services;
 
-namespace Mobin.CoreProject.AuthAdmin.Controllers
+namespace Mobin.CoreProject.Admin.Controllers
 {
     [Authorize]
     public class UserController : Controller

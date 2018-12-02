@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Mobin.CoreProject.Config;
 
 namespace Mobin.CoreProject.AuthAdmin
 {
@@ -25,8 +26,6 @@ namespace Mobin.CoreProject.AuthAdmin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(IISDefaults.AuthenticationScheme);
-
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -36,6 +35,8 @@ namespace Mobin.CoreProject.AuthAdmin
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddIdentity(isWindowsAuthentication: false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

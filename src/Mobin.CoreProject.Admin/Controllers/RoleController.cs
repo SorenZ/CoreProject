@@ -51,7 +51,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         #region UpdateRoleTitle
         public IActionResult UpdateRoleTitle()
         {
-            var data = new { id = 1, title = "مدیر واحد تضمین کیفیت" };
+            var data = new { id = 1, title = "مدیر" };
             return RedirectToAction(nameof(UpdateRoleTitlePost), data);
         }
 
