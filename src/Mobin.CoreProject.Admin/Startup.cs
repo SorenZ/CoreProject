@@ -73,7 +73,7 @@ namespace Mobin.CoreProject.Admin
             services.AddAppServices();
             services.RegisterCustomClaims();
 
-            services.AddIdentity();
+            services.AddIdentity(isWindowsAuthentication: true);
 
         }
 

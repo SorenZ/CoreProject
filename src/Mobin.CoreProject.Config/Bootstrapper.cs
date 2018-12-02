@@ -43,8 +43,6 @@ namespace Mobin.CoreProject.Config
         public static void RegisterCustomClaims(this IServiceCollection services) =>
             services.AddScoped<IClaimsTransformation, AppClaimsTransformer>();
 
-        
-
         public static void AddRepositories(this IServiceCollection services)
         {
 
@@ -130,13 +128,9 @@ namespace Mobin.CoreProject.Config
             services.AddScoped<IRoleService, RoleService>();
 
             if (isWindowsAuthentication)
-            {
-                services.AddScoped<IUserService, UserServiceWindowsAuth>();
-            }
+                { services.AddScoped<IUserService, UserServiceWindowsAuth>(); }
             else
-            {
-                
-            }
+                { services.AddScoped<IUserService, UserServiceFormAuth>(); }
         }
         
     }
