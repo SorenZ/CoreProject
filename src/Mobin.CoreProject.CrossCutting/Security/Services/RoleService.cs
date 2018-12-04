@@ -19,16 +19,28 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             _roleManager = roleManager;
         }
 
-        public async Task<ServiceResult> CreateAsync(string name)
+        public async Task<ServiceResult<int>> CreateAsync(string name)
         {
+            // normalize input
+            name = name.ToLower();
+
             var newRole = await _roleManager.FindByNameAsync(name);
 
+
             if (newRole != null)
-                { return ServiceResult.Error($"The role {name} already exist."); }
+            {
+                return new Alamut.Data.Structure.ServiceResult<int>
+                {
+                    Message = $"The role {name} already exist.",
+                    Data = 0,
+                    Succeed = false,
+                };
+            }
+
 
             newRole = new AppRole(name);
             var result = await _roleManager.CreateAsync(newRole);
-            return result.AsServiceResult();
+            return result.AsServiceResult<int>(newRole.Id);
         }
 
         public async Task<ServiceResult> UpdateAsync(int id, string name)
@@ -36,7 +48,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             var role = await _roleManager.FindByIdAsync(id.ToString());
 
             if (role == null)
-                { return ServiceResult.Error($"There is no role with name {name}"); }
+            { return ServiceResult.Error($"There is no role with name {name}"); }
 
             role.Name = name;
             var result = await _roleManager.UpdateAsync(role);
@@ -49,7 +61,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             var role = _roleManager.Roles.FirstOrDefault(q => q.Id == id);
 
             if (role == null)
-                { return ServiceResult.Error($"There is no role with id {id}"); }
+            { return ServiceResult.Error($"There is no role with id {id}"); }
 
             var result = await _roleManager.DeleteAsync(role);
 
@@ -61,16 +73,16 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             var role = await _roleManager.FindByIdAsync(roleId.ToString());
 
             if (role == null)
-                { return ServiceResult.Error($"There is no role with id {roleId}"); }
+            { return ServiceResult.Error($"There is no role with id {roleId}"); }
 
             var currentClaims = await _roleManager.GetClaimsAsync(role);
 
             foreach (var claim in currentClaims)
-                { await _roleManager.RemoveClaimAsync(role, claim); }
-            
+            { await _roleManager.RemoveClaimAsync(role, claim); }
+
             foreach (var claim in permissions)
-                { await _roleManager.AddClaimAsync(role, new Claim(AlamutClaimTypes.Permission, claim)); }
-            
+            { await _roleManager.AddClaimAsync(role, new Claim(AlamutClaimTypes.Permission, claim)); }
+
             return ServiceResult.Okay();
         }
     }

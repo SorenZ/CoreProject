@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Mobin.CoreProject.Admin.Extensions;
 using Mobin.CoreProject.Admin.Helper;
 using Mobin.CoreProject.Core.SSOT;
 using Mobin.CoreProject.CrossCutting.Security.Helper;
@@ -10,42 +10,46 @@ using Mobin.CoreProject.CrossCutting.Security.Services;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
-    [Authorize]
+    // [HasPermission(Permissions.UserAndRoles)]
     public class RoleController : Controller
     {
         private readonly IRoleService _roleServices;
-        
+
         public RoleController(IRoleService roleServices)
         {
             _roleServices = roleServices;
         }
 
-        #region CreateRole
-        public IActionResult CreateRole()
+        public IActionResult Index()
         {
-            var data = new { title = "مدیر واحد کنترل کیفیت" };
-            return RedirectToAction(nameof(CreateRolePost), data);
+            // var model = _roleManager.Roles.ToList();
+            // return View(model);
+            return View();
         }
 
-        public async Task<IActionResult> CreateRolePost(string title)
+        #region CreateRole
+        public IActionResult Create()
         {
-            // Create a role
-            //var newRole = await _roleManager.FindByNameAsync(title);
-            //if (newRole == null)
-            //{
-            //    newRole = new AppRole(title);
-            //    var result = await _roleManager.CreateAsync(newRole);
-            //    return Json(result);
-            //}
+            return View();
+        }
 
-            var result = await _roleServices.CreateAsync(title);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(string name)
+        {
+            var result = await _roleServices.CreateAsync(name);
 
-            return Json(result);
+            TempData.AddResult(result);
+
+
+            return result.Succeed
+                ? RedirectToAction(nameof(Index), new { id = result.Data })
+                : RedirectToAction(nameof(Create));
         }
         #endregion
 
 
-        
+
 
 
         #region UpdateRoleTitle
@@ -104,7 +108,7 @@ namespace Mobin.CoreProject.Admin.Controllers
 
             //    await _roleManager.AddClaimAsync(role, new Claim(AlamutClaimTypes.Permission, claim));
             //}
-            
+
             //return Json(new { id, claims });
 
             var result = await _roleServices.UpdatePermissions(id, claims);
@@ -137,7 +141,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         }
         #endregion
 
-        
+
 
 
         // implement HasPermission method
@@ -147,12 +151,6 @@ namespace Mobin.CoreProject.Admin.Controllers
             return Json($"the user has permission {Permissions.ForestCreate}");
         }
 
-
-        [HasPermission(Permissions.NoPermission)]
-        public IActionResult NoPermission()
-        {
-            return Json($"the user has permission {Permissions.NoPermission}");
-        }
 
         public IActionResult GetClaims()
         {
@@ -173,7 +171,7 @@ namespace Mobin.CoreProject.Admin.Controllers
                 Name = User.Identity.Name
             });
         }
-        
+
 
     }
 }

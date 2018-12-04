@@ -7,7 +7,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
 {
     public interface IRoleService
     {
-        Task<ServiceResult> CreateAsync(string name);
+        Task<ServiceResult<int>> CreateAsync(string name);
 
         Task<ServiceResult> UpdateAsync(int id, string name);
 

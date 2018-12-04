@@ -5,11 +5,6 @@ using System.Text;
 
 namespace Mobin.CoreProject.Core.SSOT
 {
-    public class AlamutClaimTypes
-    {
-        public const string Permission = "permission";
-    }
-
     /// <summary>
     /// [provides permissions of system]
     /// </summary>
@@ -19,6 +14,6 @@ namespace Mobin.CoreProject.Core.SSOT
         ForestEdit,
         ForestDelete,
 
-        NoPermission,
+        UserAndRoles,
     }
 }

@@ -4,6 +4,7 @@ using Alamut.Data.Structure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Mobin.CoreProject.Core.SSOT;
+using Mobin.CoreProject.CrossCutting.Security.SSOT;
 
 namespace Mobin.CoreProject.AuthAdmin.Helper
 {
