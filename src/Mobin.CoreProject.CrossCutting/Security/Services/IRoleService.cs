@@ -17,5 +17,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
         Task<ServiceResult> UpdatePermissions(int roleId, List<string> permissions);
 
         List<AppRole> GetAll();
+
+        Task<AppRole> FindByIdAsync(int id);
     }
 }

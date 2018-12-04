@@ -52,23 +52,22 @@ namespace Mobin.CoreProject.Admin.Controllers
 
 
         #region UpdateRoleTitle
-        public IActionResult UpdateRoleTitle()
+        public async Task<IActionResult> EditName(int id)
         {
-            var data = new { id = 1, title = "مدیر" };
-            return RedirectToAction(nameof(UpdateRoleTitlePost), data);
+            var role = await _roleServices.FindByIdAsync(id);
+            return View(role);
         }
 
-        public async Task<IActionResult> UpdateRoleTitlePost(int id, string title)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditName(int id, string title, bool isAjax = false)
         {
-            ////  update role title
-            //var role = await _roleManager.FindByIdAsync(id.ToString());
-            //role.Name = title;
-
-            //var result = await _roleManager.UpdateAsync(role);
-
             var result = await _roleServices.UpdateAsync(id, title);
 
-            return Json(result);
+            if (isAjax) return Json(result);
+
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(EditName));
         }
         #endregion
 
@@ -133,6 +132,7 @@ namespace Mobin.CoreProject.Admin.Controllers
 
 
 
+        /*
         // implement HasPermission method
         [HasPermission(Permissions.ForestCreate, Permissions.ForestDelete, Permissions.ForestEdit)]
         public IActionResult HasPermission()
@@ -160,7 +160,7 @@ namespace Mobin.CoreProject.Admin.Controllers
                 Name = User.Identity.Name
             });
         }
-
+        */
 
     }
 }

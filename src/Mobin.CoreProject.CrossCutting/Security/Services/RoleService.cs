@@ -76,5 +76,10 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
         {
             return _roleManager.Roles.ToList();
         }
+
+        public Task<AppRole> FindByIdAsync(int id)
+        {
+            return _roleManager.FindByIdAsync(id.ToString());
+        }
     }
 }
