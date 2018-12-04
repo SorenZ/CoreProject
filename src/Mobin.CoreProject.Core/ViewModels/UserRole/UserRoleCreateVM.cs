@@ -1,4 +1,4 @@
-﻿using Mobin.CoreProject.Core.SSOT;
+﻿
 
 namespace Mobin.CoreProject.Core.ViewModels.UserRole
 {
