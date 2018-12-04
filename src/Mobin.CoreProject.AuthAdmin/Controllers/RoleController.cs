@@ -62,21 +62,7 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
 
 
         #region UpdateRoleClaims
-        public IActionResult UpdateRoleClaims()
-        {
-            var data = new
-            {
-                id = 6,
-                claims = new List<string>
-                {
-                    Permissions.ForestCreate.ToString(),
-                    Permissions.ForestDelete.ToString(),
-                    Permissions.ForestEdit.ToString()
-                }
-            };
-
-            return RedirectToAction(nameof(UpdateRoleClaimsPost), data);
-        }
+        
 
         public async Task<IActionResult> UpdateRoleClaimsPost(int id, List<string> claims)
         {
@@ -105,11 +91,13 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
         
 
 
+        /*
         // implement HasPermission method
         [HasPermission(Permissions.ForestCreate)]
         public IActionResult HasPermission()
         {
             return Json($"the user has permission {Permissions.ForestCreate}");
         }
+        */
     }
 }

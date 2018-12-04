@@ -10,10 +10,13 @@ namespace Mobin.CoreProject.Core.SSOT
     /// </summary>
     public enum Permissions
     {
-        ForestCreate,
-        ForestEdit,
-        ForestDelete,
+        [Display(Name = "داشبورد")]
+        Dashboard,
 
+        [Display(Name = "مدیریت ماژول درخت")]
+        Forest,
+
+        [Display(Name = "مدیریت کاربران و نقش‌ها")]
         UserAndRoles,
     }
 }
