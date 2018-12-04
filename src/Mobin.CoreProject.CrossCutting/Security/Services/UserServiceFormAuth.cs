@@ -36,5 +36,15 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
         {
             throw new System.NotImplementedException();
         }
+
+        public Task<AppUser> FindByIdAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<IList<string>> GetRolesAsync(AppUser user)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

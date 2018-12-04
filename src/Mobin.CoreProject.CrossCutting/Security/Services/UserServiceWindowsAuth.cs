@@ -95,5 +95,15 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
                 .OrderBy(q => q.UserName)
                 .ToList();
         }
+
+        public Task<AppUser> FindByIdAsync(int id)
+        {
+            return _userManager.FindByIdAsync(id.ToString());
+        }
+
+        public Task<IList<string>> GetRolesAsync(AppUser user)
+        {
+            return _userManager.GetRolesAsync(user);
+        }
     }
 }

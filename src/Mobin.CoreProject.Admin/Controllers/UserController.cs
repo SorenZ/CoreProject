@@ -11,10 +11,12 @@ namespace Mobin.CoreProject.Admin.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IRoleService roleService)
         {
             _userService = userService;
+            _roleService = roleService;
         }
 
         public IActionResult Index()
@@ -40,35 +42,28 @@ namespace Mobin.CoreProject.Admin.Controllers
         #endregion
 
         #region UpdateUserRoles
-        public IActionResult UpdateUserRoles()
+        public async Task<IActionResult> Roles(int id)
         {
-            var data = new
-            {
-                userId = 1, // userid
-                roleIds = new List<int> {6}/*{ 1, 2, 3 }*/,
-            };
+            var user = await _userService.FindByIdAsync(id);
+            var roles = _roleService.GetAll();
+            var userRoles = await _userService.GetRolesAsync(user);
 
-            return RedirectToAction(nameof(UpdateUserRolesPost), data);
+            ViewBag.UserRoles = userRoles;
+            ViewBag.User = user;
+
+            return View(roles);
         }
 
-        public async Task<IActionResult> UpdateUserRolesPost(int userId, List<int> roleIds)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Roles(int id, List<int> roleIds, bool isAjax)
         {
-            // update user roles
-            //var user = await _userManager.FindByIdAsync(userId.ToString());
-            //var userRoles = await _userManager.GetRolesAsync(user);
-            //var roles = _roleManager.Roles
-            //    .Where(q => roleIds.Contains(q.Id))
-            //    .Select(s => s.Name);
+            var result = await _userService.UpdateRoles(id, roleIds);
 
-            //var result = await _userManager.RemoveFromRolesAsync(user, userRoles);
+            if (isAjax) return Json(result);
 
-            //if (!result.Succeeded)
-            //{return Json(result);}
-
-            //result = await _userManager.AddToRolesAsync(user, roles);
-            var result = await _userService.UpdateRoles(userId, roleIds);
-
-            return Json(result);
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(Roles), new { id });
 
         }
         #endregion
