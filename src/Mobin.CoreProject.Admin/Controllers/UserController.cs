@@ -74,19 +74,14 @@ namespace Mobin.CoreProject.Admin.Controllers
         #endregion
 
         #region Delete User
-        public IActionResult DeleteUser()
+        public async Task<IActionResult> Delete(int id, bool isAjax = false)
         {
-            return RedirectToAction(nameof(DeleteUserPost), new {userName = "m.dashtinejad"});
-        }
+            var result = await _userService.DeleteAsync(id);
 
-        public async Task<IActionResult> DeleteUserPost(string userName)
-        {
-            //var user = await _userManager.FindByNameAsync($"{DomainName}\\{userName}");
-            //var result = await _userManager.DeleteAsync(user);
+            if (isAjax) return Json(result);
 
-            var result = await _userService.DeleteAsync(userName);
-
-            return Json(result);
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(Index));
         }
         #endregion
         
