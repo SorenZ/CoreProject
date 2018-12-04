@@ -89,6 +89,21 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             throw new System.NotImplementedException();
         }
 
+        public async Task<ServiceResult> RenameUsername(int id, string newUsername)
+        {
+            // clean up username
+            newUsername = newUsername.ToLower()
+                .Replace(DomainName.ToLower() + "\\", "")
+                .Replace("@" + DomainEMail.ToLower(), "");
+
+            var user = await FindByIdAsync(id);
+            user.UserName = $"{DomainName}\\{newUsername}";
+            user.Email = $"{newUsername}@{DomainEMail}";
+
+            var result = await _userManager.UpdateAsync(user);
+            return result.AsServiceResult();
+        }
+
         public IList<AppUser> GetAll()
         {
             return _userManager.Users

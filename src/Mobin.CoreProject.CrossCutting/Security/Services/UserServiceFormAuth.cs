@@ -32,6 +32,11 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             throw new System.NotImplementedException();
         }
 
+        public Task<ServiceResult> RenameUsername(int id, string newUsername)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IList<AppUser> GetAll()
         {
             throw new System.NotImplementedException();

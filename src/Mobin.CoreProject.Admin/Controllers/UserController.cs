@@ -48,6 +48,16 @@ namespace Mobin.CoreProject.Admin.Controllers
             var user = await _userService.FindByIdAsync(id);
             return View(user);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditUsername(int id, string newUsername)
+        {
+            var result = await _userService.RenameUsername(id, newUsername);
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(Index));
+        }
+
         #endregion
 
 
