@@ -13,5 +13,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.1.2" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SecurityServices\" />
+  </ItemGroup>
   
 </Project>
