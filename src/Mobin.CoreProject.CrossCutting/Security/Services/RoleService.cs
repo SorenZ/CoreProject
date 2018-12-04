@@ -24,23 +24,9 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             // normalize input
             name = name.ToLower();
 
-            var newRole = await _roleManager.FindByNameAsync(name);
-
-
-            if (newRole != null)
-            {
-                return new Alamut.Data.Structure.ServiceResult<int>
-                {
-                    Message = $"The role {name} already exist.",
-                    Data = 0,
-                    Succeed = false,
-                };
-            }
-
-
-            newRole = new AppRole(name);
+            var newRole = new AppRole(name);
             var result = await _roleManager.CreateAsync(newRole);
-            return result.AsServiceResult<int>(newRole.Id);
+            return result.AsServiceResult(newRole.Id);
         }
 
         public async Task<ServiceResult> UpdateAsync(int id, string name)
