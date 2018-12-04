@@ -26,6 +26,11 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
 
         public async Task<ServiceResult> CreateAsync(string username)
         {
+            // clean up username
+            username = username.ToLower()
+                .Replace(DomainName.ToLower() + "\\", "")
+                .Replace("@" + DomainEMail.ToLower(), "");
+
             var user = new AppUser {UserName = $"{DomainName}\\{username}", Email = $"{username}@{DomainEMail}"};
             var result = await _userManager.CreateAsync(user);
 

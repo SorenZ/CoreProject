@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Mobin.CoreProject.Admin.Extensions;
 using Mobin.CoreProject.CrossCutting.Security.Services;
 
 namespace Mobin.CoreProject.Admin.Controllers
@@ -16,26 +17,24 @@ namespace Mobin.CoreProject.Admin.Controllers
             _userService = userService;
         }
 
-        #region CreateUser
-        public IActionResult CreateUser()
+        public IActionResult Index()
         {
-            return RedirectToAction(nameof(CreateUserPost), new {userName = "m.dashtinejad"});
-
-            // add other parameters if they are mandatory
-            //var data = new { id = 12548 };
-            
-
-
+            return View();
         }
 
-        public async Task<IActionResult> CreateUserPost(string userName)
+        #region CreateUser
+        public IActionResult Create()
         {
-            //var user = new AppUser {UserName = $"{DomainName}\\{userName}", Email = $"{userName}@{DomainEMail}"};
-            //var result = await _userManager.CreateAsync(user);
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(string userName)
+        {
             var result = await _userService.CreateAsync(userName);
-
-            return Json(result);
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(Index));
         }
         #endregion
 

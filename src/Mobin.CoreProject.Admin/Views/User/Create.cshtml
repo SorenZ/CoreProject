@@ -1,0 +1,62 @@
+﻿@using Mobin.CoreProject.Admin.Toolkit
+@using Mobin.CoreProject.Core.SSOT
+@{
+    ViewData["Title"] = "ثبت کاربر جدید";
+}
+
+@{
+    ViewBag.BreadCrumb = new BreadCrumb
+    {
+        Links = new List<BreadCrumbLink>
+        {
+            new BreadCrumbLink
+            {
+                Title = "کاربر",
+                Link = Url.Action("Index"),
+            },
+
+            new BreadCrumbLink
+            {
+                Title = ViewData["Title"].ToString(),
+            },
+        }
+    };
+}
+
+@Html.Raw(RegateText.Init())
+
+<div class="content">
+
+    <form asp-action="Create">
+        <div class="block block-rounded block-bordered">
+            <div class="block-content">
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">نام سازمانی</label>
+                    <div class="col-sm-9">
+                        <div dir="ltr">
+                            @Html.Raw(RegateText.Build("Username", isRequired: true))
+                        </div>
+                        
+                        <div class="alert alert-info mt-2">
+                            نام سازمانی را به سه صورت زیر می‌توانید وارد کنید:
+                            <ul>
+                                <li>m.dashtinejad</li>
+                                <li>MOBINNET\m.dashtinejad</li>
+                                <li>m.dashtinejad@mobinnet.net</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="block-content block-content-full block-content-sm bg-body-light text-right">
+                <button type="submit" class="btn btn-hero-success">
+                    <i class="fa fa-check"></i> ثبت اطلاعات
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
