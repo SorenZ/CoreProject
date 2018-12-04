@@ -27,10 +27,6 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<ServiceResult> RenameUsername(string oldUsername, string newUsername)
-        {
-            throw new System.NotImplementedException();
-        }
 
         public Task<ServiceResult> RenameUsername(int id, string newUsername)
         {

@@ -14,7 +14,6 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
 
         Task<ServiceResult> UpdateRoles(int userId, List<int> roleIds);
 
-        Task<ServiceResult> RenameUsername(string oldUsername, string newUsername);
         Task<ServiceResult> RenameUsername(int id, string newUsername);
 
         IList<AppUser> GetAll();

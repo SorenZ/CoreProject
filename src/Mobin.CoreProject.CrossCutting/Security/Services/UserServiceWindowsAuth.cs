@@ -84,11 +84,6 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             return result.AsServiceResult();
         }
 
-        public Task<ServiceResult> RenameUsername(string oldUsername, string newUsername)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task<ServiceResult> RenameUsername(int id, string newUsername)
         {
             // clean up username
@@ -104,21 +99,15 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             return result.AsServiceResult();
         }
 
-        public IList<AppUser> GetAll()
-        {
-            return _userManager.Users
+        public IList<AppUser> GetAll() =>
+            _userManager.Users
                 .OrderBy(q => q.UserName)
                 .ToList();
-        }
 
-        public Task<AppUser> FindByIdAsync(int id)
-        {
-            return _userManager.FindByIdAsync(id.ToString());
-        }
+        public Task<AppUser> FindByIdAsync(int id) => 
+            _userManager.FindByIdAsync(id.ToString());
 
-        public Task<IList<string>> GetRolesAsync(AppUser user)
-        {
-            return _userManager.GetRolesAsync(user);
-        }
+        public Task<IList<string>> GetRolesAsync(AppUser user) => 
+            _userManager.GetRolesAsync(user);
     }
 }
