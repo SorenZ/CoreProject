@@ -19,7 +19,8 @@ namespace Mobin.CoreProject.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = _userService.GetAll();
+            return View(model);
         }
 
         #region CreateUser

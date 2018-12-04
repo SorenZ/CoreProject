@@ -1,0 +1,82 @@
+﻿@using Alamut.Helpers.Linq
+@using DNTPersianUtils.Core
+@using Mobin.CoreProject.Admin.Toolkit
+
+@model IList<Mobin.CoreProject.CrossCutting.Security.Models.AppUser>
+
+@{
+    ViewData["Title"] = "مدیریت کاربران";
+}
+
+
+@{
+    ViewBag.BreadCrumb = new BreadCrumb
+    {
+        Links = new List<BreadCrumbLink>
+        {
+            new BreadCrumbLink
+            {
+                Title = "مدیریت کاربران",
+                Link = Url.Action("Index"),
+            },
+        }
+    };
+}
+
+<div class="content">
+
+    <div class="text-right mb-3">
+        <a class="btn btn-hero-success" asp-action="Create">
+            <i class="fa fa-fw fa-plus"></i>
+            ثبت کاربر جدید
+        </a>
+    </div>
+
+
+
+    @if (Model.IsAny())
+    {
+        var i = 1;
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-vcenter table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th width="70" class="text-center">#</th>
+                        <th>نام سازمانی</th>
+                        <th class="text-center" style="width: 1px;">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @(i++.ToPersianNumbers())
+                            </td>
+                            <td>
+                                @item.UserName.Replace("MOBINNET\\", "").ToLower()
+                            </td>
+                            
+                            <td class="text-center fa-lg" style="white-space: nowrap;">
+                                <a asp-action="Delete" asp-route-id="@item.Id" data-role="delete" data-toggle="tooltip" title="حذف">
+                                    <i class="si si-close text-danger"></i>
+                                </a>
+                                <a asp-action="Roles" asp-route-id="@item.Id" data-toggle="tooltip" title="تخصیص نقش">
+                                    <i class="si si-settings"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        @await Html.PartialAsync("_Nodata")
+    }
+
+
+</div>
+

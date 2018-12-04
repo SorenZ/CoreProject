@@ -88,5 +88,12 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
         {
             throw new System.NotImplementedException();
         }
+
+        public IList<AppUser> GetAll()
+        {
+            return _userManager.Users
+                .OrderBy(q => q.UserName)
+                .ToList();
+        }
     }
 }

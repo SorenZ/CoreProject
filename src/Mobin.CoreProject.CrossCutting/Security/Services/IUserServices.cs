@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Alamut.Data.Structure;
+using Mobin.CoreProject.CrossCutting.Security.Models;
 
 namespace Mobin.CoreProject.CrossCutting.Security.Services
 {
@@ -14,5 +15,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
         Task<ServiceResult> UpdateRoles(int userId, List<int> roleIds);
 
         Task<ServiceResult> RenameUsername(string oldUsername, string newUsername);
+
+        IList<AppUser> GetAll();
     }
 }

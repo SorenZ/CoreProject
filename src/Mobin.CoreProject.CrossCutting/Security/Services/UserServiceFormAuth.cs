@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Alamut.Data.Structure;
+using Mobin.CoreProject.CrossCutting.Security.Models;
 
 namespace Mobin.CoreProject.CrossCutting.Security.Services
 {
@@ -27,6 +28,11 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
         }
 
         public Task<ServiceResult> RenameUsername(string oldUsername, string newUsername)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IList<AppUser> GetAll()
         {
             throw new System.NotImplementedException();
         }
