@@ -41,6 +41,16 @@ namespace Mobin.CoreProject.Admin.Controllers
         }
         #endregion
 
+
+        #region EditUsername
+        public async Task<IActionResult> EditUsername(int id)
+        {
+            var user = await _userService.FindByIdAsync(id);
+            return View(user);
+        }
+        #endregion
+
+
         #region UpdateUserRoles
         public async Task<IActionResult> Roles(int id)
         {
