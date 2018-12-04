@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Alamut.Data.Structure;
 using Microsoft.AspNetCore.Identity;
@@ -109,5 +111,53 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
 
         public Task<IList<string>> GetRolesAsync(AppUser user) => 
             _userManager.GetRolesAsync(user);
+
+        public async Task<ServiceResult> SetClaimAsync(int userId, string type, string value)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+                { return ServiceResult.Error($"There is no user with userId {userId}"); }
+
+            var claim = new Claim(type, value);
+
+            var result = await _userManager.AddClaimAsync(user, claim);
+
+            return result.AsServiceResult();
+        }
+
+        public async Task<IList<Claim>> GetClaimsAsync(int userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString())
+                       ?? throw new NullReferenceException($"There is no user with userId {userId}");
+
+            return await _userManager.GetClaimsAsync(user);
+        }
+
+        public async Task<string> GetClaimValue(int userId, string type)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString())
+                       ?? throw new NullReferenceException($"There is no user with userId {userId}");
+
+            var claims = await _userManager.GetClaimsAsync(user);
+
+            return claims
+                .FirstOrDefault(q => q.Type == type)
+                ?.Value;
+        }
+
+        public async Task<ServiceResult> RemoveClaimAsync(int userId, string type, string value)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+            { return ServiceResult.Error($"There is no user with userId {userId}"); }
+
+            var claim = new Claim(type, value);
+
+            var result = await _userManager.RemoveClaimAsync(user, claim);
+
+            return result.AsServiceResult();
+        }
     }
 }
