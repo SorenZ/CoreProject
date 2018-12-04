@@ -21,9 +21,6 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
 
         public async Task<ServiceResult<int>> CreateAsync(string name)
         {
-            // normalize input
-            name = name.ToLower();
-
             var newRole = new AppRole(name);
             var result = await _roleManager.CreateAsync(newRole);
             return result.AsServiceResult(newRole.Id);

@@ -37,7 +37,7 @@ Title = ViewData["Title"].ToString(),
     @await Html.PartialAsync("_Progress")
     <script>$('#EditClaimsTab').addClass('active')</script>
 
-    <form asp-action="EditClaims" asp-route-id="@Model.Id">
+    <form asp-action="EditClaims" asp-route-id="@Model.Id" data-ajax>
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-vcenter table-hover">
 

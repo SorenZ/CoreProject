@@ -43,7 +43,7 @@ namespace Mobin.CoreProject.Admin.Controllers
 
 
             return result.Succeed
-                ? RedirectToAction(nameof(Index), new { id = result.Data })
+                ? RedirectToAction(nameof(EditClaims), new { id = result.Data })
                 : RedirectToAction(nameof(Create));
         }
         #endregion
@@ -80,9 +80,7 @@ namespace Mobin.CoreProject.Admin.Controllers
             var roleClaims = await _roleService.GetClaimsAsync(role);
             var roleClaimsStringArray = roleClaims.Select(c => c.Value).ToList();
 
-            var claims = new Dictionary<string, string>();
             var allClaims = EnumHelper.EnumToList(typeof(Permissions));
-            // return Json(allClaims);
 
             ViewBag.RoleClaimsStringArray = roleClaimsStringArray;
             ViewBag.AllClaims = allClaims;
@@ -90,29 +88,16 @@ namespace Mobin.CoreProject.Admin.Controllers
             return View(role);
         }
 
-        public async Task<IActionResult> UpdateRoleClaimsPost(int id, List<string> claims)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditClaims(int id, List<string> claims, bool isAjax = false)
         {
-            // update role claims
-            //var role = await _roleManager.FindByIdAsync(id.ToString());
-
-            //if (role == null)
-            //    {return Content($"there is no role with Id : {id}");}
-
-            //var currentClaims = await _roleManager.GetClaimsAsync(role);
-
-            //foreach (var claim in claims)
-            //{
-            //    if (currentClaims.Any(q => q.Value == claim)) // simplified 
-            //        { continue;}
-
-            //    await _roleManager.AddClaimAsync(role, new Claim(AlamutClaimTypes.Permission, claim));
-            //}
-
-            //return Json(new { id, claims });
-
             var result = await _roleService.UpdatePermissions(id, claims);
 
-            return Json(result);
+            if (isAjax) return Json(result);
+
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(EditClaims), new { id });
 
         }
         #endregion
@@ -130,38 +115,6 @@ namespace Mobin.CoreProject.Admin.Controllers
         }
         #endregion
 
-
-
-
-        /*
-        // implement HasPermission method
-        [HasPermission(Permissions.ForestCreate, Permissions.ForestDelete, Permissions.ForestEdit)]
-        public IActionResult HasPermission()
-        {
-            return Json($"the user has permission {Permissions.ForestCreate}");
-        }
-
-
-        public IActionResult GetClaims()
-        {
-            var keyPair = User.Claims.Select(s => new
-            {
-                s.Type,
-                s.Value
-            });
-
-            return Json(keyPair);
-        }
-
-        public IActionResult GetUserInfo()
-        {
-            return Json(new
-            {
-                Id = User.GetUserId(),
-                Name = User.Identity.Name
-            });
-        }
-        */
 
     }
 }
