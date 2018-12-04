@@ -22,9 +22,8 @@ namespace Mobin.CoreProject.Admin.Controllers
 
         public IActionResult Index()
         {
-            // var model = _roleManager.Roles.ToList();
-            // return View(model);
-            return View();
+            var model = _roleServices.GetAll();
+            return View(model);
         }
 
         #region CreateRole
@@ -120,24 +119,14 @@ namespace Mobin.CoreProject.Admin.Controllers
 
 
         #region DeleteRole
-        public IActionResult DeleteRole()
+        public async Task<IActionResult> Delete(int id, bool isAjax = false)
         {
-            var data = new { id = 1 };
-            return RedirectToAction(nameof(DeleteRolePost), data);
-        }
-
-        public async Task<IActionResult> DeleteRolePost(int id)
-        {
-            //  delete role
-            // [ ] assigned to the users (AspNetUserRoles)
-            // [ ] delete role claims (AspNetRoleClaims)
-            // [ ] the role itself (AspNetRoles)
-            //var role = _roleManager.Roles.FirstOrDefault(q => q.Id == id);
-            //var result = await _roleManager.DeleteAsync(role);
-
             var result = await _roleServices.DeleteAsync(id);
 
-            return Json(result);
+            if (isAjax) return Json(result);
+
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(Index));
         }
         #endregion
 

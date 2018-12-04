@@ -1,0 +1,83 @@
+﻿@using Alamut.Helpers.Linq
+@using DNTPersianUtils.Core
+@using Mobin.CoreProject.Admin.Toolkit
+@model List<Mobin.CoreProject.CrossCutting.Security.Models.AppRole>
+
+@{
+    ViewData["Title"] = "نقش";
+}
+
+
+@{
+    ViewBag.BreadCrumb = new BreadCrumb
+    {
+        Links = new List<BreadCrumbLink>
+{
+new BreadCrumbLink
+{
+Title = "نقش",
+Link = Url.Action("Index"),
+},
+
+new BreadCrumbLink
+{
+Title = "لیست",
+},
+}
+    };
+}
+
+<div class="content">
+
+    <div class="text-right mb-3">
+        <a class="btn btn-hero-success" asp-action="Create">
+            <i class="fa fa-fw fa-plus"></i>
+            ثبت نقش جدید
+        </a>
+    </div>
+
+
+
+    @if (Model.IsAny())
+    {
+        var i = 1;
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-vcenter table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th width="70" class="text-center">#</th>
+                        <th>عنوان</th>
+                        <th class="text-center" style="width: 1px;">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @(i++.ToPersianNumbers())
+                            </td>
+                            <td>@item.Name</td>
+                            <td class="text-center fa-lg" style="white-space: nowrap;">
+                                <a asp-action="Delete" asp-route-id="@item.Id" data-role="delete" data-toggle="tooltip" title="حذف">
+                                    <i class="si si-close text-danger"></i>
+                                </a>
+                                <a asp-action="EditName" asp-route-id="@item.Id" data-toggle="tooltip" title="ویرایش">
+                                    <i class="si si-note text-primary"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        @await Html.PartialAsync("_Nodata")
+    }
+
+
+</div>
+

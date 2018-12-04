@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 using Alamut.Data.Structure;
+using Mobin.CoreProject.CrossCutting.Security.Models;
 
 namespace Mobin.CoreProject.CrossCutting.Security.Services
 {
@@ -14,5 +15,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
         Task<ServiceResult> DeleteAsync(int id);
 
         Task<ServiceResult> UpdatePermissions(int roleId, List<string> permissions);
+
+        List<AppRole> GetAll();
     }
 }

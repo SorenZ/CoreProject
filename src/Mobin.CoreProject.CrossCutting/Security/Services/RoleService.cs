@@ -71,5 +71,10 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
 
             return ServiceResult.Okay();
         }
+
+        public List<AppRole> GetAll()
+        {
+            return _roleManager.Roles.ToList();
+        }
     }
 }
