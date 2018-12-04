@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Admin.Extensions;
 using Mobin.CoreProject.Admin.Helper;
+using Mobin.CoreProject.Core.Helpers;
 using Mobin.CoreProject.Core.SSOT;
 using Mobin.CoreProject.CrossCutting.Security.Helper;
 using Mobin.CoreProject.CrossCutting.Security.Services;
@@ -13,16 +14,16 @@ namespace Mobin.CoreProject.Admin.Controllers
     // [HasPermission(Permissions.UserAndRoles)]
     public class RoleController : Controller
     {
-        private readonly IRoleService _roleServices;
+        private readonly IRoleService _roleService;
 
-        public RoleController(IRoleService roleServices)
+        public RoleController(IRoleService roleService)
         {
-            _roleServices = roleServices;
+            _roleService = roleService;
         }
 
         public IActionResult Index()
         {
-            var model = _roleServices.GetAll();
+            var model = _roleService.GetAll();
             return View(model);
         }
 
@@ -36,7 +37,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string name)
         {
-            var result = await _roleServices.CreateAsync(name);
+            var result = await _roleService.CreateAsync(name);
 
             TempData.AddResult(result);
 
@@ -54,7 +55,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         #region UpdateRoleTitle
         public async Task<IActionResult> EditName(int id)
         {
-            var role = await _roleServices.FindByIdAsync(id);
+            var role = await _roleService.FindByIdAsync(id);
             return View(role);
         }
 
@@ -62,7 +63,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditName(int id, string title, bool isAjax = false)
         {
-            var result = await _roleServices.UpdateAsync(id, title);
+            var result = await _roleService.UpdateAsync(id, title);
 
             if (isAjax) return Json(result);
 
@@ -73,20 +74,20 @@ namespace Mobin.CoreProject.Admin.Controllers
 
 
         #region UpdateRoleClaims
-        public IActionResult UpdateRoleClaims()
+        public async Task<IActionResult> EditClaims(int id)
         {
-            var data = new
-            {
-                id = 6,
-                claims = new List<string>
-                {
-                    Permissions.ForestCreate.ToString(),
-                    Permissions.ForestDelete.ToString(),
-                    Permissions.ForestEdit.ToString()
-                }
-            };
+            var role = await _roleService.FindByIdAsync(id);
+            var roleClaims = await _roleService.GetClaimsAsync(role);
+            var roleClaimsStringArray = roleClaims.Select(c => c.Value).ToList();
 
-            return RedirectToAction(nameof(UpdateRoleClaimsPost), data);
+            var claims = new Dictionary<string, string>();
+            var allClaims = EnumHelper.EnumToList(typeof(Permissions));
+            // return Json(allClaims);
+
+            ViewBag.RoleClaimsStringArray = roleClaimsStringArray;
+            ViewBag.AllClaims = allClaims;
+
+            return View(role);
         }
 
         public async Task<IActionResult> UpdateRoleClaimsPost(int id, List<string> claims)
@@ -109,7 +110,7 @@ namespace Mobin.CoreProject.Admin.Controllers
 
             //return Json(new { id, claims });
 
-            var result = await _roleServices.UpdatePermissions(id, claims);
+            var result = await _roleService.UpdatePermissions(id, claims);
 
             return Json(result);
 
@@ -120,7 +121,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         #region DeleteRole
         public async Task<IActionResult> Delete(int id, bool isAjax = false)
         {
-            var result = await _roleServices.DeleteAsync(id);
+            var result = await _roleService.DeleteAsync(id);
 
             if (isAjax) return Json(result);
 

@@ -1,0 +1,79 @@
+﻿@using System.Security.Claims
+@using Microsoft.EntityFrameworkCore.Internal
+@using Mobin.CoreProject.Admin.Toolkit
+@using Mobin.CoreProject.Core.Helpers
+@using Mobin.CoreProject.Core.SSOT
+@model Mobin.CoreProject.CrossCutting.Security.Models.AppRole
+
+@{
+    ViewData["Title"] = "ویرایش نقش: " + Model.Name;
+    var roleClaimsStringArray = (List<string>)ViewBag.RoleClaimsStringArray;
+    var allClaims = (List<EnumHelper.EnumModel>)ViewBag.AllClaims;
+}
+
+@{
+    ViewBag.BreadCrumb = new BreadCrumb
+    {
+        Links = new List<BreadCrumbLink>
+{
+new BreadCrumbLink
+{
+Title = "نقش",
+Link = Url.Action("Index"),
+},
+
+new BreadCrumbLink
+{
+Title = ViewData["Title"].ToString(),
+},
+}
+    };
+}
+
+@Html.Raw(RegateText.Init())
+
+
+<div class="content">
+    @await Html.PartialAsync("_Progress")
+    <script>$('#EditClaimsTab').addClass('active')</script>
+
+    <form asp-action="EditClaims" asp-route-id="@Model.Id">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-vcenter table-hover">
+
+                <tbody>
+                    @foreach (var claim in allClaims)
+                    {
+                        <tr>
+                            <td class="text-center" width="100">
+                                <div class="custom-control custom-checkbox custom-control-primary mb-1">
+                                    <input type="checkbox" class="custom-control-input" name="claims" value="@claim.Name" id="claim_@claim.Name"
+                                           checked="@(roleClaimsStringArray.Contains(claim.Name))" />
+
+                                    <label class="custom-control-label" for="claim_@claim.Name"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <label for="claim_@claim.Name">
+                                    @claim.DisplayName
+                                </label>
+                            </td>
+                            <td>
+                                <label for="claim_@claim.Name">
+                                    @claim.Name
+                                </label>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="text-right">
+                <button type="submit" class="btn btn-hero-success">
+                    <i class="fa fa-check"></i> ثبت اطلاعات
+                </button>
+            </div>
+        </div>
+
+    </form>
+</div>
