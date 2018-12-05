@@ -1,0 +1,73 @@
+﻿@using System.Security.Claims
+@using Microsoft.EntityFrameworkCore.Internal
+@using Mobin.CoreProject.Admin.Toolkit
+@using Mobin.CoreProject.Core.Helpers
+@using Mobin.CoreProject.Core.SSOT
+@model Mobin.CoreProject.Admin.Controllers.UserEditClaimsPM
+
+@{
+    ViewData["Title"] = "Claims: " + Model.User.UserName.ToLower().Replace("MOBINNET\\".ToLower(), "");
+}
+
+@{
+    ViewBag.BreadCrumb = new BreadCrumb
+    {
+        Links = new List<BreadCrumbLink>
+{
+new BreadCrumbLink
+{
+Title = "مدیریت کاربران",
+Link = Url.Action("Index"),
+},
+
+new BreadCrumbLink
+{
+Title = "Claims",
+},
+}
+    };
+}
+
+@Html.Raw(RegateText.Init())
+
+
+<div class="content">
+
+
+    <form asp-action="EditClaims" asp-route-id="@Model.User.Id">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-vcenter">
+
+                <tbody>
+                    @{
+                        var i = 0;
+                    }
+
+                    @foreach (var claim in Model.AllClaims)
+                    {
+                        <tr>
+                            <td width="300">
+                                <div>
+                                    @claim.DisplayName
+                                </div>
+                                <div>@claim.Name</div>
+                            </td>
+                            <td> 
+                                <input type="text" name="Claims[@i].Key" value="@claim.Name" />
+                                @Html.Raw(RegateText.Build($"Claims[{i}].Value"))
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+
+            <div class="text-right">
+                <button type="submit" class="btn btn-hero-success">
+                    <i class="fa fa-check"></i> ثبت اطلاعات
+                </button>
+            </div>
+        </div>
+
+    </form>
+</div>

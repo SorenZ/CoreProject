@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Admin.Extensions;
+using Mobin.CoreProject.Core.Helpers;
+using Mobin.CoreProject.Core.SSOT;
+using Mobin.CoreProject.CrossCutting.Security.Models;
 using Mobin.CoreProject.CrossCutting.Security.Services;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
+
     [Authorize]
     public class UserController : Controller
     {
@@ -99,6 +105,46 @@ namespace Mobin.CoreProject.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
         #endregion
-        
+
+
+        #region UpdateClaims
+        public async Task<IActionResult> EditClaims(int id)
+        {
+            var user = await _userService.FindByIdAsync(id);
+            var userClaims = await _userService.GetClaimsAsync(id);
+            var allClaims = EnumHelper.EnumToList(typeof(Claims));
+
+            var model = new UserEditClaimsPM
+            {
+                User = user,
+                UserClaims = userClaims,
+                AllClaims = allClaims,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditClaims(int id, List<KeyValuePair<string, string>> claims, bool isAjax = false)
+        {
+            return Json(claims);
+
+            /*
+            if (isAjax) return Json(result);
+
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(EditClaims), new { id });
+            */
+        }
+        #endregion
+    }
+
+
+    public class UserEditClaimsPM
+    {
+        public AppUser User { get; set; }
+        public IList<Claim> UserClaims { get; set; }
+        public List<EnumHelper.EnumModel> AllClaims { get; set; }
     }
 }
