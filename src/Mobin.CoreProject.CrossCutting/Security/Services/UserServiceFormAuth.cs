@@ -73,5 +73,10 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
         {
             throw new System.NotImplementedException();
         }
+
+        public Task<ServiceResult> UpdateClaims(int id, List<KeyValuePair<string, string>> claims)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

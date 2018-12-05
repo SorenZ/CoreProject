@@ -29,5 +29,6 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
         
         Task<ServiceResult> RemoveClaimAsync(int userId, string type, string value);
         Task<ServiceResult> RemoveClaimAsync(int userId, Claim userClaim);
+        Task<ServiceResult> UpdateClaims(int id, List<KeyValuePair<string, string>> claims);
     }
 }

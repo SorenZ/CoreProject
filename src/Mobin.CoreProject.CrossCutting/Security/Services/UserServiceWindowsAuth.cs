@@ -166,5 +166,22 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             var result = await _userManager.RemoveClaimAsync(user, userClaim);
             return result.AsServiceResult();
         }
+
+        public async Task<ServiceResult> UpdateClaims(int userId, List<KeyValuePair<string, string>> claims)
+        {
+            var userClaims = await GetClaimsAsync(userId);
+
+            foreach (var userClaim in userClaims)
+            {
+                await RemoveClaimAsync(userId, userClaim);
+            }
+
+            foreach (var claim in claims.Where(q => !string.IsNullOrWhiteSpace(q.Value)))
+            {
+                await SetClaimAsync(userId, claim.Key, claim.Value);
+            }
+
+            return ServiceResult.Okay();
+        }
     }
 }

@@ -12,8 +12,5 @@ namespace Mobin.CoreProject.Core.SSOT
     {
         [Display(Name = "کد پرسنلی")]
         EmployeeNumber,
-
-        [Display(Name = "۱۲۳")]
-        OneTwoThree,
     }
 }
