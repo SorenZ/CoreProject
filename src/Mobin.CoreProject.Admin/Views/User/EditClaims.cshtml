@@ -34,7 +34,7 @@ Title = "Claims",
 <div class="content">
 
 
-    <form asp-action="EditClaims" asp-route-id="@Model.User.Id">
+    <form asp-action="EditClaims" asp-route-id="@Model.User.Id" data-ajax>
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-vcenter">
 
@@ -53,7 +53,7 @@ Title = "Claims",
                                 <div>@claim.Name</div>
                             </td>
                             <td> 
-                                <input type="text" name="Claims[@i].Key" value="@claim.Name" />
+                                <input type="hidden" name="Claims[@i].Key" value="@claim.Name" />
                                 @Html.Raw(RegateText.Build($"Claims[{i}].Value"))
                             </td>
                         </tr>

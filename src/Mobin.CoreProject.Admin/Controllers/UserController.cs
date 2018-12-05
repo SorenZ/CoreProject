@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Alamut.Data.Structure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Admin.Extensions;
@@ -140,14 +141,14 @@ namespace Mobin.CoreProject.Admin.Controllers
                 await _userService.SetClaimAsync(id, claim.Key, claim.Value);
             }
 
-            return Json(claims);
+            var result = ServiceResult.Okay();
 
-            /*
+            
             if (isAjax) return Json(result);
 
             TempData.AddResult(result);
             return RedirectToAction(nameof(EditClaims), new { id });
-            */
+            
         }
         #endregion
     }
