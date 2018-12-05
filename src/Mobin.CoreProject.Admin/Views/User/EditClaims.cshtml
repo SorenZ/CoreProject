@@ -54,7 +54,7 @@ Title = "Claims",
                             </td>
                             <td> 
                                 <input type="hidden" name="Claims[@i].Key" value="@claim.Name" />
-                                @Html.Raw(RegateText.Build($"Claims[{i}].Value"))
+                                @Html.Raw(RegateText.Build($"Claims[{i}].Value", Model.UserClaims.FirstOrDefault(q => q.Type == claim.Name)?.Value))
                             </td>
                         </tr>
                         i++;

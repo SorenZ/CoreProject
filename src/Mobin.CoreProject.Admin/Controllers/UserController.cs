@@ -69,7 +69,7 @@ namespace Mobin.CoreProject.Admin.Controllers
 
 
         #region UpdateUserRoles
-        public async Task<IActionResult> Roles(int id)
+        public async Task<IActionResult> EditRoles(int id)
         {
             var user = await _userService.FindByIdAsync(id);
             var roles = _roleService.GetAll();
@@ -83,14 +83,14 @@ namespace Mobin.CoreProject.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Roles(int id, List<int> roleIds, bool isAjax)
+        public async Task<IActionResult> EditRoles(int id, List<int> roleIds, bool isAjax)
         {
             var result = await _userService.UpdateRoles(id, roleIds);
 
             if (isAjax) return Json(result);
 
             TempData.AddResult(result);
-            return RedirectToAction(nameof(Roles), new { id });
+            return RedirectToAction(nameof(EditRoles), new { id });
 
         }
         #endregion
