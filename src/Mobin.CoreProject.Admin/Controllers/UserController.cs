@@ -128,6 +128,18 @@ namespace Mobin.CoreProject.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditClaims(int id, List<KeyValuePair<string, string>> claims, bool isAjax = false)
         {
+            var userClaims = await _userService.GetClaimsAsync(id);
+
+            foreach (var userClaim in userClaims)
+            {
+                await _userService.RemoveClaimAsync(id, userClaim);
+            }
+
+            foreach (var claim in claims.Where(q => ! string.IsNullOrWhiteSpace(q.Value)))
+            {
+                await _userService.SetClaimAsync(id, claim.Key, claim.Value);
+            }
+
             return Json(claims);
 
             /*

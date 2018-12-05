@@ -159,5 +159,12 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
 
             return result.AsServiceResult();
         }
+
+        public async Task<ServiceResult> RemoveClaimAsync(int userId, Claim userClaim)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var result = await _userManager.RemoveClaimAsync(user, userClaim);
+            return result.AsServiceResult();
+        }
     }
 }
