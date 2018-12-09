@@ -27,38 +27,43 @@ namespace Mobin.CoreProject.CrossCutting.Security.Helper
             _userManager = userManager;
         }
 
-        public IList<Claim> GetUserClaims(string userName) =>
-            _cache.GetOrCreate($"UserClaims_{userName}", entry =>
+        public async Task<IList<Claim>> GetUserClaimsAsync(string userName) =>
+            await _cache.GetOrCreateAsync($"UserClaims_{userName}", async entry =>
             {
                 var claims = new List<Claim>();
 
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(ClaimDuration);
-                var user = _userManager.FindByNameAsync(userName).Result;
+                var user = await _userManager.FindByNameAsync(userName);
                 if (user == null)
-                { return claims; }
+                    { return claims; }
                 
-                var userRoles = _userManager.GetRolesAsync(user).Result;
+                var userRoles = await _userManager.GetRolesAsync(user);
                 var roles = _roleManager.Roles
                     .Where(q => userRoles.Contains(q.NormalizedName))
                     .ToList();
 
                 foreach (var role in roles)
-                { claims.AddRange(_roleManager.GetClaimsAsync(role).Result); }
+                {
+                    var roleClaims = await _roleManager.GetClaimsAsync(role);
+                    claims.AddRange(roleClaims);
+                }
 
-                claims.AddRange(_userManager.GetClaimsAsync(user).Result);
+                var userClaims = await _userManager.GetClaimsAsync(user);
+                claims.AddRange(userClaims);
+
                 claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())); // update UserId
 
                 return claims;
             });
 
 
-        public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
+        public async Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
         {
-            var roleClaims = GetUserClaims(principal.Identity.Name);
+            var roleClaims = await GetUserClaimsAsync(principal.Identity.Name);
 
             (principal.Identity as ClaimsIdentity)?.AddClaims(roleClaims);
 
-            return Task.FromResult(principal);
+            return principal;
         }
     }
 }

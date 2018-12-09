@@ -27,5 +27,9 @@ namespace Mobin.CoreProject.CrossCutting.Security.Helper
         public static string GetUserId(this ClaimsPrincipal principal) =>
             principal.FindFirstValue(ClaimTypes.NameIdentifier)
                 ?? throw new NullReferenceException("there is no claim with type 'ClaimTypes.NameIdentifier'");
+
+
+        public static string GetClaim(this ClaimsPrincipal principal, string claimType) =>
+            principal.FindFirstValue(claimType);
     }
 }

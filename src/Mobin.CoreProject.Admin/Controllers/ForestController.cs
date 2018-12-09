@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using Alamut.Data.Linq;
 using Alamut.Data.Paging;
@@ -11,8 +12,10 @@ using Mobin.CoreProject.Core.DTOs.Forest;
 using Mobin.CoreProject.Core.Entities;
 using Mobin.CoreProject.Core.SearchCriteria.Forest;
 using Mobin.CoreProject.Core.ServiceContracts;
+using Mobin.CoreProject.Core.SSOT;
 using Mobin.CoreProject.Core.ViewModels.Forest;
 using Mobin.CoreProject.Core.ViewModels.Leaf;
+using Mobin.CoreProject.CrossCutting.Security.Helper;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
@@ -32,6 +35,19 @@ namespace Mobin.CoreProject.Admin.Controllers
             ViewBag.Q = criteria.Q;
 
             return View(model);
+        }
+
+        public IActionResult GetClaims()
+        {
+            var claims = User.Claims.Select(claim => new { claim.Type, claim.Value }).ToArray();
+            return Json(claims);
+        }
+
+        public IActionResult GetEmployeeId()
+        {
+            // var employeeNumber = User.FindFirstValue("EmployeeNumber");
+            var employeeNumber = User.GetClaim(Claims.EmployeeNumber.ToString());
+            return Json(employeeNumber);
         }
 
 
