@@ -15,7 +15,7 @@ namespace Mobin.CoreProject.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -102,7 +102,24 @@ namespace Mobin.CoreProject.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Mobin.CoreProject.Core.Entities.AppRole", b =>
+            modelBuilder.Entity("Mobin.CoreProject.Core.Entities.Forest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Forest");
+                });
+
+            modelBuilder.Entity("Mobin.CoreProject.CrossCutting.Security.Models.AppRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,7 +144,7 @@ namespace Mobin.CoreProject.Data.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Mobin.CoreProject.Core.Entities.AppUser", b =>
+            modelBuilder.Entity("Mobin.CoreProject.CrossCutting.Security.Models.AppUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -179,43 +196,9 @@ namespace Mobin.CoreProject.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Mobin.CoreProject.Core.Entities.Forest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description");
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Forest");
-                });
-
-            modelBuilder.Entity("Mobin.CoreProject.Core.Entities.Leaf", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ForestId");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ForestId");
-
-                    b.ToTable("Leaf");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Mobin.CoreProject.Core.Entities.AppRole")
+                    b.HasOne("Mobin.CoreProject.CrossCutting.Security.Models.AppRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -223,7 +206,7 @@ namespace Mobin.CoreProject.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Mobin.CoreProject.Core.Entities.AppUser")
+                    b.HasOne("Mobin.CoreProject.CrossCutting.Security.Models.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -231,7 +214,7 @@ namespace Mobin.CoreProject.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("Mobin.CoreProject.Core.Entities.AppUser")
+                    b.HasOne("Mobin.CoreProject.CrossCutting.Security.Models.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -239,12 +222,12 @@ namespace Mobin.CoreProject.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("Mobin.CoreProject.Core.Entities.AppRole")
+                    b.HasOne("Mobin.CoreProject.CrossCutting.Security.Models.AppRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Mobin.CoreProject.Core.Entities.AppUser")
+                    b.HasOne("Mobin.CoreProject.CrossCutting.Security.Models.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -252,17 +235,9 @@ namespace Mobin.CoreProject.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Mobin.CoreProject.Core.Entities.AppUser")
+                    b.HasOne("Mobin.CoreProject.CrossCutting.Security.Models.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Mobin.CoreProject.Core.Entities.Leaf", b =>
-                {
-                    b.HasOne("Mobin.CoreProject.Core.Entities.Forest", "Forest")
-                        .WithMany("Leafs")
-                        .HasForeignKey("ForestId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
