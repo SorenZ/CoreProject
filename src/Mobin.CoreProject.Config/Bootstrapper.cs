@@ -123,7 +123,7 @@ namespace Mobin.CoreProject.Config
                 options.SlidingExpiration = true;
             });
 
-            services.AddSingleton<IEmailSender, EmailSender>();
+            // services.AddSingleton<IEmailSender, EmailSender>();
 
             services.AddScoped<IRoleService, RoleService>();
 
