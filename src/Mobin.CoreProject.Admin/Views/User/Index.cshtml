@@ -55,7 +55,7 @@
                                 @(i++.ToPersianNumbers())
                             </td>
                             <td>
-                                @item.UserName.Replace("MOBINNET\\", "").ToLower()
+                                @item.UserName.NormalizeUsername()
                             </td>
                             
                             <td class="text-center fa-lg" style="white-space: nowrap;">

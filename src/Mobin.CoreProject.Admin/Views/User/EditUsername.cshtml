@@ -3,7 +3,7 @@
 @model AppUser
 
 @{
-    ViewData["Title"] = "ویرایش نام کاربری: " + Model.UserName.ToLower().Replace("MOBINNET\\".ToLower(), "");
+    ViewData["Title"] = "ویرایش نام کاربری: " + Model.UserName.NormalizeUsername();
 
 }
 
@@ -39,7 +39,7 @@ Title = "تخصیص نقش",
                     <label class="col-sm-3 col-form-label">نام سازمانی</label>
                     <div class="col-sm-9">
                         <div dir="ltr">
-                            @Html.Raw(RegateText.Build("NewUsername", Model.UserName.ToLower().Replace("MOBINNET\\".ToLower(), ""), isRequired: true))
+                            @Html.Raw(RegateText.Build("NewUsername", Model.UserName.NormalizeUsername(), isRequired: true))
                         </div>
 
                         <div class="alert alert-info mt-2">

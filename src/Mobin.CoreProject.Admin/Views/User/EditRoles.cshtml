@@ -6,8 +6,8 @@
     var user = (AppUser)ViewBag.user;
     var userRoles = (IList<string>)ViewBag.UserRoles;
 
-    ViewData["Title"] = "تخصیص نقش: " + user.UserName.ToLower().Replace("MOBINNET\\".ToLower(), "");
-    
+    ViewData["Title"] = "تخصیص نقش: " + user.UserName.NormalizeUsername();
+
 }
 
 

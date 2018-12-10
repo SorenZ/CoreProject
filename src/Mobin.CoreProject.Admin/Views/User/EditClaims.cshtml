@@ -6,7 +6,7 @@
 @model Mobin.CoreProject.Admin.Controllers.UserEditClaimsPM
 
 @{
-    ViewData["Title"] = "Claims: " + Model.User.UserName.ToLower().Replace("MOBINNET\\".ToLower(), "");
+    ViewData["Title"] = "Claims: " + Model.User.UserName.NormalizeUsername();
 }
 
 @{
