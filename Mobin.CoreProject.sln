@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mobin.CoreProject.Config", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mobin.CoreProject.AuthAdmin", "src\Mobin.CoreProject.AuthAdmin\Mobin.CoreProject.AuthAdmin.csproj", "{FEE16295-9E6E-463C-A26D-074E191BAA10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobin.CoreProject.CrossCutting", "src\Mobin.CoreProject.CrossCutting\Mobin.CoreProject.CrossCutting.csproj", "{221D4982-ABF6-4A20-BFC3-02F0EF3A1536}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mobin.CoreProject.CrossCutting", "src\Mobin.CoreProject.CrossCutting\Mobin.CoreProject.CrossCutting.csproj", "{221D4982-ABF6-4A20-BFC3-02F0EF3A1536}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mobin.CoreProject.Tests", "test\Mobin.CoreProject.Tests\Mobin.CoreProject.Tests.csproj", "{2C95F990-34D1-429D-B805-1E9C34302D67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{221D4982-ABF6-4A20-BFC3-02F0EF3A1536}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{221D4982-ABF6-4A20-BFC3-02F0EF3A1536}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{221D4982-ABF6-4A20-BFC3-02F0EF3A1536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C95F990-34D1-429D-B805-1E9C34302D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C95F990-34D1-429D-B805-1E9C34302D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C95F990-34D1-429D-B805-1E9C34302D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C95F990-34D1-429D-B805-1E9C34302D67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +75,7 @@ Global
 		{AE9BB59F-39C1-482A-9008-4C7449D3BF00} = {AB0FA78F-4408-42A3-BEDB-6FB434C25019}
 		{FEE16295-9E6E-463C-A26D-074E191BAA10} = {AB0FA78F-4408-42A3-BEDB-6FB434C25019}
 		{221D4982-ABF6-4A20-BFC3-02F0EF3A1536} = {AB0FA78F-4408-42A3-BEDB-6FB434C25019}
+		{2C95F990-34D1-429D-B805-1E9C34302D67} = {299D1D49-2871-42D3-BD42-A201278EEED1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {24C188C9-94E3-4D0E-A93B-0EDA8C81AECB}
