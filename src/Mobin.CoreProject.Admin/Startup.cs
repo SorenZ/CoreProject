@@ -71,10 +71,9 @@ namespace Mobin.CoreProject.Admin
             services.AddAlamut();
             services.AddRepositories();
             services.AddAppServices();
+
             services.RegisterCustomClaims();
-
             services.AddIdentity(isWindowsAuthentication: true);
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
