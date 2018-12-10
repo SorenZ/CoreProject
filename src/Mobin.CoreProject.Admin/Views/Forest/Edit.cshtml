@@ -26,9 +26,6 @@
     };
 }
 
-<script src="~/dashmix/js/plugins/sortable/Sortable.min.js"></script>
-<script src="~/dashmix/js/plugins/vue-draggable/vuedraggable.min.js"></script>
-
 @Html.Raw(RegateText.Init())
 @Html.Raw(RegateTextarea.Init())
 
@@ -50,33 +47,6 @@
                         @Html.Raw(RegateTextarea.Build("Description", Model.Description))
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">برگ‌ها</label>
-                    <div class="col-sm-9">
-                        <div id="app">
-                            <draggable :list="items" v-model="items" :options="{handle:'.list-item--move'}">
-                                <div class="mb-2" v-for="(item, index) in items">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend handle list-item--move">
-                                            <span class="input-group-text"><i class="fa fa-fw fa-bars" style="opacity: 0.3;"></i></span>
-                                        </div>
-                                        <input type="hidden" v-bind:name="'Leafs['+index+'].Id'" v-model="item.Id" />
-                                        <input type="text" class="form-control" v-bind:name="'Leafs['+index+'].Title'" v-model="item.Title" />
-                                        <div class="input-group-append">
-                                            <button type="button" class="btn btn-danger" v-on:click="removeItem(index)"><i class="fa fa-fw fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </draggable>
-                            <div class="text-right">
-                               
-                                    <button type="button" class="btn btn-success" v-on:click="addItem"><i class="fa fa-fw fa-plus"></i></button>
-                              
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </div>
             <div class="block-content block-content-full block-content-sm bg-body-light text-right">
                 <button type="submit" class="btn btn-hero-success">
@@ -89,27 +59,3 @@
 </div>
 
 
-
-
-<script>
-    var data = @Html.Raw(JsonConvert.SerializeObject(Model.Leafs));
-    console.log(data);
-
-    var app = new Vue({
-        el: '#app',
-
-        data: {
-            items: data
-        },
-
-        methods: {
-            addItem: function () {
-                this.items.push({ Id: 0, Title: '' });
-            },
-
-            removeItem: function (index) {
-                this.items.splice(index, 1);
-            }
-        }
-    });
-</script>

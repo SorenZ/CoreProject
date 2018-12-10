@@ -13,7 +13,6 @@ namespace Mobin.CoreProject.Data
         { }
 
         public DbSet<Forest> Forest { get; set; }
-        public DbSet<Leaf> Leaf { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
