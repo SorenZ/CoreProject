@@ -40,8 +40,7 @@ namespace Mobin.CoreProject.Config
             Mapper.Initialize(option => option.AddProfiles(typeof(Bootstrapper).Assembly));
         }
 
-        public static void RegisterCustomClaims(this IServiceCollection services) =>
-            services.AddScoped<IClaimsTransformation, AppClaimsTransformer>();
+        
 
         public static void AddRepositories(this IServiceCollection services)
         {
@@ -78,6 +77,9 @@ namespace Mobin.CoreProject.Config
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
         }
+
+        public static void RegisterCustomClaims(this IServiceCollection services) =>
+            services.AddScoped<IClaimsTransformation, AppClaimsTransformer>();
 
         public static void AddIdentity(this IServiceCollection services, bool isWindowsAuthentication = true)
         {
