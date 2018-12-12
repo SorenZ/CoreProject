@@ -31,5 +31,10 @@ namespace Mobin.CoreProject.CrossCutting.Security.Helper
 
         public static string GetClaim(this ClaimsPrincipal principal, string claimType) =>
             principal.FindFirstValue(claimType);
+
+        public static bool HasPermission(this ClaimsPrincipal principal, Enum permission) =>
+            principal.Claims.Any(q =>
+                q.Type == AlamutClaimTypes.Permission
+                && q.Value == permission.ToString());
     }
 }
