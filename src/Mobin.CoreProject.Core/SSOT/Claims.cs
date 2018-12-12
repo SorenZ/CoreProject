@@ -11,6 +11,6 @@ namespace Mobin.CoreProject.Core.SSOT
     public enum Claims
     {
         [Display(Name = "کد پرسنلی")]
-        EmployeeNumber,
+        EmployeeId,
     }
 }

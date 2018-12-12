@@ -36,9 +36,8 @@ namespace Mobin.CoreProject.Admin.Controllers
 
         public IActionResult GetEmployeeId()
         {
-            // var employeeNumber = User.FindFirstValue("EmployeeNumber");
-            var employeeNumber = User.GetClaim(Claims.EmployeeNumber.ToString());
-            return Json(employeeNumber);
+            var employeeId = User.GetClaim(Claims.EmployeeId.ToString());
+            return Json(employeeId);
         }
 
 
