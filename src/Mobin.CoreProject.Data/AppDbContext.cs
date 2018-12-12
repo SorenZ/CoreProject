@@ -6,7 +6,7 @@ using Mobin.CoreProject.CrossCutting.Security.Models;
 
 namespace Mobin.CoreProject.Data
 {
-    public class AppDbContext : IdentityDbContext<AppUser,AppRole,int>
+    public class AppDbContext : IdentityDbContext<AppUser, AppRole, int>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
