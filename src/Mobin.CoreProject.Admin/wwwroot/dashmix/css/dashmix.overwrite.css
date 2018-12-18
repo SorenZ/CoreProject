@@ -92,8 +92,7 @@ body.swal2-height-auto {
 .dashboard-box-header {
     display: flex;
     justify-content: flex-start;
-    border-top: 1px solid #87059e;
-    }
+}
 
 .dashboard-box-header--avatar {
     width: 60px;
@@ -113,6 +112,134 @@ body.swal2-height-auto {
 .dashboard-box-header--subtitle {
     font-size: 0.7rem;
     margin-bottom:0 !important;
+}
+
+.dashboard-box-header__purple300 {
+    border-top: 1px solid #BA68C8;
+}
+
+.dashboard-box-header__purple800 {
+    border-top: 1px solid #9C27B0;
+}
+
+.dashboard-box-header__purple800 {
+    border-top: 1px solid #6A1B9A;
+}
+
+.dashboard-box-header__red400 {
+    border-top: 1px solid #EF5350;
+}
+
+.dashboard-box-header__red700 {
+    border-top: 1px solid #D32F2F;
+}
+
+.dashboard-box-header__red9100 {
+    border-top: 1px solid #B71C1C;
+}
+
+.dashboard-box-header__teal200 {
+    border-top: 1px solid #80CBC4;
+}
+
+.dashboard-box-header__teal300 {
+    border-top: 1px solid #4DB6AC;
+}
+
+.dashboard-box-header__teal500 {
+    border-top: 1px solid #009688;
+}
+
+.dashboard-box-header__amber400 {
+    border-top: 1px solid #FFCA28;
+}
+
+.dashboard-box-header__amber600 {
+    border-top: 1px solid #FFB300;
+}
+
+.dashboard-box-header__amber800 {
+    border-top: 1px solid #FF8F00;
+}
+
+.dashboard-box-header__pink400 {
+    border-top: 1px solid #EC407A;
+}
+
+.dashboard-box-header__pink600 {
+    border-top: 1px solid #D81B60;
+}
+
+.dashboard-box-header__pink700 {
+    border-top: 1px solid #C2185B;
+}
+
+.dashboard-box-header__cyan200 {
+    border-top: 1px solid #80DEEA;
+}
+
+.dashboard-box-header__cyan400 {
+    border-top: 1px solid #26C6DA;
+}
+
+.dashboard-box-header__cyan500 {
+    border-top: 1px solid #00BCD4;
+}
+
+.dashboard-box-header__cyan500 {
+    border-top: 1px solid #00BCD4;
+}
+
+.dashboard-box-header__green400 {
+    border-top: 1px solid #66BB6A;
+}
+
+.dashboard-box-header__green500 {
+    border-top: 1px solid #4CAF50;
+}
+
+.dashboard-box-header__green700 {
+    border-top: 1px solid #388E3C;
+}
+
+.dashboard-box-header__green700 {
+    border-top: 1px solid #388E3C;
+}
+
+.dashboard-box-header__lightGreen500 {
+    border-top: 1px solid #8BC34A;
+}
+
+.dashboard-box-header__lightGreen800 {
+    border-top: 1px solid #558B2F;
+}
+
+.dashboard-box-header__lime600 {
+    border-top: 1px solid #C0CA33;
+}
+
+.dashboard-box-header__yellow600 {
+    border-top: 1px solid #FDD835;
+}
+
+.dashboard-box-header__blueGray400 {
+    border-top: 1px solid #78909C;
+}
+
+.dashboard-box-header__blueGray700 {
+    border-top: 1px solid #455A64;
+}
+
+.dashboard-box-header__blue200 {
+    border-top: 1px solid #90CAF9;
+}
+
+.dashboard-box-header__blue400 {
+    border-top: 1px solid #42A5F5;
+}
+
+.dashboard-box-header__blue700 {
+    border-top: 1px solid #1976D2;
 }
 
 /*#endregion */
