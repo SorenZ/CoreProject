@@ -91,7 +91,8 @@ namespace Mobin.CoreProject.AuthAdmin.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    //ModelState.AddModelError(string.Empty, @"نام کاربری یا رمز عبور اشتباه می باشد");
+                    TempData["error"] = @"نام کاربری یا رمز عبور اشتباه می باشد";
                     return Page();
                 }
             }

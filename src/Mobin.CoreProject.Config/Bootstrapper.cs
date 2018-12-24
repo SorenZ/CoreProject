@@ -78,6 +78,10 @@ namespace Mobin.CoreProject.Config
                 .WithScopedLifetime());
         }
 
+        /// <summary>
+        /// use it just for windows authentication 
+        /// </summary>
+        /// <param name="services"></param>
         public static void RegisterCustomClaims(this IServiceCollection services) =>
             services.AddScoped<IClaimsTransformation, AppClaimsTransformer>();
 
