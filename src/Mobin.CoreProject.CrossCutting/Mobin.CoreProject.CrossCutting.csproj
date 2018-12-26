@@ -8,8 +8,11 @@
     <PackageReference Include="Alamut.Service" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Aspnetcore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Aspnetcore.Identity.Entityframeworkcore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Aspnetcore.Identity.Ui" Version="2.2.0" />
   </ItemGroup>
 
 </Project>

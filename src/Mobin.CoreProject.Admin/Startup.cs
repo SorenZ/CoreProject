@@ -77,7 +77,7 @@ namespace Mobin.CoreProject.Admin
             Configuration.Bind("FileRepository", fileConfig);
             services.AddSingleton(fileConfig);
 
-            services.RegisterCustomClaims();
+            
             services.AddIdentity(isWindowsAuthentication: true);
         }
 
