@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mobin.CoreProject.Config;
+using Mobin.CoreProject.Core.SSOT;
 using Newtonsoft.Json.Serialization;
 
 namespace Mobin.CoreProject.Admin
@@ -71,6 +72,10 @@ namespace Mobin.CoreProject.Admin
             services.AddAlamut();
             services.AddRepositories();
             services.AddAppServices();
+
+            var fileConfig = new FileConfig();
+            Configuration.Bind("FileRepository", fileConfig);
+            services.AddSingleton(fileConfig);
 
             services.RegisterCustomClaims();
             services.AddIdentity(isWindowsAuthentication: true);
