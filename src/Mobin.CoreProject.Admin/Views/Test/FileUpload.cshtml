@@ -1,0 +1,17 @@
+﻿
+
+@{
+    ViewData["Title"] = "داشبورد";
+}
+
+@Html.Raw(RegateFile.Init())
+
+<div class="content">
+    <div class="row">
+        <form asp-controller="Test" asp-action="FileUpload">
+            @Html.Raw(RegateFile.Build("file"))
+            
+            <button type="submit">SUBMIT</button>
+        </form>
+    </div>
+</div>

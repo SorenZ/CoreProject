@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="DNTPersianUtils.Core" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Mime" Version="3.0.2" />
     <PackageReference Include="Regate" Version="0.17.1" />
   </ItemGroup>
 
