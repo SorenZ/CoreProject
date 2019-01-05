@@ -12,13 +12,4 @@ namespace Mobin.CoreProject.CrossCutting.Notification.Services
 
         Task<ServiceResult> SendAsync(IEnumerable<string> to, IEnumerable<string> body, string sarshomare, string consumer);
     }
-
-    public interface IEmailService
-    {
-        Task<ServiceResult> SendAsync(string title, string to, string body);
-
-        Task<ServiceResult> SendAsync(string title, IEnumerable<string> to, IEnumerable<string> cc,
-            string body,
-            IEnumerable<string> attachmentFileAddress);
-    }
 }
