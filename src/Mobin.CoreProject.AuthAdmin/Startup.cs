@@ -39,7 +39,7 @@ namespace Mobin.CoreProject.AuthAdmin
             services.ConfigDatabase(Configuration);
             services.AddAlamut();
             services.AddRepositories();
-            services.AddIdentity(isWindowsAuthentication: false);
+            services.RegisterIdentity(isWindowsAuthentication: false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

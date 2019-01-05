@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Admin.Extensions;
 using Mobin.CoreProject.Core.DTOs.Forest;
@@ -7,6 +8,7 @@ using Mobin.CoreProject.Core.SearchCriteria.Forest;
 using Mobin.CoreProject.Core.ServiceContracts;
 using Mobin.CoreProject.Core.SSOT;
 using Mobin.CoreProject.Core.ViewModels.Forest;
+using Mobin.CoreProject.CrossCutting.Notification.Services;
 using Mobin.CoreProject.CrossCutting.Security.Helper;
 
 namespace Mobin.CoreProject.Admin.Controllers
@@ -14,10 +16,16 @@ namespace Mobin.CoreProject.Admin.Controllers
     public class ForestController : Controller
     {
         private readonly IForestService _forestService;
+        private readonly ISmsService _smsService;
+        private readonly IEmailService _emailService;
 
-        public ForestController(IForestService forestService)
+        public ForestController(IForestService forestService, 
+            ISmsService smsService, 
+            IEmailService emailService)
         {
             _forestService = forestService;
+            _smsService = smsService;
+            _emailService = emailService;
         }
 
         public IActionResult Index(ForestGetDataSC criteria, int page = 1, int size = 10)
@@ -38,6 +46,27 @@ namespace Mobin.CoreProject.Admin.Controllers
         {
             var employeeId = User.GetClaim(Claims.EmployeeId.ToString());
             return Json(employeeId);
+        }
+
+        public async Task<IActionResult> SendSms()
+        {
+            var result = await _smsService.SendAsync(
+                "09121063717",
+                "http://localhost:5407/forest/sendsms",
+                "50004001575",
+                "Test");
+
+            return Json(result);
+        }
+
+        public async Task<IActionResult> SendEmail()
+        {
+            var result = await _emailService.SendAsync(
+                "test Client.SDK",
+                "m.dashtinejad@mobinnet.net",
+                "http://localhost:5407/forest/sendEmail");
+
+            return Json(result);
         }
 
 

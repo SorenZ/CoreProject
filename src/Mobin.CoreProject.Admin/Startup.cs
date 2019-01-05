@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mobin.CoreProject.Config;
 using Mobin.CoreProject.Core.SSOT;
+using Mobin.CoreProject.CrossCutting.Notification;
 using Newtonsoft.Json.Serialization;
 
 namespace Mobin.CoreProject.Admin
@@ -78,7 +79,8 @@ namespace Mobin.CoreProject.Admin
             services.AddSingleton(fileConfig);
 
             
-            services.AddIdentity(isWindowsAuthentication: true);
+            services.RegisterIdentity(isWindowsAuthentication: true);
+            services.RegisterNotifier(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

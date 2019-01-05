@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +22,8 @@ namespace Mobin.CoreProject.CrossCutting.Security
         public static void RegisterCustomClaims(this IServiceCollection services) =>
             services.AddScoped<IClaimsTransformation, AppClaimsTransformer>();
 
-        public static void AddIdentity<TContext>(this IServiceCollection services, bool isWindowsAuthentication = true) where TContext : DbContext
+        public static void RegisterIdentity<TDbContext>(this IServiceCollection services, bool isWindowsAuthentication) 
+            where TDbContext : DbContext
         {
             services
                 .AddIdentity<AppUser, AppRole>()
@@ -29,7 +31,7 @@ namespace Mobin.CoreProject.CrossCutting.Security
                 //.AddDefaultIdentity<AppUser>()
                 //.AddRoleManager<RoleManager<IdentityRole>>()
                 //.AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<TContext>();
+                .AddEntityFrameworkStores<TDbContext>();
 
 
 
