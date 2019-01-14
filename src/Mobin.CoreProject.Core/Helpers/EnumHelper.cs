@@ -34,6 +34,25 @@ namespace Mobin.CoreProject.Core.Helpers
             }
         }
 
+        public static string GetDisplayPrompt(this Enum enumValue)
+        {
+            if (enumValue == null) return "";
+
+            try
+            {
+                var model = enumValue.GetType()
+                    .GetMember(enumValue.ToString())
+                    .First()
+                    .GetCustomAttribute<DisplayAttribute>();
+
+                return model?.Prompt;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public static List<EnumModel> EnumToList(Type enumType)
         {
             var items = new List<EnumModel>();
@@ -44,6 +63,7 @@ namespace Mobin.CoreProject.Core.Helpers
                            {
                                Value = Convert.ToInt32(item),
                                DisplayName = GetDisplayName(item),
+                               Prompt = GetDisplayPrompt(item),
                                Name = item.ToString()
                            });
 
@@ -55,6 +75,7 @@ namespace Mobin.CoreProject.Core.Helpers
             public int Value { get; set; }
             public string Name { get; set; }
             public string DisplayName { get; set; }
+            public string Prompt { get; set; }
         }
     }
 }

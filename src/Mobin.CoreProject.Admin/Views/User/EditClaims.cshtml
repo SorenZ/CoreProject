@@ -29,7 +29,6 @@ Title = "Claims",
 }
 
 @Html.Raw(RegateText.Init())
-@Html.Raw(RegateDropdown.Init())
 
 
 <div class="content">
@@ -40,41 +39,19 @@ Title = "Claims",
             <table class="table table-bordered table-striped table-vcenter">
 
                 <tbody>
-                @{
-                    var i = 0;
-                }
-
-                @*
-                        @foreach (var claim in Model.AllClaims)
+                <tr>
+                    <td width="300">
+                        <select class="form-control" name="claimType">
+                            @foreach (var claim in Model.AllClaims)
                             {
-                                <tr>
-                                    <td width="300">
-                                        <div>
-                                            @claim.DisplayName
-                                        </div>
-                                        <div>@claim.Name</div>
-                                    </td>
-                                    <td>
-                                        <input type="hidden" name="Claims[@i].Key" value="@claim.Name" />
-                                        @Html.Raw(RegateText.Build($"Claims[{i}].Value", Model.UserClaims.FirstOrDefault(q => q.Type == claim.Name)?.Value))
-                                    </td>
-                                </tr>
-                                i++;
+                                <option value="@claim.Name">@claim.DisplayName</option>
                             }
-                    *@
-                
-                @foreach (var claim in Model.UserClaims)
-                {
-                    <tr>
-                        <td width="300">
-                            @Html.Raw(RegateDropdown.Build<Claims>($"Claims[{i}].Key", isRequired: true))
-                        </td>
-                        <td>
-                            @Html.Raw(RegateText.Build($"Claims[{i}].Value", claim.Value))
-                        </td>
-                    </tr>
-                    i++;
-                }
+                        </select>
+                    </td>
+                    <td>
+                        @Html.Raw(RegateText.Build("claimValue", isRequired: true))
+                    </td>
+                </tr>
                 </tbody>
             </table>
 

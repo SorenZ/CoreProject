@@ -123,20 +123,14 @@ namespace Mobin.CoreProject.Admin.Controllers
                 AllClaims = allClaims,
             };
 
-            // return Json(model);
-
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditClaims(int id, List<KeyValuePair<string, string>> claims, bool isAjax = false)
+        public async Task<IActionResult> EditClaims(int id, string claimType, string claimValue)
         {
-            // return Json(claims);
-
-            var result = await _userService.UpdateClaims(id, claims);
-
-            if (isAjax) return Json(result);
+            var result = await _userService.SetClaimAsync(id, claimType, claimValue);
 
             TempData.AddResult(result);
             return RedirectToAction(nameof(EditClaims), new { id });

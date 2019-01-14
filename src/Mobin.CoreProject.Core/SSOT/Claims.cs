@@ -14,7 +14,10 @@ namespace Mobin.CoreProject.Core.SSOT
         EmployeeId,
 
 
-        [Display(Name = "پروژه")]
+        [Display(
+            Name = "پروژه",
+            Prompt = "/helloWorld"
+        )]
         ProjectId,
     }
 }
