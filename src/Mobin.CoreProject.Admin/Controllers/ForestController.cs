@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.Admin.Extensions;
+using Mobin.CoreProject.Admin.Helper;
 using Mobin.CoreProject.Core.DTOs.Forest;
 using Mobin.CoreProject.Core.SearchCriteria.Forest;
 using Mobin.CoreProject.Core.ServiceContracts;
 using Mobin.CoreProject.Core.SSOT;
 using Mobin.CoreProject.Core.ViewModels.Forest;
 using Mobin.CoreProject.CrossCutting.Notification.Services;
+using Mobin.CoreProject.CrossCutting.Security.ActionFilters;
 using Mobin.CoreProject.CrossCutting.Security.Helper;
 
 namespace Mobin.CoreProject.Admin.Controllers
@@ -122,6 +125,38 @@ namespace Mobin.CoreProject.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
         #endregion
+
+        //[HasClaim(Claims.HotelId,"hotelId")]
+        [HasClaim(Claims.HotelId)]
+        public IActionResult HasClaim(int id /*int hotelId*/)
+        {
+            var list = User.Claims
+                .Select(s => new
+                {
+                    s.Type,
+                    s.Value
+                })
+                .ToList();
+                
+
+            return Json(list);
+
+        }
+
+        [HasPermission(Permissions.Forest)]
+        public IActionResult HasPermission()
+        {
+            var list = User.Claims
+                .Select(s => new
+                {
+                    s.Type,
+                    s.Value
+                })
+                .ToList();
+                
+
+            return Json(list);
+        }
     }
 
 

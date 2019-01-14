@@ -8,7 +8,7 @@ namespace Mobin.CoreProject.Core.SSOT
     /// <summary>
     /// [provides permissions of system]
     /// </summary>
-    public enum Permissions
+    public enum Permissions 
     {
         [Display(Name = "داشبورد")]
         Dashboard,
