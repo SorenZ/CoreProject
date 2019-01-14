@@ -14,8 +14,8 @@ namespace Mobin.CoreProject.Core.SSOT
         EmployeeId,
 
 
-        [Display(Name = "پروژه")]
-        ProjectId,
+        [Display(Name = "هتل")]
+        HotelId,
     }
 
     
