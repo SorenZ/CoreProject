@@ -12,5 +12,8 @@ namespace Mobin.CoreProject.Core.SSOT
     {
         [Display(Name = "کد پرسنلی")]
         EmployeeId,
+
+        [Display(Name = "کد هتل")]
+        HotelId,
     }
 }
