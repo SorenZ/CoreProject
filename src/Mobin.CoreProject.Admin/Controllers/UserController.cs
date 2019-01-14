@@ -10,6 +10,7 @@ using Mobin.CoreProject.Core.Helpers;
 using Mobin.CoreProject.Core.SSOT;
 using Mobin.CoreProject.CrossCutting.Security.Models;
 using Mobin.CoreProject.CrossCutting.Security.Services;
+using Newtonsoft.Json;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
@@ -122,6 +123,8 @@ namespace Mobin.CoreProject.Admin.Controllers
                 AllClaims = allClaims,
             };
 
+            // return Json(model);
+
             return View(model);
         }
 
@@ -129,13 +132,25 @@ namespace Mobin.CoreProject.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditClaims(int id, List<KeyValuePair<string, string>> claims, bool isAjax = false)
         {
+            // return Json(claims);
+
             var result = await _userService.UpdateClaims(id, claims);
-            
+
             if (isAjax) return Json(result);
 
             TempData.AddResult(result);
             return RedirectToAction(nameof(EditClaims), new { id });
-            
+
+        }
+
+        public async Task<IActionResult> DeleteSingleClaim(int id, string claimType, string claimValue, bool isAjax = false)
+        {
+            var result = await _userService.RemoveClaimAsync(id, claimType, claimValue);
+
+            if (isAjax) return Json(result);
+
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(Index));
         }
         #endregion
     }

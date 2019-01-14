@@ -29,36 +29,52 @@ Title = "Claims",
 }
 
 @Html.Raw(RegateText.Init())
+@Html.Raw(RegateDropdown.Init())
 
 
 <div class="content">
 
 
-    <form asp-action="EditClaims" asp-route-id="@Model.User.Id" data-ajax>
+    <form asp-action="EditClaims" asp-route-id="@Model.User.Id">
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-vcenter">
 
                 <tbody>
-                    @{
-                        var i = 0;
-                    }
+                @{
+                    var i = 0;
+                }
 
-                    @foreach (var claim in Model.AllClaims)
-                    {
-                        <tr>
-                            <td width="300">
-                                <div>
-                                    @claim.DisplayName
-                                </div>
-                                <div>@claim.Name</div>
-                            </td>
-                            <td> 
-                                <input type="hidden" name="Claims[@i].Key" value="@claim.Name" />
-                                @Html.Raw(RegateText.Build($"Claims[{i}].Value", Model.UserClaims.FirstOrDefault(q => q.Type == claim.Name)?.Value))
-                            </td>
-                        </tr>
-                        i++;
-                    }
+                @*
+                        @foreach (var claim in Model.AllClaims)
+                            {
+                                <tr>
+                                    <td width="300">
+                                        <div>
+                                            @claim.DisplayName
+                                        </div>
+                                        <div>@claim.Name</div>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" name="Claims[@i].Key" value="@claim.Name" />
+                                        @Html.Raw(RegateText.Build($"Claims[{i}].Value", Model.UserClaims.FirstOrDefault(q => q.Type == claim.Name)?.Value))
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                    *@
+                
+                @foreach (var claim in Model.UserClaims)
+                {
+                    <tr>
+                        <td width="300">
+                            @Html.Raw(RegateDropdown.Build<Claims>($"Claims[{i}].Key", isRequired: true))
+                        </td>
+                        <td>
+                            @Html.Raw(RegateText.Build($"Claims[{i}].Value", claim.Value))
+                        </td>
+                    </tr>
+                    i++;
+                }
                 </tbody>
             </table>
 
@@ -70,4 +86,28 @@ Title = "Claims",
         </div>
 
     </form>
+    
+    
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-vcenter">
+            <tbody>
+            @foreach (var claim in Model.UserClaims)
+            {
+                <tr>
+                    <td width="300">
+                        @claim.Type
+                    </td>
+                    <td>
+                        @claim.Value
+                    </td>
+                    <td class="text-center fa-lg" style="white-space: nowrap;" width="1">
+                        <a asp-action="DeleteSingleClaim" asp-route-id="@Model.User.Id" asp-route-claimType="@claim.Type" asp-route-claimValue="@claim.Value" data-role="delete" data-toggle="tooltip" title="حذف">
+                            <i class="si si-close text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
 </div>
