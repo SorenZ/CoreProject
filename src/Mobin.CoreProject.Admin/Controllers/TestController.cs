@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Mobin.CoreProject.Core.SSOT;
+using Mobin.CoreProject.CrossCutting.Security.Helper;
 
 namespace Mobin.CoreProject.Admin.Controllers
 {
@@ -15,6 +17,13 @@ namespace Mobin.CoreProject.Admin.Controllers
         public IActionResult FileUpload(string file)
         {
             return Content(file);
+        }
+
+
+        public IActionResult GetClaim()
+        {
+            var claim = User.GetClaimInt(Claims.EmployeeId);
+            return Json(new { claim });
         }
     }
 }
