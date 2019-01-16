@@ -1,4 +1,4 @@
-﻿namespace Mobin.CoreProject.Core.Extensions.StringExtensions
+﻿namespace Mobin.CoreProject.CrossCutting.Security.Extensions
 {
     public static partial class StringExtensions
     {

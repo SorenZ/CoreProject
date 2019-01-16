@@ -1,5 +1,5 @@
 ﻿using System;
-using Mobin.CoreProject.Core.Extensions.StringExtensions;
+using Mobin.CoreProject.CrossCutting.Security.Extensions;
 using Xunit;
 
 namespace Mobin.CoreProject.Tests
