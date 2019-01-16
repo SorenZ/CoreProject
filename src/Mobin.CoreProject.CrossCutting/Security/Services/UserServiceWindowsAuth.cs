@@ -146,6 +146,22 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
                 ?.Value;
         }
 
+        public async Task<List<string>> GetClaimValues(int userId, object type)
+        {
+            var claimType = type?.ToString() 
+                            ?? throw new ArgumentNullException(nameof(type));
+
+            var user = await _userManager.FindByIdAsync(userId.ToString())
+                       ?? throw new ArgumentNullException($"There is no user with userId {userId}");
+
+            var claims = await _userManager.GetClaimsAsync(user);
+
+            return claims
+                .Where(q => q.Type == claimType)
+                .Select(s => s.Value)
+                .ToList();
+        }
+
         public async Task<ServiceResult> RemoveClaimAsync(int userId, string type, string value)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());

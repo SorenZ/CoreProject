@@ -64,6 +64,11 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             throw new System.NotImplementedException();
         }
 
+        public Task<List<string>> GetClaimValues(int userId, object type)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task<ServiceResult> RemoveClaimAsync(int userId, string type, string value)
         {
             throw new System.NotImplementedException();
