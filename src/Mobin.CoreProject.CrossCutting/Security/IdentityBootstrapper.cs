@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Mobin.CoreProject.CrossCutting.Security.Helper;
@@ -15,13 +12,6 @@ namespace Mobin.CoreProject.CrossCutting.Security
     public static class IdentityBootstrapper
     {
         
-        /// <summary>
-        /// use it just for windows authentication 
-        /// </summary>
-        /// <param name="services"></param>
-        public static void RegisterCustomClaims(this IServiceCollection services) =>
-            services.AddScoped<IClaimsTransformation, AppClaimsTransformer>();
-
         public static void RegisterIdentity<TDbContext>(this IServiceCollection services, bool isWindowsAuthentication) 
             where TDbContext : DbContext
         {
@@ -70,15 +60,19 @@ namespace Mobin.CoreProject.CrossCutting.Security
             // services.AddSingleton<IEmailSender, EmailSender>();
 
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IUserService, UserService>();
 
             if (isWindowsAuthentication)
-            {
-                services.RegisterCustomClaims();
-                services.AddScoped<IUserService, UserServiceWindowsAuth>();
-            }
-            else
-                { services.AddScoped<IUserService, UserServiceFormAuth>(); }
+                { services.RegisterCustomClaims(); }
         }
+
+        /// <summary>
+        /// use it just for windows authentication 
+        /// </summary>
+        /// <param name="services"></param>
+        public static void RegisterCustomClaims(this IServiceCollection services) =>
+            services.AddScoped<IClaimsTransformation, AppClaimsTransformer>();
+
         
     }
 

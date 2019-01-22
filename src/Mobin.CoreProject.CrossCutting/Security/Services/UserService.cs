@@ -10,7 +10,7 @@ using Mobin.CoreProject.CrossCutting.Security.Models;
 
 namespace Mobin.CoreProject.CrossCutting.Security.Services
 {
-    public class UserServiceWindowsAuth : IUserService
+    public class UserService : IUserService
     {
         // TODO : put it in config
         private const string DomainName = "MOBINNET";
@@ -19,7 +19,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
 
-        public UserServiceWindowsAuth(UserManager<AppUser> userManager, 
+        public UserService(UserManager<AppUser> userManager, 
             RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
