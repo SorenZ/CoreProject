@@ -148,7 +148,9 @@ namespace Mobin.CoreProject.Admin.Controllers
         }
         #endregion
 
-        public  IActionResult CreatePublicUser()
+        #region CreatePublicUser
+
+        public IActionResult CreatePublicUser()
         {
             return View();
         }
@@ -161,6 +163,24 @@ namespace Mobin.CoreProject.Admin.Controllers
             TempData.AddResult(result);
             return RedirectToAction(nameof(Index));
         }
+        #endregion
+
+        #region EditPublicUsername
+        public async Task<IActionResult> EditPublicUsername(int id)
+        {
+            var user = await _userService.FindByIdAsync(id);
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditPublicUsername(int id, string newUsername, string newPassword)
+        {
+            var result = await _userService.RenameUsername(id, newUsername);
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(Index));
+        }
+        #endregion
 
     }
 
