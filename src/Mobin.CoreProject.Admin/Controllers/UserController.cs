@@ -147,6 +147,21 @@ namespace Mobin.CoreProject.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
         #endregion
+
+        public  IActionResult CreatePublicUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreatePublicUser(string userName, string password)
+        {
+            var result = await _userService.CreateAsync(userName);
+            TempData.AddResult(result);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 
 
