@@ -4,7 +4,7 @@
 @model AppUser
 
 @{
-    ViewData["Title"] = "ویرایش نام سازمانی: " + Model.UserName.NormalizeUsername();
+    ViewData["Title"] = "ویرایش نام کاربری: " + Model.UserName.NormalizeUsername();
 
 }
 
@@ -22,7 +22,7 @@ Link = Url.Action("Index"),
 
 new BreadCrumbLink
 {
-Title = "ویرایش نام سازمانی",
+Title = "ویرایش نام کاربری",
 },
 }
     };
@@ -42,14 +42,14 @@ Title = "ویرایش نام سازمانی",
                         <div dir="ltr">
                             @Html.Raw(RegateText.Build("NewUsername", Model.UserName.NormalizeUsername(), isRequired: true))
                         </div>
+                    </div>
+                </div>
 
-                        <div class="alert alert-info mt-2">
-                            نام سازمانی را به سه صورت زیر می‌توانید وارد کنید:
-                            <ul>
-                                <li>m.dashtinejad</li>
-                                <li>MOBINNET\m.dashtinejad</li>
-                                <li>m.dashtinejad@mobinnet.net</li>
-                            </ul>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">رمز ورود</label>
+                    <div class="col-sm-9">
+                        <div dir="ltr">
+                            @Html.Raw(RegateText.Build("NewPassword", Model.UserName.NormalizeUsername(), isRequired: true))
                         </div>
                     </div>
                 </div>
