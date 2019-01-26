@@ -105,7 +105,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         public IActionResult Edit(int id, ForestEditVM vm, bool isAjax = false)
         {
             var result = _forestService.Update(id, vm);
-
+            
             if (isAjax) return Json(result);
 
             TempData.AddResult(result);
@@ -143,7 +143,7 @@ namespace Mobin.CoreProject.Admin.Controllers
 
         }
 
-        [HasPermission(Permissions.Forest)]
+        [HasPermission(Permissions.Dashboard)]
         public IActionResult HasPermission()
         {
             var list = User.Claims

@@ -33,7 +33,7 @@ namespace Mobin.CoreProject.AuthAdmin.Controllers
             //var user = new AppUser {UserName = $"{DomainName}\\{userName}", Email = $"{userName}@{DomainEMail}"};
             //var result = await _userManager.CreateAsync(user);
 
-            var result = await _userService.CreateAsync(userName);
+            var result = await _userService.CreateDomainUserAsync(userName);
 
             return Json(result);
         }

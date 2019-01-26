@@ -26,8 +26,10 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             _roleManager = roleManager;
         }
 
-        public async Task<ServiceResult> CreateAsync(string username)
+        public async Task<ServiceResult<AppUser>> CreateDomainUserAsync(string username)
         {
+            // TODO : [Soren] -> check user name with DS
+
             // clean up username
             username = username.ToLower()
                 .Replace(DomainName.ToLower() + "\\", "")
@@ -36,7 +38,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             var user = new AppUser {UserName = $"{DomainName}\\{username}", Email = $"{username}@{DomainEMail}"};
             var result = await _userManager.CreateAsync(user);
 
-            return result.AsServiceResult();
+            return result.AsServiceResult<AppUser>(user);
         }
 
         public async Task<ServiceResult> DeleteAsync(int userId)

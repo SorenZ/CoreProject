@@ -43,7 +43,7 @@ namespace Mobin.CoreProject.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string userName)
         {
-            var result = await _userService.CreateAsync(userName);
+            var result = await _userService.CreateDomainUserAsync(userName);
             TempData.AddResult(result);
             return RedirectToAction(nameof(Index));
         }
