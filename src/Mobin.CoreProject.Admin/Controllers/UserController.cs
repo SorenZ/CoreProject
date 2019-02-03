@@ -159,8 +159,10 @@ namespace Mobin.CoreProject.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePublicUser(string userName, string password)
         {
-            var result = await _userService.CreateDomainUserAsync(userName);
+            var result = await _userService.CreatePublicUserAsync(userName, password);
+
             TempData.AddResult(result);
+
             return RedirectToAction(nameof(Index));
         }
         #endregion

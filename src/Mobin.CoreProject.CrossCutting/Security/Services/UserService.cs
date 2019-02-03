@@ -41,6 +41,20 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             return result.AsServiceResult<AppUser>(user);
         }
 
+        public async Task<ServiceResult<AppUser>> CreatePublicUserAsync(string username, string password)
+        {
+
+            var user = new AppUser
+            {
+                UserName = username,
+                Email = username
+            };
+
+            var result = await _userManager.CreateAsync(user, password);
+
+            return result.AsServiceResult<AppUser>(user);
+        }
+
         public async Task<ServiceResult> DeleteAsync(int userId)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());

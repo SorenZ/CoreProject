@@ -8,7 +8,20 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
 {
     public interface IUserService
     {
+        /// <summary>
+        /// for windows authentication app
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         Task<ServiceResult<AppUser>> CreateDomainUserAsync(string username);
+        
+        /// <summary>
+        /// for form authentication app
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        Task<ServiceResult<AppUser>> CreatePublicUserAsync(string username, string password);
 
         Task<ServiceResult> DeleteAsync(int userId);
         Task<ServiceResult> DeleteAsync(string username);

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Mobin.CoreProject.CrossCutting.Security.Helper;
 using Mobin.CoreProject.CrossCutting.Security.Models;
 using Mobin.CoreProject.CrossCutting.Security.Services;
+using Mobin.CoreProject.CrossCutting.Security.SSOT;
 
 namespace Mobin.CoreProject.CrossCutting.Security
 {
@@ -63,7 +64,10 @@ namespace Mobin.CoreProject.CrossCutting.Security
             services.AddScoped<IUserService, UserService>();
 
             if (isWindowsAuthentication)
-                { services.RegisterCustomClaims(); }
+            {
+                IdentityConfig.IsWindowsAuth = true;
+                services.RegisterCustomClaims();
+            }
         }
 
         /// <summary>

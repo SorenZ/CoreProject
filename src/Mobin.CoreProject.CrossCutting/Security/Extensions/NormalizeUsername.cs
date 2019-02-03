@@ -1,13 +1,14 @@
-﻿namespace Mobin.CoreProject.CrossCutting.Security.Extensions
-{
-    public static partial class StringExtensions
-    {
-        public static string NormalizeUsername(this string str)
-        {
-            str = str.ToLower().Replace("mobinnet\\", "");
-            str = str.ToLower().Replace("@mobinnet.net", "");
+﻿using Mobin.CoreProject.CrossCutting.Security.SSOT;
 
-            return str;
-        }
+namespace Mobin.CoreProject.CrossCutting.Security.Extensions
+{
+    public static class StringExtensions
+    {
+        public static string NormalizeUsername(this string str) =>
+            IdentityConfig.IsWindowsAuth
+                ? str.ToLower()
+                    .Replace("mobinnet\\", "")
+                    .Replace("@mobinnet.net", "")
+                : str;
     }
 }
