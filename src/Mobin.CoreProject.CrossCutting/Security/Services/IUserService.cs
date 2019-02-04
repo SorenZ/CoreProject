@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Alamut.Data.Structure;
+using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.CrossCutting.Security.Models;
 
 namespace Mobin.CoreProject.CrossCutting.Security.Services
@@ -14,14 +15,17 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
         /// <param name="username"></param>
         /// <returns></returns>
         Task<ServiceResult<AppUser>> CreateDomainUserAsync(string username);
-        
+
         /// <summary>
         /// for form authentication app
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
+        /// <param name="email"></param>
+        /// <param name="emailConformationCallbackUrl"></param>
         /// <returns></returns>
-        Task<ServiceResult<AppUser>> CreatePublicUserAsync(string username, string password);
+        Task<ServiceResult<AppUser>> CreatePublicUserAsync(string username, string password, 
+            string email = null, string emailConformationCallbackUrl = null);
 
         Task<ServiceResult> DeleteAsync(int userId);
         Task<ServiceResult> DeleteAsync(string username);

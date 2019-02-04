@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Alamut.Data.Structure;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 using Mobin.CoreProject.CrossCutting.Security.Helper;
 using Mobin.CoreProject.CrossCutting.Security.Models;
 
@@ -18,12 +21,15 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
 
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
+        private readonly IEmailSender _emailSender;
 
         public UserService(UserManager<AppUser> userManager, 
-            RoleManager<AppRole> roleManager)
+            RoleManager<AppRole> roleManager,
+            IEmailSender emailSender)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _emailSender = emailSender;
         }
 
         public async Task<ServiceResult<AppUser>> CreateDomainUserAsync(string username)
@@ -41,9 +47,9 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             return result.AsServiceResult<AppUser>(user);
         }
 
-        public async Task<ServiceResult<AppUser>> CreatePublicUserAsync(string username, string password)
+        public async Task<ServiceResult<AppUser>> CreatePublicUserAsync(string username, string password,
+            string email = null, string emailConformationCallbackUrl = null)
         {
-
             var user = new AppUser
             {
                 UserName = username,
@@ -51,6 +57,16 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             };
 
             var result = await _userManager.CreateAsync(user, password);
+            
+            if (result.Succeeded && email != null && emailConformationCallbackUrl != null)
+            {
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var callbackUrl = emailConformationCallbackUrl + $"?userId={user.Id}&code={code}";
+                    
+                await _emailSender.SendEmailAsync(email, "Confirm your email",
+                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+            }
+
 
             return result.AsServiceResult<AppUser>(user);
         }
