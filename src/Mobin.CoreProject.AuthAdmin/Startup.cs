@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mobin.CoreProject.Config;
+using Mobin.CoreProject.CrossCutting.Notification;
 
 namespace Mobin.CoreProject.AuthAdmin
 {
@@ -40,6 +41,7 @@ namespace Mobin.CoreProject.AuthAdmin
             services.AddAlamut();
             services.AddRepositories();
             services.RegisterIdentity(isWindowsAuthentication: false);
+            services.RegisterNotifier(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

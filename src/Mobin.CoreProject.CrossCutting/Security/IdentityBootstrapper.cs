@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Mobin.CoreProject.CrossCutting.Security.Helper;
@@ -45,6 +46,7 @@ namespace Mobin.CoreProject.CrossCutting.Security
                 options.User.AllowedUserNameCharacters =
                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+\\";
                 options.User.RequireUniqueEmail = false;
+                options.SignIn.RequireConfirmedEmail = true;
             });
 
             services.ConfigureApplicationCookie(options =>
@@ -62,6 +64,7 @@ namespace Mobin.CoreProject.CrossCutting.Security
 
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmailSender, MessageSender>();
 
             if (isWindowsAuthentication)
             {
@@ -79,12 +82,4 @@ namespace Mobin.CoreProject.CrossCutting.Security
 
         
     }
-
-    //public class EmailSender : IEmailSender
-    //{
-    //    public Task SendEmailAsync(string email, string subject, string message)
-    //    {
-    //        return Task.CompletedTask;
-    //    }
-    //}
 }
