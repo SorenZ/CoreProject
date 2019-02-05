@@ -17,20 +17,19 @@
                     <p class="text-uppercase font-w700 font-size-sm text-muted">Sign In</p>
                 </div>
                 <!-- END Header -->
-                <!-- Sign In Form -->
-                <!-- jQuery Validation (.js-validation-signin class is initialized in js/pages/op_auth_signin.min.js which was auto compiled from _es6/pages/op_auth_signin.js) -->
-                <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                <!-- Sign In Form --> 
                 <div class="row no-gutters justify-content-center">
                     <div class="col-sm-8 col-xl-6">
                         <form class="js-validation-signin" method="post">
-                            <div asp-validation-summary="All" class="text-danger"></div>
+
+                            @*<div asp-validation-summary="All" class="text-danger"></div>*@
                             @TempData["error"]
 
                             <div class="py-3">
                                 <div class="form-group">
-                                    <input type="text" asp-for="Input.Email" class="form-control form-control-lg form-control-alt"  name="login-username" placeholder="Username">
+                                    <input type="text" asp-for="Input.Email" class="form-control form-control-lg form-control-alt" name="login-username" placeholder="Username">
                                     <span asp-validation-for="Input.Email" class="text-danger"></span>
-                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <input type="password" asp-for="Input.Password" class="form-control form-control-lg form-control-alt" placeholder="Password">
                                     <span asp-validation-for="Input.Password" class="text-danger"></span>
@@ -50,7 +49,6 @@
                                     <a asp-page="./ForgotPassword" class="btn btn-sm btn-light d-block d-lg-inline-block mb-1">
                                         <i class="fa fa-exclamation-triangle text-muted mr-1"></i> فراموشی رمز عبور
                                     </a>
-                                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                                 </p>
                             </div>
                         </form>
