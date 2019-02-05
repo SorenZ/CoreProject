@@ -159,11 +159,16 @@ namespace Mobin.CoreProject.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePublicUser(string userName, string password)
         {
-            var url = Url.Action("ConfirmEmail", "Account", null, Request.Scheme);
+            var callbackUrl = Url.Page(
+                "/Account/ConfirmEmail",
+                pageHandler: null,
+                values: null,
+                protocol: Request.Scheme);
+            
 
             var result = await _userService.CreatePublicUserAsync(userName, password,
                 userName, // optional
-                url); // optional
+                callbackUrl); // optional
 
             TempData.AddResult(result);
 

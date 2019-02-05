@@ -57,12 +57,12 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
             };
 
             var result = await _userManager.CreateAsync(user, password);
-            
+
             if (result.Succeeded && email != null && emailConformationCallbackUrl != null)
             {
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 var callbackUrl = emailConformationCallbackUrl + $"?userId={user.Id}&code={code}";
-                    
+
                 await _emailSender.SendEmailAsync(email, "Confirm your email",
                     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
             }
