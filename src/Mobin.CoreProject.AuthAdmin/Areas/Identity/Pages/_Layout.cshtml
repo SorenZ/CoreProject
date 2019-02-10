@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>@ViewData["Title"]</title>
+
+    <script src="~/dashmix/js/core/jquery.min.js"></script>
+    <script src="~/dashmix/js/core/bootstrap.bundle.min.js"></script>
+    <script src="~/dashmix/js/core/simplebar.min.js"></script>
+    <script src="~/dashmix/js/core/jquery-scrollLock.min.js"></script>
+    <script src="~/dashmix/js/core/jquery.appear.min.js"></script>
+    <script src="~/dashmix/js/core/js.cookie.min.js"></script>
+
+    <script src="~/dashmix/js/plugins/vue/vue.js"></script>
+
+    <script src="~/dashmix/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+    <script src="~/dashmix/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+    <link rel="stylesheet" href="~/dashmix/js/plugins/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="~/dashmix/fonts/IRANSans5/WebFonts/css/fontiran.css" />
+
+    <link rel="stylesheet" id="css-main" href="~/dashmix/css/dashmix.min.rtl.css">
+
+    <link rel="stylesheet" href="~/dashmix/css/dashmix.overwrite.css">
+
+    <script src="~/dashmix/js/dashmix.overwrite.js"></script>
+</head>
+<body>
+    <div class="page-body">
+        <!-- Your Content Goes Here -->
+        @RenderBody()
+    </div>
+
+    @RenderSection("Scripts", required: false)
+
+     <script src="~/dashmix/js/dashmix.app.min.js"></script>
+</body>
+</html>
