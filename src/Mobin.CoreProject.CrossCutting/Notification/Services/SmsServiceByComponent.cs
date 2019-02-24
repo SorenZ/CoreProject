@@ -14,14 +14,15 @@ namespace Mobin.CoreProject.CrossCutting.Notification.Services
             _sms = sms;
         }
 
-        public async Task<ServiceResult> SendAsync(string to, string body, string consumer) =>
-            await _sms.Send(to, body, consumer);
+        public async Task<ServiceResult> SendAsync(string to, string body) =>
+            await _sms.Send(to, body);
 
-        public async Task<ServiceResult> SendAsync(string to, string body, string sarshomare, string consumer) =>
+        public async Task<ServiceResult> SendAsync(string to, string body, string sarshomare = null, string consumer = null) =>
             await _sms.Send(to, body, sarshomare, consumer);
 
-        public async Task<ServiceResult> SendAsync(IEnumerable<string> to, IEnumerable<string> body, string sarshomare,
-            string consumer) =>
+        public async Task<ServiceResult> SendAsync(IEnumerable<string> to, IEnumerable<string> body, 
+            string sarshomare = null,
+            string consumer = null) =>
             await _sms.Send(to, body, sarshomare, consumer);
 
     }

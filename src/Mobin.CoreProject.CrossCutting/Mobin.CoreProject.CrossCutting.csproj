@@ -14,7 +14,7 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="2.2.0" />
     <PackageReference Include="Microsoft.Aspnetcore.Identity.Entityframeworkcore" Version="2.2.0" />
     <PackageReference Include="Microsoft.Aspnetcore.Identity.Ui" Version="2.2.0" />
-    <PackageReference Include="Mobinnet.Notifier" Version="0.0.2" />
+    <PackageReference Include="Mobinnet.Notifier" Version="0.0.3" />
   </ItemGroup>
 
 </Project>

@@ -6,10 +6,10 @@ namespace Mobin.CoreProject.CrossCutting.Notification.Services
 {
     public interface ISmsService
     {
-        Task<ServiceResult> SendAsync(string to, string body, string consumer);
+        Task<ServiceResult> SendAsync(string to, string body);
 
-        Task<ServiceResult> SendAsync(string to, string body, string sarshomare, string consumer);
+        Task<ServiceResult> SendAsync(string to, string body, string sarshomare = null, string consumer= null);
 
-        Task<ServiceResult> SendAsync(IEnumerable<string> to, IEnumerable<string> body, string sarshomare, string consumer);
+        Task<ServiceResult> SendAsync(IEnumerable<string> to, IEnumerable<string> body, string sarshomare = null, string consumer = null);
     }
 }
