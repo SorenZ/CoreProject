@@ -1,52 +1,52 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "داشبورد";
 }
 
-
-<ul dir="rtl">
-    <li>
-        <a asp-controller="Role" asp-action="CreateRole">ایجاد رول جدید</a>
-    </li>
-    <li>
-        <a asp-controller="Role" asp-action="UpdateRoleTitle">به روز رسانی رول - عنوان</a>
-    </li>
-    <li>
-        <a asp-controller="Role" asp-action="UpdateRoleClaims">به روز رسانی دسترسی‌های رول - RoleClaims</a>
-    </li>
-    <li>
-        <a asp-controller="Role" asp-action="DeleteRole">حذف رول</a>
-    </li>
-</ul>
-
-<hr />
-
-<ul dir="rtl">
-    <li>
-        <a asp-controller="Role" asp-action="UpdateUserRoles">به روز رسانی رول‌های کاربر</a>
-    </li>
-</ul>
-
-<hr />
-
-
-<ul dir="rtl">
-    <li>
-        <a asp-controller="Role" asp-action="HasPermission">چک کردن دسترسی کاربر - HasPermission</a>
-    </li>
-</ul>
-
-<hr />
-
-<ul dir="rtl">
-    <li>
-        <a asp-controller="User" asp-action="CreateUser">ایجاد کاربر جدید</a>
-    </li>
-</ul>
-
-<hr />
-
-<ul dir="rtl">
-    <li>
-        <a asp-controller="User" asp-action="DeleteUser">حذف کاربر</a>
-    </li>
-</ul>
+<div class="content">
+    <div class="row">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="block block-bordered dashboard-box">
+                <div class="block-header block-header-default dashboard-box-header dashboard-box-header__red400">
+                    <img src="~/dashmix/media/modules/user-managment.svg" class="dashboard-box-header--avatar" />
+                    <div class="dashboard-box-header--info">
+                        <h3 class="dashboard-box-header--title">ماژول مدیریت کاربران</h3>
+                        <p class="dashboard-box-header--subtitle">متن تستی به عنوان ساب تایتل</p>
+                    </div>
+                </div>
+                <div class="block-content text-center">
+                    <ul class="nav-items push">
+                        <li>
+                            <a class="media py-2" href="javascript:void(0)">
+                                <div class="media-body">
+                                    <div class="font-size-sm text-muted">حذف و اضافه کاربران</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="media py-2" href="javascript:void(0)">
+                                <div class="media-body">
+                                    <div class="font-size-sm text-muted">مدیریت نقش ها</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="media py-2" href="javascript:void(0)">
+                                <div class="media-body">
+                                    <div class="font-size-sm text-muted">مدیریت دسترسی ها</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="media py-2" href="javascript:void(0)">
+                                <div class="media-body">
+                                    <div class="font-size-sm text-muted">مدیریت کد پرسنلی</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

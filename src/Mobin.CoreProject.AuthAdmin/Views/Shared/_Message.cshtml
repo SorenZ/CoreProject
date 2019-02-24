@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Html
+@using Newtonsoft.Json
+
+
+
+
+@{
+    <script>
+        (function () {
+            var result = @Html.Raw(JsonConvert.SerializeObject(TempData));
+
+            var fixedResult = {
+                Succeed: result['ServiceResult.Succeed'],
+                Message: result['ServiceResult.Message']
+            };
+
+            showBeautyMessage(fixedResult);
+        }());
+    </script>
+}

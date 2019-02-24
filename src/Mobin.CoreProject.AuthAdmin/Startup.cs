@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.IISIntegration;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mobin.CoreProject.Config;
+using Mobin.CoreProject.Core.SSOT;
 using Mobin.CoreProject.CrossCutting.Notification;
+using Newtonsoft.Json.Serialization;
 
 namespace Mobin.CoreProject.AuthAdmin
 {
@@ -34,16 +32,38 @@ namespace Mobin.CoreProject.AuthAdmin
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddMemoryCache();
+            services.AddSession(opt =>
+            {
+                opt.Cookie.IsEssential = true;
+            });
 
             services
-                .AddMvc()
+                .AddMvc(config =>
+                {
+                    var authPolicy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .Build();
+
+                    config.Filters.Add(new AuthorizeFilter(authPolicy));
+                })
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
+                .AddSessionStateTempDataProvider()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.ConfigDatabase(Configuration);
+            
             services.AddAlamut();
             services.AddRepositories();
+            services.AddAppServices();
+            
             services.RegisterIdentity(isWindowsAuthentication: false);
+            
             services.RegisterNotifier(Configuration);
+
+            var fileConfig = new FileConfig();
+            Configuration.Bind("FileRepository", fileConfig);
+            services.AddSingleton(fileConfig);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

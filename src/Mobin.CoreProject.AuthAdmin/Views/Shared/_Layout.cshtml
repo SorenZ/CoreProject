@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>@ViewData["Title"] - Mobin.CoreProject.AuthAdmin</title>
+    <title>@ViewData["Title"]</title>
 
     <script src="~/dashmix/js/core/jquery.min.js"></script>
     <script src="~/dashmix/js/core/bootstrap.bundle.min.js"></script>
@@ -28,33 +28,29 @@
 </head>
 <body dir="rtl">
 
-    <div id="page-container">
+    @await Html.PartialAsync("_Message")
+
+    <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-fixed page-header-dark main-content-narrow">
+
+        @await Html.PartialAsync("_Sidebar")
+
+        @await Html.PartialAsync("_Header")
+
         <!-- Main Container -->
-        <main id="main-container" >
+        <main id="main-container">
+
+            @await Html.PartialAsync("_BreadCrumb")
 
             @RenderBody()
-            <hr/>
-        </main>
-    </div>
-    <footer id="page-footer" class="bg-body-light">
-        <div class="content py-0">
-            <div class="row font-size-sm">
-                <div class="col-sm-6 order-sm-2 mb-1 mb-sm-0 text-center text-sm-right">
-                    Made with <i class="fa fa-heart text-danger"></i>
-                    by Mobinnet
-                    &copy;
-                    <span data-toggle="year-copy">2018</span>
-                </div>
-                <div class="col-sm-6 order-sm-1 text-center text-sm-left">
-                    کلیه حقوق این سامانه متعلق به مبین نت است.
-                </div>
-            </div>
-        </div>
-    </footer>
 
+        </main>
+        <!-- END Main Container -->
+
+        @await Html.PartialAsync("_Footer")
+
+    </div>
 
     <script src="~/dashmix/js/dashmix.app.min.js"></script>
 
-    @RenderSection("Scripts", required: false)
 </body>
 </html>

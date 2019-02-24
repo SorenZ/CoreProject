@@ -1,0 +1,38 @@
+﻿@using Mobin.CoreProject.AuthAdmin.Toolkit
+
+@{ BreadCrumb breadCrumb = ViewBag.BreadCrumb; }
+
+
+@if (breadCrumb != null)
+{
+    <div class="bg-body-light">
+        <div class="content content-full" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill font-size-h3 font-w400 mt-2 mb-0 mb-sm-2">@ViewData["Title"]</h1>
+
+                @if (breadCrumb.Links != null)
+                {
+                    <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            @foreach (var item in breadCrumb.Links)
+                            {
+                                <li class="breadcrumb-item @(string.IsNullOrWhiteSpace(item.Link) ? " active " : "")">
+                                    @if (string.IsNullOrWhiteSpace(item.Link))
+                                    {
+                                        <span>@item.Title</span>
+                                    }
+                                    else
+                                    {
+                                        <a href="@item.Link">@item.Title</a>
+                                    }
+                                </li>
+                            }
+                        </ol>
+                    </nav>
+                }
+                
+
+            </div>
+        </div>
+    </div>
+}

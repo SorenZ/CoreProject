@@ -1,0 +1,143 @@
+﻿@using System.Threading.Tasks
+@using DNTPersianUtils.Core
+@using Microsoft.AspNetCore.Hosting.Internal
+@using Microsoft.AspNetCore.Http.Extensions
+@model Alamut.Data.Paging.IPaginated
+
+@{ var count = 3; }
+
+@{
+    var querystringDictionary = Context.Request.Query.Keys.ToDictionary(k => k, v => Context.Request.Query[v]);
+    var qs = "";
+}
+
+@if (Model.TotalRowsCount != 0)
+{
+    <div class="_content">
+        <div class="block">
+            <div class="block-content text-center">
+
+
+                <nav style="display: inline-block;">
+                    <ul class="pagination">
+                        @{
+                            querystringDictionary["page"] = "1";
+                            qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                        }
+                        <li class="page-item"><a class="page-link" href="?@qs"><i class="fa fa-angle-double-right"></i></a></li>
+
+                        @{
+                            querystringDictionary["page"] = Model.PreviousPage.ToString();
+                            qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                        }
+                        <li class="page-item"><a class="page-link" href="?@qs"><i class="fa fa-angle-right"></i></a></li>
+
+
+                        @for (var i = Model.CurrentPage - count; i <= Model.CurrentPage - 1; i++)
+                        {
+                            if (i >= 1)
+                            {
+                                {
+                                    querystringDictionary["page"] = i.ToString();
+                                    qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                                }
+
+                                <li><a class="page-link" href="?@qs">@i.ToPersianNumbers()</a></li>
+                            }
+                        }
+
+
+                        @{
+                            querystringDictionary["page"] = Model.CurrentPage.ToString();
+                            qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                        }
+                        <li class="page-item active"><a class="page-link" href="?@qs" style="white-space: nowrap;">صفحه @Model.CurrentPage.ToPersianNumbers() از @Model.PageCount.ToPersianNumbers()</a></li>
+
+
+                        @for (var i = Model.CurrentPage + 1; i <= Model.CurrentPage + count; i++)
+                        {
+                            if (i <= Model.PageCount)
+                            {
+                                {
+                                    querystringDictionary["page"] = i.ToString();
+                                    qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                                }
+
+                                <li class="page-item"><a class="page-link" href="?@qs">@i.ToPersianNumbers()</a></li>
+                            }
+                        }
+
+
+                        @{
+                            querystringDictionary["page"] = Model.NextPage.ToString();
+                            qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                        }
+                        <li class="page-item"><a class="page-link" href="?@qs"><i class="fa fa-angle-left"></i></a></li>
+
+                        @{
+                            querystringDictionary["page"] = Model.PageCount.ToString();
+                            qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                        }
+                        <li class="page-item"><a class="page-link" href="?@qs"><i class="fa fa-angle-double-left"></i></a></li>
+                    </ul>
+
+                </nav>
+
+                <nav style="display: inline-block; pointer-events: none;">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <span class="page-link">
+                                نمایش رکوردهای
+                                @((((Model.CurrentPage - 1) * Model.PageSize) + 1).ToPersianNumbers())
+                                تا
+                                @(((Model.CurrentPage * Model.PageSize) > Model.TotalRowsCount ? Model.TotalRowsCount : Model.CurrentPage * Model.PageSize).ToPersianNumbers())
+                                از
+                                @Model.TotalRowsCount.ToPersianNumbers()
+                            </span>
+                        </li>
+                    </ul>
+                </nav>
+
+                <nav style="display: inline-block;">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item @(Model.PageSize == 10 ? " active " : "")">
+                            @{
+                                querystringDictionary["size"] = "10";
+                                querystringDictionary["page"] = "1";
+                                qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                            }
+                            <a class="page-link" href="?@qs">۱۰</a>
+                        </li>
+                        <li class="page-item @(Model.PageSize == 20 ? " active " : "")">
+                            @{
+                                querystringDictionary["size"] = "20";
+                                querystringDictionary["page"] = "1";
+                                qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                            }
+                            <a class="page-link" href="?@qs">۲۰</a>
+                        </li>
+                        <li class="page-item @(Model.PageSize == 50 ? " active " : "")">
+                            @{
+                                querystringDictionary["size"] = "50";
+                                querystringDictionary["page"] = "1";
+                                qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                            }
+                            <a class="page-link" href="?@qs">۵۰</a>
+                        </li>
+                        <li class="page-item @(Model.PageSize == 100 ? " active " : "")">
+                            @{
+                                querystringDictionary["size"] = "100";
+                                querystringDictionary["page"] = "1";
+                                qs = string.Join("&", querystringDictionary.Select((x) => x.Key + "=" + x.Value));
+                            }
+                            <a class="page-link" href="?@qs">۱۰۰</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    
+
+}
+

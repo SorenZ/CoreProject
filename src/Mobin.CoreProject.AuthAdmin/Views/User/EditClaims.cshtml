@@ -1,0 +1,92 @@
+﻿@using System.Security.Claims
+@using Microsoft.EntityFrameworkCore.Internal
+@using Mobin.CoreProject.AuthAdmin.Toolkit
+@using Mobin.CoreProject.Core.Helpers
+@using Mobin.CoreProject.Core.SSOT
+@using Mobin.CoreProject.CrossCutting.Security.Extensions
+@model Mobin.CoreProject.AuthAdmin.Controllers.UserEditClaimsPM
+
+@{
+    ViewData["Title"] = "Claims: " + Model.User.UserName.NormalizeUsername();
+}
+
+@{
+    ViewBag.BreadCrumb = new BreadCrumb
+    {
+        Links = new List<BreadCrumbLink>
+{
+new BreadCrumbLink
+{
+Title = "مدیریت کاربران",
+Link = Url.Action("Index"),
+},
+
+new BreadCrumbLink
+{
+Title = "Claims",
+},
+}
+    };
+}
+
+@Html.Raw(RegateText.Init())
+
+
+<div class="content">
+
+
+    <form asp-action="EditClaims" asp-route-id="@Model.User.Id">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-vcenter">
+
+                <tbody>
+                    <tr>
+                        <td width="300">
+                            <select class="form-control" name="claimType">
+                                @foreach (var claim in Model.AllClaims)
+                                {
+                                    <option value="@claim.Name">@claim.DisplayName</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            @Html.Raw(RegateText.Build("claimValue", isRequired: true))
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="text-right">
+                <button type="submit" class="btn btn-hero-success">
+                    <i class="fa fa-check"></i> ثبت اطلاعات
+                </button>
+            </div>
+        </div>
+
+    </form>
+    
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-vcenter">
+            <tbody>
+                @foreach (var claim in Model.UserClaims)
+                {
+                    <tr>
+                        <td width="300">
+                            @(Model.AllClaims.FirstOrDefault(q => q.Name == claim.Type)?.DisplayName)
+                        </td>
+                        <td>
+                            @claim.Value
+                        </td>
+                        <td class="text-center fa-lg" style="white-space: nowrap;" width="1">
+                            <a asp-action="DeleteSingleClaim" asp-route-id="@Model.User.Id" asp-route-claimType="@claim.Type" asp-route-claimValue="@claim.Value" data-role="delete" data-toggle="tooltip" title="حذف">
+                                <i class="si si-close text-danger"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

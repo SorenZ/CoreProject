@@ -1,0 +1,76 @@
+﻿@using Mobin.CoreProject.AuthAdmin.Toolkit
+@using Mobin.CoreProject.CrossCutting.Security.Extensions
+@using Mobin.CoreProject.CrossCutting.Security.Models
+@model List<AppRole>
+
+@{
+    var user = (AppUser)ViewBag.user;
+    var userRoles = (IList<string>)ViewBag.UserRoles;
+
+    ViewData["Title"] = "تخصیص نقش: " + user.UserName.NormalizeUsername();
+
+}
+
+
+@{
+    ViewBag.BreadCrumb = new BreadCrumb
+    {
+        Links = new List<BreadCrumbLink>
+{
+new BreadCrumbLink
+{
+Title = "مدیریت کاربران",
+Link = Url.Action("Index"),
+},
+
+new BreadCrumbLink
+{
+Title = "تخصیص نقش",
+},
+}
+    };
+}
+
+<div class="content">
+
+    <form asp-action="EditRoles" asp-route-id="@user.Id" data-ajax>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-vcenter table-hover">
+                <thead class="thead-light">
+                <tr>
+                    <th width="70" class="text-center"></th>
+                    <th>عنوان</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <div class="custom-control custom-checkbox custom-control-primary mb-1">
+                                <input type="checkbox" class="custom-control-input" name="roleIds" value="@item.Id" id="role_@item.Id"
+                                       checked="@(userRoles.Contains(item.Name))" />
+
+                                <label class="custom-control-label" for="role_@item.Id"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <label for="role_@item.Id">
+                                @item.Name
+                            </label>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+            <div class="text-right">
+                <button type="submit" class="btn btn-hero-success">
+                    <i class="fa fa-check"></i> ثبت اطلاعات
+                </button>
+            </div>
+        </div>
+    </form>
+    
+</div>
+

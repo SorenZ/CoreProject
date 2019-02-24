@@ -1,0 +1,28 @@
+﻿<form class="mb-3" action="" method="get">
+    @{
+        var qsDictionary = Context.Request.Query.Keys.ToDictionary(k => k, v => Context.Request.Query[v]);
+        if (!qsDictionary.ContainsKey("size"))
+        {
+            qsDictionary["size"] = "10";
+        }
+    }
+
+    <input type="hidden" name="page" value="1" />
+    <input type="hidden" name="size" value="@qsDictionary["size"]" />
+
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="جستجو" name="Q" value="@ViewBag.Q" />
+        <div class="input-group-append">
+            @if (!string.IsNullOrEmpty(ViewBag.Q))
+            {
+                <a href="?size=@qsDictionary["size"]" class="btn btn-info" data-toggle="tooltip" title="لغو جستجو">
+                    <i class="fa fa-times fa-fw"></i>
+                </a>
+            }
+
+            <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="جستجو">
+                <i class="fa fa-search fa-fw"></i>
+            </button>
+        </div>
+    </div>
+</form>
