@@ -81,6 +81,7 @@ namespace Mobin.CoreProject.AuthAdmin
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
