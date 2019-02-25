@@ -86,8 +86,10 @@ body.swal2-height-auto {
         white-space: normal;
     }
 
+a.link-fx::before {
+    background-color: #b3d25d;
+}
 /*#endregion */
-
 /*#region dashboard */
 .dashboard-box-header {
     display: flex;
