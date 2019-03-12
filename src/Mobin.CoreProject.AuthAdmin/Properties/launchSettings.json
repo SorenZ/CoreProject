@@ -14,7 +14,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:38858",
+      "applicationUrl": "http://localhost:38858"
     },
     "Mobin.CoreProject.AuthAdmin": {
       "commandName": "Project",
