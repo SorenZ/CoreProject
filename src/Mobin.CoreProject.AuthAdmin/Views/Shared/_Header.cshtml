@@ -31,9 +31,11 @@
                         <!-- Toggle Side Overlay -->
 
                         <div role="separator" class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/identity/account/logout">
-                            <i class="far fa-fw fa-arrow-alt-circle-left mr-1"></i> خروج
-                        </a>
+                        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+
+                            <button id="logout" type="submit" class="dropdown-item"><i class="far fa-fw fa-arrow-alt-circle-left mr-1"></i> Logout</button>
+
+                        </form>
                     </div>
                 </div>
             </div>
