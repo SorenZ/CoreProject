@@ -12,7 +12,7 @@ namespace Mobin.CoreProject.CrossCutting.Security.Helper
 {
     public class AppClaimsTransformer : IClaimsTransformation
     {
-        private const int ClaimDuration = 1;
+        private const int ClaimDuration = 10;
 
         private readonly RoleManager<AppRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;
@@ -32,7 +32,12 @@ namespace Mobin.CoreProject.CrossCutting.Security.Helper
             {
                 var claims = new List<Claim>();
 
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMilliseconds(ClaimDuration);
+                #if DEBUG
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(ClaimDuration);
+                #else
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(ClaimDuration);
+                #endif
+
                 var user = await _userManager.FindByNameAsync(userName);
                 if (user == null)
                     { return claims; }
