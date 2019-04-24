@@ -58,7 +58,7 @@ namespace Mobin.CoreProject.Admin
                     config.Filters.Add(new AuthorizeFilter(authPolicy));
                 })
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddSessionStateTempDataProvider();
 
             services.AddMemoryCache();

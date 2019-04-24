@@ -30,9 +30,10 @@ namespace Mobin.CoreProject.AuthAdmin
                 .MinimumLevel.Debug()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning) // remove microsoft information
                 .Enrich.FromLogContext()
+                .WriteTo.Console()
                 .WriteTo.MongoDBCapped(configuration["MongoDbSettings:ConnectionString"],
                     collectionName: "CoreProject",
-                    cappedMaxDocuments: 1_00_000,
+                    cappedMaxDocuments: 1_000_000,
                     restrictedToMinimumLevel: currentEnv == EnvironmentName.Development
                         ? LogEventLevel.Information
                         : LogEventLevel.Warning)

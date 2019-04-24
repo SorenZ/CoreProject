@@ -12,7 +12,7 @@ using Mobin.CoreProject.CrossCutting.Security.Services;
 namespace Mobin.CoreProject.AuthAdmin.Controllers
 {
 
-    [Authorize]
+    [AllowAnonymous]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
