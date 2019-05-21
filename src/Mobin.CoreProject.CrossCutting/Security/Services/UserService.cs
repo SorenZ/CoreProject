@@ -138,6 +138,11 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
                 .OrderBy(q => q.UserName)
                 .ToList();
 
+        public async Task<IList<AppUser>> GetUsersByClaim(string claimType, string claimValue)
+        {
+            return await _userManager.GetUsersForClaimAsync(new Claim(claimType, claimValue));
+        }
+
         public Task<AppUser> FindByIdAsync(int id) => 
             _userManager.FindByIdAsync(id.ToString());
 

@@ -35,6 +35,9 @@ namespace Mobin.CoreProject.CrossCutting.Security.Services
         Task<ServiceResult> RenameUsername(int id, string newUsername);
 
         IList<AppUser> GetAll();
+
+        Task<IList<AppUser>> GetUsersByClaim(string claimType, string claimValue);
+
         Task<AppUser> FindByIdAsync(int id);
         Task<IList<string>> GetRolesAsync(AppUser user);
 
